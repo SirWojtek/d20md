@@ -1,0 +1,33 @@
+.general-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  table {
+    min-width: 150px;
+
+    tr {
+      border-bottom: 2px solid #464545;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: 12px 8px;
+
+        h4 {
+          margin: 0px;
+        }
+
+        span {
+          font-size: 18px;
+        }
+
+        &.right-align {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

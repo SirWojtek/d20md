@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+ <div class="panel-body">
+   <div class="introduce-container">
+     <h2>Add new monster</h2>
+     <p class="introduce">
+      Bring to life the new crature which will be prefilled with some basic statistics.
+      You can easly change them in any time after the creation process.
+      After clicking on <b>Create</b> button you will be redirected to the monster presentation page.
+     </p>
+   </div>
+   <hr>
+  <div class="accordion-container" [formGroup]="addMonsterForm">
+     <div class="introduce">
+        Type the <b>name</b> for your creature, it should be meaningful and fierce.
+        Make other feel scared!
+     </div>
+     <div class="form-group col-sm-6">
+       <input
+          type="name"
+          class="form-control dimmed"
+          id="create-name"
+          name="create-name"
+          placeholder="Name"
+          formControlName="nameControl"
+       >
+     </div>
+
+     <div class="introduce">
+        Do you want us to <b>prefill</b> some monster parameters like <b>hit dices, saves and attributes?</b>
+        Just select a <b>type</b> below, we will do our magic and overclock your creature.
+        If you dont want to do that right now, you can always apply a type later.
+     </div>
+     <div class="form-group col-sm-6">
+        <select
+          class="form-control dimmed"
+          id="create-type"
+          name="create-type"
+          formControlName="typeControl"
+        >
+           <option value="" disabled selected>Type</option>
+            <option value="">Do not apply type</option>
+            <option *ngFor="let monsterType of monsterTypes | async" [ngValue]="monsterType">{{ monsterType | startCase }}</option>
+        </select>
+     </div>
+     <div *ngIf="isElementalTypeSelected()" @slideInOutLeft class="form-group col-sm-6 slide-animation">
+        <label for="create-subtype">Subtype</label>
+        <select
+          class="form-control dimmed"
+          id="create-subtype"
+          name="create-subtype"
+          formControlName="subtypeControl"
+        >
+          <option *ngFor="let subtype of monsterSubtypes" [ngValue]="subtype">{{ subtype | startCase }}</option>
+        </select>
+     </div>
+     <div *ngIf="isTypeSelected()" @slideInOutLeft class="form-group col-sm-6">
+        <label for="create-hit-dice">Number of hit dices</label>
+        <input
+          type="number"
+          min="1"
+          class="form-control dimmed"
+          id="create-hit-dice"
+          name="create-hit-dice"
+          formControlName="hdControl"
+        >
+     </div>
+
+  </div>
+   <div *ngIf="error" class="alert alert-danger" role="alert">
+     {{ error }}
+   </div>
+ </div>
+ <div class="panel-footer" align="center">
+   <button [disabled]="addMonsterForm.invalid" type="button" class="btn btn-success" id="add-monster-button" (click)="onSubmit()">Create</button>
+ </div>
+</div>

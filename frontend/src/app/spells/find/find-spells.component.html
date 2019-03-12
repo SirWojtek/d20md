@@ -1,0 +1,82 @@
+<div class="find-container">
+
+  <button class="btn btn-sm btn-default hide-filters-btn" (click)="hideFilters=!hideFilters">
+    <d20md-icon *ngIf="!hideFilters" iconName="fa-angle-double-up fa-2x"></d20md-icon>
+    <d20md-icon *ngIf="hideFilters" iconName="fa-angle-double-down fa-2x"></d20md-icon>
+  </button>
+
+  <div *ngIf="!hideFilters" class="filters-container">
+    <div class="name-field">
+      <d20md-inputbox [name]="'name'" [id]="'name'"
+        [labelText]="'Name'"
+        [inputDivClass]="'col-xs-9'"
+        [(value)]="searchFields.name"
+        (valueChange)="onFilterChange()"
+      ></d20md-inputbox>
+      <d20md-sort-button [sortType]="'alphanumeric'"
+        (sortOrder)="onSortChange('name', $event)"
+      ></d20md-sort-button>
+    </div>
+    <div class="type-field">
+      <d20md-selectbox [name]="'Type'" [id]="'type'"
+        [inputDivClass]="'col-xs-9'"
+        [(value)]="searchFields.spell_type"
+        (valueChange)="onFilterChange()"
+        [values]="spellTypes"
+      ></d20md-selectbox>
+      <d20md-sort-button [sortType]="'alphanumeric'"
+        (sortOrder)="onSortChange('spell_type', $event)"
+      ></d20md-sort-button>
+    </div>
+    <div class="range-field">
+      <d20md-selectbox [name]="'Range'" [id]="'range'"
+        [inputDivClass]="'col-xs-9'"
+        [(value)]="searchFields.spell_range"
+        (valueChange)="onFilterChange()"
+        [values]="spellRanges"
+      ></d20md-selectbox>
+      <d20md-sort-button [sortType]="'alphanumeric'"
+        (sortOrder)="onSortChange('spell_range', $event)"
+      ></d20md-sort-button>
+    </div>
+    <div class="level-field">
+      <d20md-range-slider [name]="'Level'"
+        [inputDivClass]="'col-xs-9'"
+        [min]="0" [max]="9" [step]="1"
+        [connect]="[false, true, false]"
+        [(ngModel)]="levelRange"
+        (ngModelChange)="onLevelChange()"
+      ></d20md-range-slider>
+      <d20md-sort-button
+        style="padding-top: 30px"
+        [sortType]="'alphanumeric'"
+        (sortOrder)="onSortChange('level', $event)"
+      ></d20md-sort-button>
+    </div>
+    <div class="class-field">
+      <d20md-inputbox [name]="'class'" [id]="'class'"
+        [labelText]="'Class'"
+        [inputDivClass]="'col-xs-9'"
+        [(value)]="searchFields.class_name"
+        (valueChange)="onFilterChange()"
+      ></d20md-inputbox>
+      <d20md-sort-button [sortType]="'alphanumeric'"
+        (sortOrder)="onSortChange('class_name', $event)"
+      ></d20md-sort-button>
+    </div>
+  </div>
+
+  <div class="miniatures-container" #miniaturesContainer>
+    <div @slideInOutRight class="miniatures-flex-container">
+      <div class="miniature-container" *ngFor="let result of spells">
+        <d20md-spell-miniature [spell]="result"></d20md-spell-miniature>
+      </div>
+    </div>
+
+    <div *ngIf="spells.length" class="pagination-container">
+      <pagination [totalItems]="page.total" [(ngModel)]="page.current" (ngModelChange)="onQueryChange()"
+        [itemsPerPage]="page.size" [maxSize]="10" class="pagination-sm" [boundaryLinks]="true"
+      ></pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<table *ngIf="armor" class="table table-striped">
+  <thead><tr>
+    <th>Armor class type</th>
+    <th class="value-col">Value</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>Base</td>
+      <td class="value-col">{{ armor.armorBase }}</td>
+    </tr>
+    <tr *ngFor="let armorType of armorTypes" [style.color]="getColor(armorType)">
+      <td>{{ utils.toUpperCase(armorType) }}</td>
+      <td class="value-col">{{ armor[armorType] }}</td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="armor" class="table table-bordered panel-table">
+  <thead><tr>
+    <th class="col-sm-4 value-col">Touch</th>
+    <th class="col-sm-4 value-col">FF</th>
+    <th class="col-sm-4 value-col active">Total</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <ng-template ngFor let-summaryType [ngForOf]="summaryTypes">
+        <td
+          [ngClass]="{'value-col': true, 'active': summaryType === 'total'}"
+          [style.color]="getSummaryColor(summaryType)"
+        >
+          {{ armor.summary[summaryType] }}
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,87 @@
+@import 'variables';
+
+@font-face {
+  font-family: Simplifica;
+  src: url(assets/fonts/simplifica.ttf) format('truetype');
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+table.table {
+  font-size: 15px;
+
+  thead {
+    font-size: 16px;
+
+    tr > th {
+      vertical-align: middle;
+    }
+  }
+}
+
+input.form-control.dimmed {
+  background-color: $input-background-color;
+
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+}
+
+select.form-control.dimmed {
+  background-color: $input-background-color;
+  color: $input-placeholder-color;
+}
+
+.value-col {
+  text-align: center;
+}
+
+.panel-table {
+  margin-bottom: 0px;
+}
+
+.inactive {
+  background-color: #464545;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+div.tab-container {
+  padding: 15px;
+  border: 1px solid #464545;
+  border-top: none;
+  border-radius: 4px;
+  background-color: #303030;
+}
+
+.edit-button {
+  margin-top: 20px;
+}
+
+.introduce {
+  font-size: 17px;
+  font-weight: lighter;
+}
+
+ul.nav {
+  &.nav-tabs.nav-justified {
+    li > a {
+      border-bottom: 1px solid #464545;
+    }
+
+    li.active > a {
+      border-bottom: none;
+      border-color: #464545;
+    }
+  }
+
+  > li {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,22 @@
+<d20md-modal-base [buttons]="modalButtons">
+  <form *ngIf="hp != undefined" class="form-horizontal">
+    <d20md-inputbox
+      [name]="'hp'" [id]="'hp'"
+      [labelText]="'Hit Points'"
+      [inputType]="'number'"
+      [rangeMin]="1" [rangeMax]="2000"
+      [value]="hp"
+      (valueChange)="onHpChange($event)"
+      [errorText]="errorText"
+    ></d20md-inputbox>
+  </form>
+  <hr>
+  <div class="row suggestion">
+    <div class="col-sm-6">
+      <span>Suggested HP</span>
+    </div>
+    <div class="col-sm-4">
+      <span>{{ suggestedHp }}</span>
+    </div>
+  </div>
+</d20md-modal-base>

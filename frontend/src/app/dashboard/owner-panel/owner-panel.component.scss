@@ -1,0 +1,13 @@
+ul.nav {
+  margin-bottom: 16px;
+
+  li > a {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    span {
+      margin-left: 4px;
+    }
+  }
+}

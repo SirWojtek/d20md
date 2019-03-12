@@ -1,0 +1,81 @@
+
+<div class="form-group">
+  <input
+    type="text"
+    class="form-control input-sm dimmed"
+    id="name-control"
+    placeholder="Name..."
+    [formControl]="nameControl"
+  >
+</div>
+
+<div *ngIf="dataObs | async as data">
+
+  <div *ngIf="data.rows?.length; else noMonsters">
+
+    <table class="table table-striped" id="owned-monsters-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hit Dices</th>
+          <th>Saves</th>
+          <th>Views</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let monster of data.rows">
+          <td class="name-cell" [routerLink]="[ '/', 'monsters', 'show', monster.id ]">{{ monster.name }}</td>
+          <td>
+            <div *ngFor="let hd of monster.HitDices">
+              {{ hd | hitDice }}
+            </div>
+          </td>
+          <td>
+            <div>Reflex: {{ monster.Save.reflex }}</div>
+            <div>Fortitude: {{ monster.Save.fortitude }}</div>
+            <div>Will: {{ monster.Save.will }}</div>
+          </td>
+          <td>{{ monster.views }}</td>
+          <td class="dropdown-column">
+            <div class="btn-group" dropdown>
+              <button dropdownToggle type="button" class="btn btn-default dropdown-toggle">
+                <d20md-icon iconName="fa-ellipsis-v"></d20md-icon>
+              </button>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem">
+                  <a class="dropdown-item delete-item" (click)="deleteModal.show({ name: monster.name, id: monster.id })">
+                    <d20md-icon iconName="fas fa-trash" text="Delete"></d20md-icon>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="data.rows.length">
+      <pagination
+        class="pagination-sm"
+        [itemsPerPage]="itemsPerPage"
+        [maxSize]="10"
+        [totalItems]="data.count"
+        [formControl]="paginationControl"
+        [boundaryLinks]="true"
+      ></pagination>
+    </div>
+  </div>
+
+  <ng-template #noMonsters>
+    <div class="no-items-placeholder">
+      <img src="assets/img/no-monsters.svg" width="128" height="128" />
+      <h3>There are no matching monsters</h3>
+      <button class="btn btn-lg btn-success" [routerLink]="['/', 'monsters', 'add']">Add Monster</button>
+    </div>
+  </ng-template>
+</div>
+
+<d20md-confirm-delete-modal
+  #deleteModal
+  (deleteEntity)="onDelete($event)"
+></d20md-confirm-delete-modal>

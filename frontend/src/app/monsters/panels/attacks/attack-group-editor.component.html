@@ -1,0 +1,54 @@
+<d20md-modal-base #modal
+  [modalSizeClass]="'modal-lg'"
+  [headerText]="'Edit attack groups'"
+  [buttons]="modalButtons"
+>
+  <p class="introduce">
+    In this editor you can edit attack groups. Each group can contain one or more attacks.
+    If your monster have more than one attack in a round place them in separate attack groups.
+    Placing more that one attack in group means that a monster can choose which attack to use.
+  </p>
+  <hr>
+  <div class="container-fluid">
+    <div *ngFor="let groups of choppedAttackGroups; last as isLast" class="row">
+      <div *ngFor="let attackGroup of groups" class="col-xs-4">
+        <div class="list-group">
+          <div class="list-group-item inactive">
+            <button type="button" class="btn btn-sm btn-danger" (click)="onAttackGroupDelete(attackGroup)">
+              <d20md-icon [iconName]="'fa-trash'"></d20md-icon>
+            </button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="onEditorOpen(attackGroup)">
+              <d20md-icon [iconName]="'fa-pencil'"></d20md-icon>
+            </button>
+          </div>
+          <bs-sortable
+            [(ngModel)]="attackGroup.Attacks"
+            fieldName="name"
+            itemClass="list-group-item"
+            itemActiveClass="list-group-item list-group-item-info"
+            placeholderItem="Empty group"
+            placeholderClass="list-group-item list-group-item-warning"
+            wrapperClass="list-group"
+          ></bs-sortable>
+        </div>
+      </div>
+      <d20md-add-attack-group
+        *ngIf="isLast && (attackGroups.length % 3) !== 0"
+        (onAdd)="onAttackGroupAdd()"
+      ></d20md-add-attack-group>
+    </div>
+    <div *ngIf="(attackGroups.length % 3) === 0" class="row">
+      <d20md-add-attack-group (onAdd)="onAttackGroupAdd()"></d20md-add-attack-group>
+    </div>
+  </div>
+</d20md-modal-base>
+<d20md-editor-table #editor
+  [header]="'Edit attack group'"
+  [modalSize]="'modal-lg'"
+  [properties]="attackProperties"
+  (onValueEdit)="attackForm.show($event)"
+  (onValueAdd)="attackForm.show(null)"
+  (onSave)="onEditorSave($event)"
+></d20md-editor-table>
+<d20md-attack-form #attackForm (onAdd)="editor.add($event)">
+</d20md-attack-form>

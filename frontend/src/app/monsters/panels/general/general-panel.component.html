@@ -1,0 +1,55 @@
+<div class="panel panel-primary">
+  <div class="panel-heading"><b>General</b></div>
+    <div class="panel-body">
+      <div *ngIf="monster" class="general-container">
+
+        <img
+          *ngIf="monster.Image && monster.Image.path; else placeholder"
+          src="{{ monster.Image.path }}"
+          alt="Monster Image"
+          title="Monster Image"
+        >
+        <ng-template #placeholder>
+          <img
+            src="assets/img/monster-generic.svg"
+            alt="Monster Image"
+            title="Monster Image"
+          >
+        </ng-template>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><h4>Type</h4></td>
+              <td class="right-align">
+                <img [src]="'assets/img/' + monster.type + '.svg'" height=32 title="{{ monster.type | startCase }}">
+              </td>
+            </tr>
+            <tr>
+              <td><h4>Initiative</h4></td>
+              <td class="right-align"><span [style.color]="initiativeColors(monster.initiative)">{{ monster.initiative }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <div *ngIf="canModify" class="panel-footer">
+      <button
+        type="button"
+        class="btn btn-default"
+        (click)="imageForm.show(monsterId)"
+      >Edit Image</button>
+      <button
+        type="button"
+        class="btn btn-default"
+        (click)="generalForm.show(monster)"
+      >Edit Values</button>
+    </div>
+</div>
+<d20md-general-form #generalForm
+  (onChange)="onChange($event)"
+></d20md-general-form>
+<d20md-image-form #imageForm
+  (imageChange)="onImageChange($event)"
+></d20md-image-form>

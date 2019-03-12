@@ -1,0 +1,28 @@
+<div class="special-container">
+  <accordion>
+    <accordion-group *ngFor="let special of specialPage"
+      heading="{{ special.name }}"
+    >
+      <img [src]="'assets/img/' + special.type + '.svg'" height="64"
+        title="{{ utils.toUpperCase(special.type) }}"
+      >
+      <div [innerHtml]="special.description" class="description"></div>
+      <hr *ngIf="canModifyObs | async">
+      <button *ngIf="canModifyObs | async" class="btn btn-default" (click)="onSpecialEdit(special)">Edit</button>
+      <button *ngIf="canModifyObs | async" class="btn btn-danger" (click)="onSpecialDelete(special)">Delete</button>
+    </accordion-group>
+  </accordion>
+  <pagination *ngIf="specials.length > page.size" [totalItems]="specials.length" [(ngModel)]="page.current" (ngModelChange)="onPageChange()"
+    [itemsPerPage]="page.size" [maxSize]="5" class="pagination-sm" [boundaryLinks]="true"
+  ></pagination>
+</div>
+<hr *ngIf="canModifyObs | async">
+<div *ngIf="canModifyObs | async" class="edit-button">
+  <button type="button" class="btn btn-primary"
+    (click)="specialForm.show()"
+  >Add</button>
+</div>
+<d20md-special-form #specialForm
+  (specialChange)="onSpecialChange($event)"
+  (onAdd)="onSpecialAdd($event)"
+></d20md-special-form>

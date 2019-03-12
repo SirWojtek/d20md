@@ -1,0 +1,17 @@
+<d20md-modal-base [buttons]="modalButtons" [headerText]="'Edit details'">
+  <d20md-selectbox
+    [name]="'Save'"
+    [(value)]="save"
+    [values]="saves"
+  ></d20md-selectbox>
+  <hr>
+  <label>
+    <input
+      type="checkbox"
+      name="spell-resistable"
+      id="spell-resistable"
+      [(ngModel)]="spellResistable"
+    >
+    Spell Resistable
+  </label>
+</d20md-modal-base>

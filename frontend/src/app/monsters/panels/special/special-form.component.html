@@ -1,0 +1,18 @@
+<d20md-modal-base [buttons]="modalButtons">
+  <div class="form-horizontal">
+    <d20md-inputbox
+      [name]="'name'" [id]="'name'"
+      [labelText]="'Name'"
+      [inputType]="'text'"
+      [rangeMin]="1" [rangeMax]="20"
+      [(value)]="value && value.name"
+    ></d20md-inputbox>
+    <d20md-selectbox
+      [name]="'Type'"
+      [(value)]="value && value.type"
+      [values]="specialTypes"
+    ></d20md-selectbox>
+    <d20md-trumbowyg-wrapper #trumbowyg (onChange)="value.description = $event">
+    </d20md-trumbowyg-wrapper>
+  </div>
+</d20md-modal-base>

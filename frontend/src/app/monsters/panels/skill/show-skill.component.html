@@ -1,0 +1,53 @@
+<div class="checkboxes-container">
+  <label for="show-not-learned-skills">
+    <input
+      type="checkbox"
+      name="show-not-learned-skills"
+      id="show-not-learned-skills"
+      [(ngModel)]="showNotLearnedSkills"
+      (ngModelChange)="createSkills()"
+    >
+    Show not learned skills
+  </label>
+  <label for="sort-by-rank">
+    <input
+      type="checkbox"
+      name="sort-by-rank"
+      id="sort-by-rank"
+      [(ngModel)]="sortByRank"
+      (ngModelChange)="createSkills()"
+    >
+    Sort by rank
+  </label>
+</div>
+<table *ngIf="skill && skills.length; else noSkillsMsg" class="table table-striped table-condensed">
+  <thead><tr>
+    <th>Name</th>
+    <th class="value-col">Modifier</th>
+    <th class="value-col">Total</th>
+  </tr></thead>
+  <tbody>
+    <tr *ngFor="let skillName of skills">
+        <td
+          [style.color]="getColor(skillName)"
+        >
+          {{ skill.toReadableName(skillName) }}
+        </td>
+        <td
+          [style.color]="getColor(skillName)"
+          class="value-col"
+        >
+          {{ skill[skillName] }}
+        </td>
+        <td
+          [style.color]="getColor(skillName)"
+          class="value-col total"
+      >
+        {{ skill.total[skillName] }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noSkillsMsg>
+  <h4>This monster has no learned skills.</h4>
+</ng-template>

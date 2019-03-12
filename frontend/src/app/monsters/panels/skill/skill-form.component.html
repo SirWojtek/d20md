@@ -1,0 +1,43 @@
+<d20md-modal-base
+  [buttons]="modalButtons"
+  [modalSizeClass]="'modal-lg'"
+>
+  <div class="checkboxes-container">
+    <label for="show-not-learned-skills">
+      <input
+        type="checkbox"
+        name="show-not-learned-skills"
+        id="show-not-learned-skills"
+        [(ngModel)]="showNotLearnedSkills"
+        (ngModelChange)="createSkillTrios()"
+      >
+      Show not learned skills
+    </label>
+    <label for="sort-by-rank">
+      <input
+        type="checkbox"
+        name="sort-by-rank"
+        id="sort-by-rank"
+        [(ngModel)]="sortByRank"
+        (ngModelChange)="createSkillTrios()"
+      >
+      Sort by rank
+    </label>
+  </div>
+  <div class="form-horizontal">
+    <div *ngFor="let trio of trios" class="row">
+      <div *ngFor="let info of trio" class="col-md-4">
+        <d20md-inputbox
+          [name]="info.key"
+          [id]="info.key"
+          [labelText]="info.name"
+          [inputType]="'range'"
+          [rangeMin]="0"
+          [rangeMax]="100"
+          [rangeStep]="1"
+          [(value)]="value[info.key]"
+        ></d20md-inputbox>
+      </div>
+    </div>
+  </div>
+</d20md-modal-base>

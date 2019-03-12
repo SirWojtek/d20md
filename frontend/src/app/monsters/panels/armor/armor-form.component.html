@@ -1,0 +1,50 @@
+<d20md-modal-base #modal
+  [modalSizeClass]="'modal-lg'"
+  [headerText]="'Edit armor'"
+  [buttons]="modalButtons"
+>
+  <div *ngIf="armor" class="form-horizontal">
+    <d20md-inputbox
+      [name]="'armor'" [id]="'armor'"
+      [labelText]="'Armor'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="20"
+      [(value)]="armor.armor"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'shield'" [id]="'shield'"
+      [labelText]="'Shield'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="20"
+      [(value)]="armor.shield"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'size'" [id]="'size'"
+      [labelText]="'Size'"
+      [inputType]="'range'"
+      [rangeMin]="-20" [rangeMax]="20"
+      [(value)]="armor.size"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'enhancement'" [id]="'enhancement'"
+      [labelText]="'Enhancement'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="20"
+      [(value)]="armor.enhancement"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'deflection'" [id]="'deflection'"
+      [labelText]="'Deflection'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="20"
+      [(value)]="armor.deflection"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'natural'" [id]="'natural'"
+      [labelText]="'Natural'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="20"
+      [(value)]="armor.natural"
+    ></d20md-inputbox>
+  </div>
+</d20md-modal-base>

@@ -1,0 +1,14 @@
+table {
+  display: block;
+  overflow-x: auto;
+
+  :host .or-column {
+    text-align: center;
+  }
+
+  :host .or-span {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 6px;
+  }
+}

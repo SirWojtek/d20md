@@ -1,0 +1,29 @@
+<div class="panel panel-default panel-miniature" routerLink="/spells/show/{{ spell.id }}">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ spell.name }}</h3>
+  </div>
+  <div class="panel-body miniature-grid">
+    <div class="type-container">
+      <d20md-spell-type-element [spellType]="spell.spell_type"></d20md-spell-type-element>
+    </div>
+    <div class="level-container">
+      <div *ngIf="spell.SpellLevels.length; else noLevels">
+        <div class="single-level" *ngFor="let info of spell.SpellLevels">
+          <d20md-spell-level-element [level]="info">
+          </d20md-spell-level-element>
+        </div>
+      </div>
+      <ng-template #noLevels>
+        <div class="no-levels-placeholder">
+          <span>No level information available</span>
+        </div>
+      </ng-template>
+    </div>
+    <div class="range-container">
+      <d20md-spell-range-element [spellRange]="spell.spell_range"></d20md-spell-range-element>
+    </div>
+    <div class="description-container">
+      <div class="description-box" [innerHTML]="spell.description"></div>
+    </div>
+  </div>
+</div>

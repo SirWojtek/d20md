@@ -1,0 +1,11 @@
+<div class="selectbox-container">
+  <label *ngIf="name" [attr.for]="id">
+    <b>{{ name }}</b>
+  </label>
+  <div [ngClass]="inputDivClass">
+    <select [ngModel]="value" (ngModelChange)="valueChange.emit($event)" [id]="id" class="form-control input-sm">
+      <option *ngIf="placeholder" value="" disabled selected>{{ placeholder }}</option>
+      <option *ngFor="let key of valuesDisplay | keys" [ngValue]="valuesDisplay[key]">{{ key }}</option>
+    </select>
+  </div>
+</div>

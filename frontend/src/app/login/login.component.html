@@ -1,0 +1,50 @@
+<div class="login-container">
+  <div class="panel panel-default">
+  <div class="panel-body">
+    <div class="img-container">
+      <img src="assets/img/login-gate.svg" width="128" height="128">
+    </div>
+    <h3>Enter d20 monster designer</h3>
+    <hr>
+    <div>
+      <div *ngIf="errorText" class="alert alert-danger" role="alert">
+        {{ errorText }}
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          name="email"
+          autocomplete="username email"
+          placeholder="Email"
+          required
+          (keyup.enter)="onLogin()"
+          [(ngModel)]="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          name="password"
+          autocomplete="current-password"
+          placeholder="Password"
+          required
+          (keyup.enter)="onLogin()"
+          [(ngModel)]="password">
+      </div>
+      <p>
+        Forgot your password? Visit <a [routerLink]="[ '/', 'reset-password' ]"> Reset Password</a> page.
+      </p>
+      <div style="text-align: right">
+        <button id="login-button" type="button" class="btn btn-info" (click)="onLogin()">
+          <d20md-icon [iconName]="'fa-sign-in'" [text]="'Enter'"></d20md-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

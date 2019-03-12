@@ -1,0 +1,41 @@
+<div class="col-xs-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Current feats</div>
+    <div class="panel-body">
+      <button *ngFor="let feat of feats"
+        class="btn btn-danger feat-button"
+        (click)="onDelete(feat)"
+      >
+        {{ feat.name }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-xs-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">All feats</div>
+    <div class="panel-body">
+      <div>
+        <d20md-inputbox [name]="'name'" [id]="'name'"
+          [labelText]="'Name'"
+          [inputDivClass]="'col-xs-9'"
+          [(value)]="searchFields.name"
+          (valueChange)="onSearch()"
+        ></d20md-inputbox>
+        <d20md-selectbox [name]="'Type'" [id]="'type'"
+          [inputDivClass]="'col-xs-9'"
+          [(value)]="searchFields.feat_type"
+          (valueChange)="onSearch()"
+          [values]="featTypes"
+        ></d20md-selectbox>
+      </div>
+      <button *ngFor="let feat of foundFeats"
+        class="btn btn-primary feat-button"
+        (click)="onAdd(feat)"
+        [disabled]="isFeatAdded(feat)"
+      >
+        {{ feat.name }}
+      </button>
+    </div>
+  </div>
+</div>

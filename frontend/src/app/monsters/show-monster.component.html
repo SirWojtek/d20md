@@ -1,0 +1,65 @@
+<div *ngIf="monster" class="show-monster-wrapper" align="center">
+  <h2 class="name-panel-item">{{ monster.name }}</h2>
+
+  <div *ngIf="canModify || isLoggedIn" class="buttons-panel-item">
+      <button id="delete-monster" class="btn btn-default" (click)="onDeleteMonster()">
+        <d20md-icon [iconName]="'fa-trash'" [text]="'Delete'"></d20md-icon>
+      </button>
+  </div>
+
+  <div class="general-panel-item">
+    <d20md-general-panel
+      [monsterId]="monster.id"
+      [canModify]="canModify"
+    ></d20md-general-panel>
+  </div>
+  <div class="saves-panel-item">
+    <d20md-save-panel
+       [monsterId]="monster.id"
+       [canModify]="canModify"
+    ></d20md-save-panel>
+  </div>
+  <div class="hit-dice-panel-item">
+    <d20md-hit-dices-panel
+       [monsterId]="monster.id"
+       [canModify]="canModify"
+    ></d20md-hit-dices-panel>
+  </div>
+
+  <div class="right-panel-item">
+    <ul class="nav nav-tabs">
+      <li role="presentation" routerLinkActive="active" [routerLink]="['attributes']">
+        <a>Attributes</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['defences']">
+        <a>Defences</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['attacks']">
+        <a>Attacks</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['movement']">
+        <a>Movement</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['skills']">
+        <a>Skills</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['spells']">
+        <a>Spells</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['feats']">
+        <a>Feats</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['special']">
+        <a>Special Abilities</a>
+      </li>
+      <li role="presentation" routerLinkActive="active" [routerLink]="['description']">
+        <a>Description</a>
+      </li>
+    </ul>
+
+    <div class="tab-container">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

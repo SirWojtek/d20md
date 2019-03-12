@@ -1,0 +1,19 @@
+
+# nodejs modules directory
+node_modules/
+
+# npm debug logs
+npm-debug.log
+
+
+# db files
+*.db*
+
+# aot compiled files
+frontend/aot
+
+# multer upload directory
+uploads/
+
+# uploaded images
+frontend/src/img/users/

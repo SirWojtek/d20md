@@ -1,0 +1,29 @@
+<div class="buttons-container">
+  <div *ngIf="isMoreThanOneTypeOfSpell()" class="btn-group" btnRadioGroup [formControl]="typeControl">
+    <label
+      *ngFor="let type of sortedSpells | keys"
+      class="btn btn-primary"
+      tabindex="0"
+      [btnRadio]="type"
+    >{{ type | startCase }}</label>
+  </div>
+
+  <div class="btn-group" btnRadioGroup [formControl]="levelControl">
+    <label
+      *ngFor="let level of getLevelsForType()"
+      class="btn btn-primary"
+      tabindex="0"
+      [btnRadio]="level"
+    >{{ level }}</label>
+  </div>
+</div>
+
+<accordion>
+  <accordion-group
+    *ngFor="let spell of getFilteredSpells()"
+    [heading]="spell.name"
+  >
+  <div [innerHtml]="spell.description"></div>
+    <a class="btn btn-default" [routerLink]="'/spells/show/' + spell.id">Show</a>
+  </accordion-group>
+</accordion>

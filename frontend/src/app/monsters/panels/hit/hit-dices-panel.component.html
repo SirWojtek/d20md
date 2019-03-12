@@ -1,0 +1,35 @@
+<div *ngIf="monsterObs | async as monster" class="panel panel-primary">
+  <div class="panel-heading"><b>Hit Dices</b></div>
+  <div class="panel-body">
+    <d20md-show-hit-dices
+        [hitDices]="monster.HitDices"
+        [hp]="monster.hp"
+        [conModifier]="monster.Attribute.mod.constitution"
+    ></d20md-show-hit-dices>
+  </div>
+  <div *ngIf="canModify" class="panel-footer">
+    <button type="button" class="btn btn-default"
+        (click)="editor.show(monster.HitDices)"
+    >Edit Hit Dices</button>
+    <button type="button" class="btn btn-default"
+        (click)="generateForm.show(monster)"
+    >Generate Hit Dices</button>
+    <button type="button" class="btn btn-default"
+        (click)="hpForm.show(monster.hp, getSuggestedHp(monster))"
+    >Edit HP</button>
+  </div>
+</div>
+<d20md-editor-table #editor
+  [header]="'Edit hit dices'"
+  [properties]="hitDiceProperties"
+  (onValueEdit)="hitDiceForm.show($event)"
+  (onValueAdd)="hitDiceForm.show(null)"
+  (onSave)="onTableEditorSave($event)"
+></d20md-editor-table>
+<d20md-hit-dice-form #hitDiceForm (onAdd)="editor.add($event)">
+</d20md-hit-dice-form>
+<d20md-hp-form #hpForm (hpChange)="onHpSave($event)"></d20md-hp-form>
+<d20md-generate-hit-dices-form
+  #generateForm
+  (onGenerate)="onGenerate($event)"
+></d20md-generate-hit-dices-form>

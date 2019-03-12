@@ -1,0 +1,25 @@
+<div class="panel panel-default panel-miniature" routerLink="/feats/show/{{ feat.id }}">
+  <div class="panel-heading">
+    <div class="flex-container">
+      <h3 class="panel-title">
+        <div [innerHTML]="highlight(feat.name)"></div>
+      </h3>
+      <img src="assets/img/{{ feat.feat_type }}.svg" title="{{ feat.feat_type }}" height="64">
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="text-container">
+      <tabset>
+        <tab *ngIf="feat.benefit" heading="Benefit">
+          <div class="text-field" [innerHTML]="highlight(feat.benefit)"></div>
+        </tab>
+        <tab *ngIf="feat.normal" heading="Normal">
+          <div class="text-field" [innerHTML]="highlight(feat.normal)"></div>
+        </tab>
+        <tab *ngIf="feat.special" heading="Special">
+          <div class="text-field" [innerHTML]="highlight(feat.special)"></div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

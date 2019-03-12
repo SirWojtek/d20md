@@ -1,0 +1,14 @@
+input.form-control {
+  display: inline-block;
+  width: inherit;
+}
+
+div.result-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  h5 {
+    margin-right: 8px;
+  }
+}

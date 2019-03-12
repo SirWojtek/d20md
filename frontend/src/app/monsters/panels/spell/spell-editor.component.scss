@@ -1,0 +1,13 @@
+.spell-button {
+  display: block;
+  width: 100%;
+  margin: 8px 0px;
+
+  &:first-of-type {
+    margin-top: 0px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0px;
+  }
+}

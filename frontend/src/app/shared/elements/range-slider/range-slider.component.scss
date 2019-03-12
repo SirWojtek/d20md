@@ -1,0 +1,28 @@
+.slider-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+
+    label {
+      margin: 0px;
+      text-align: left;
+    }
+}
+
+:host ::ng-deep .noUi-handle {
+  background-color: #c2c2c2;
+  border-color: #303030;
+  border-radius: 20px;
+}
+
+:host ::ng-deep .noUi-tooltip {
+  background-color: transparent;
+  border: none;
+  color: #c2c2c2;
+}
+
+:host ::ng-deep .noUi-base {
+  background-color: #5a5a5a;
+}

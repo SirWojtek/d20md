@@ -1,0 +1,14 @@
+.checkboxes-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.total {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+table.table>tbody>tr>td {
+  vertical-align: middle;
+}

@@ -1,0 +1,23 @@
+
+<ul class="nav nav-tabs nav-justified" *ngIf="userEntitiesCountObs | async as userEntitiesCount">
+  <li role="presentation" routerLinkActive="active">
+    <a [routerLink]="['monsters']" id="owned-monsters">
+      <h4>Monsters</h4>
+      <span class="badge">{{ userEntitiesCount[entityType.Monster] }}</span>
+    </a>
+  </li>
+  <li role="presentation" routerLinkActive="active">
+    <a [routerLink]="['spells']" id="owned-spells">
+      <h4>Spells</h4>
+      <span class="badge">{{ userEntitiesCount[entityType.Spell] }}</span>
+    </a>
+  </li>
+  <li role="presentation" routerLinkActive="active">
+    <a [routerLink]="['feats']" id="owned-feats">
+      <h4>Feats</h4>
+      <span class="badge">{{ userEntitiesCount[entityType.Feat] }}</span>
+    </a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>

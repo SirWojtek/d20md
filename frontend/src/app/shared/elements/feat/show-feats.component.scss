@@ -1,0 +1,17 @@
+div.btn-group {
+  margin-bottom: 16px;
+}
+
+accordion {
+  overflow-y: auto;
+  max-height: 476px;
+
+  accordion-group {
+    margin-left: 4px;
+    margin-right: 4px;
+
+    .btn {
+      margin-top: 12px;
+    }
+  }
+}

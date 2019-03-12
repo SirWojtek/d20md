@@ -1,0 +1,39 @@
+<d20md-modal-base [buttons]="modalButtons" [headerText]="'Edit movement'">
+  <div *ngIf="speed" class="form-horizontal">
+    <d20md-inputbox
+      [name]="'fly'" [id]="'fly'"
+      [labelText]="'Fly speed'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="500"
+      [(value)]="speed.fly"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'swim'" [id]="'swim'"
+      [labelText]="'Swim speed'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="500"
+      [(value)]="speed.swim"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'climb'" [id]="'climb'"
+      [labelText]="'Climb speed'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="500"
+      [(value)]="speed.climb"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'land'" [id]="'land'"
+      [labelText]="'Land speed'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="500"
+      [(value)]="speed.land"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'burrow'" [id]="'burrow'"
+      [labelText]="'Burrow speed'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="500"
+      [(value)]="speed.burrow"
+    ></d20md-inputbox>
+  </div>
+</d20md-modal-base>

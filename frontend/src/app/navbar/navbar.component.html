@@ -1,0 +1,82 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-container">
+    <div>
+      <div *ngFor="let el of navbarContent" class="btn-group" dropdown #dropdown="bs-dropdown">
+          <button
+            [id]="'navbar-' + el.id"
+            [title]="el.name"
+            *ngIf="el.canBeShowed() | async as canBeShowed"
+            dropdownToggle
+            class="btn btn-primary dropdown-toggle"
+          >
+            <d20md-icon class="hidden-xs" [iconName]="el.iconClass" [text]="el.name"></d20md-icon>
+            <d20md-icon class="visible-xs" [iconName]="el.iconClass"></d20md-icon>
+            <span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li class="visible-xs disabled">
+              <a class="dropdown-item">{{ el.name }}</a>
+            </li>
+            <ng-template ngFor let-content [ngForOf]="el.content">
+              <li role="menuitem">
+                <a [id]="content.id" class="dropdown-item" routerLink="{{ content.routerLink }}" (click)="content.clickCallback(dropdown)">
+                  <d20md-icon [iconName]="'fa-fw ' + content.iconClass" [text]="content.name"></d20md-icon>
+                </a>
+              </li>
+            </ng-template>
+          </ul>
+      </div>
+    </div>
+
+    <div class="logo" onclick="window.location='/'">
+      <img src="assets/img/logo.svg" alt="Logo" width="32" height="32">
+      <span>d20 monster designer</span>
+    </div>
+
+    <div class="right-container">
+      <button
+        type="button"
+        class="btn btn-sm btn-secondary visible-xs"
+        [popover]="popoverContent"
+        popoverTitle="Quick Search"
+        placement="bottom"
+      >
+        <d20md-icon iconName="fa-search"></d20md-icon>
+      </button>
+      <ng-template #popoverContent>
+        <d20md-search-bar></d20md-search-bar>
+      </ng-template>
+      <d20md-search-bar class="hidden-xs"></d20md-search-bar>
+
+        <div *ngIf="!(isLoggedIn | async)">
+          <button
+            id="login-button"
+            type="button"
+            class="btn btn-sm btn-info"
+            title="Login"
+            angulartics2On="click"
+            angularticsAction="Login"
+            angularticsCategory="Account"
+            [routerLink]="[ '/', 'login' ]"
+          >
+            <d20md-icon class="hidden-xs" iconName="fa-user" [text]="'Login'"></d20md-icon>
+            <d20md-icon class="visible-xs" iconName="fa-user"></d20md-icon>
+          </button>
+          <button
+            id="register-button"
+            class="btn btn-sm btn-success"
+            title="Register"
+            angulartics2On="click"
+            angularticsAction="Register"
+            angularticsCategory="Account"
+            [routerLink]="[ '/', 'register' ]"
+          >
+            <d20md-icon class="hidden-xs" iconName="fa-plus-circle" [text]="'Sign Up'"></d20md-icon>
+            <d20md-icon class="visible-xs" iconName="fa-plus-circle"></d20md-icon>
+          </button>
+        </div>
+
+    </div>
+  </div>
+
+</nav>

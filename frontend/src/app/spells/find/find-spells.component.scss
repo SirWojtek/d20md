@@ -1,0 +1,55 @@
+@import '../../../variables';
+
+.find-container {
+  display: flex;
+
+  .hide-filters-btn {
+    margin-bottom: 8px;
+  }
+
+  .filters-container {
+    margin: 0px 5px;
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+
+      d20md-inputbox,
+      d20md-selectbox,
+      d20md-range-slider {
+        display: inline-block;
+        width: 100%;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .miniatures-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .miniature-container {
+      margin: 0px 5px;
+      flex: 1 1 270px;
+    }
+
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: $lg-md-breakpoint) {
+    flex-direction: column;
+  }
+
+  @media (min-width: $lg-md-breakpoint) {
+    .hide-filters-btn {
+      display: none;
+    }
+  }
+}

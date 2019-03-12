@@ -1,0 +1,40 @@
+<d20md-modal-base [buttons]="modalButtons" [headerText]="'Edit movement'">
+  <div *ngIf="monster">
+    <d20md-inputbox
+      [name]="'initiative'" [id]="'initiative'"
+      [labelText]="'Initiative'"
+      [inputType]="'range'"
+      [rangeMin]="-100" [rangeMax]="100"
+      [(value)]="monster.initiative"
+    ></d20md-inputbox>
+
+    <d20md-selectbox
+      name="Monster Type"
+      [(value)]="monster.type"
+      (valueChange)="typeChanged = true"
+      [values]="monsterTypes"
+    ></d20md-selectbox>
+
+    <d20md-selectbox
+      *ngIf="enableSubtype()"
+      name="Monster Subtype"
+      [(value)]="subtype"
+      [values]="monsterSubtypes"
+    ></d20md-selectbox>
+
+    <label
+      @slideInOutLeft
+      *ngIf="typeChanged"
+      tooltip="Checking this will change some monster parameters like saves and attributes"
+    >
+      <input
+        type="checkbox"
+        name="apply-type"
+        id="apply-type"
+        [(ngModel)]="applyType"
+      >
+      Apply new type perks
+    </label>
+
+  </div>
+</d20md-modal-base>

@@ -1,0 +1,15 @@
+<div class="panel panel-primary">
+  <div class="panel-heading"><b>Details</b></div>
+  <div class="panel-body">
+    <d20md-show-details [spellType]="spellType"
+      [spellRange]="spellRange"></d20md-show-details>
+  </div>
+  <div *ngIf="canModify" class="panel-footer">
+    <button type="button" class="btn btn-default"
+    (click)="editor.show(spellType, spellRange)">Edit</button>
+  </div>
+</div>
+<d20md-details-form #editor
+  (spellTypeChange)="spellTypeChange.emit($event)"
+  (spellRangeChange)="spellRangeChange.emit($event)"
+></d20md-details-form>

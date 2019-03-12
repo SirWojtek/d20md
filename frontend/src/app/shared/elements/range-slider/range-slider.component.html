@@ -1,0 +1,12 @@
+<div *ngIf="value !== null" class="slider-container">
+  <label *ngIf="name" [attr.for]="name">
+    <b>{{ name }}</b>
+  </label>
+  <div [ngClass]="inputDivClass">
+    <nouislider [min]="min" [max]="max" [step]="step"
+      [connect]="connect"
+      [tooltips]="true"
+      [(ngModel)]="value"
+    ></nouislider>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  animation: fadein 2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .textbox {
+      height: 64px;
+      width: 100%;
+      padding: 18px;
+      background-color: #7f7f7f;
+      font-size: 18px;
+      margin-top: -18px;
+      border-radius: 3px;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+
+  <div class="main-container">
+    <div class="panel">
+      <div class="panel-body">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-container">
+
+    <d20md-entities-panel
+      id="recent-activity-entities"
+      title="Recent Activity"
+      [entities]="historyObs | async"
+    ></d20md-entities-panel>
+
+    <d20md-entities-panel
+      id="popular-entities"
+      title="Popular"
+      [entities]="popularObs | async"
+    ></d20md-entities-panel>
+
+    <d20md-entities-panel
+      id="last-updated-entities"
+      title="Last Updated"
+      [entities]="lastUpdatedObs | async"
+    ></d20md-entities-panel>
+
+  </div>
+
+</div>

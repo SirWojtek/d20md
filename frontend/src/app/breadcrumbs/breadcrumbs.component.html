@@ -1,0 +1,5 @@
+<ol *ngIf="itemsObs | async as items" class="breadcrumb">
+  <li *ngFor="let item of items; let last = last;" [ngClass]="{ active: last }">
+    <a *ngIf="item.name | async as name" [routerLink]="item.href">{{ name }}</a>
+  </li>
+</ol>

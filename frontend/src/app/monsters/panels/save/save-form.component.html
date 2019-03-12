@@ -1,0 +1,29 @@
+<d20md-modal-base #modal
+  [modalSizeClass]="'modal-lg'"
+  [headerText]="'Edit saves'"
+  [buttons]="modalButtons"
+>
+  <div *ngIf="save" class="form-horizontal">
+    <d20md-inputbox
+      [name]="'will'" [id]="'will'"
+      [labelText]="'Will'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="30"
+      [(value)]="save.will"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'reflex'" [id]="'reflex'"
+      [labelText]="'Reflex'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="30"
+      [(value)]="save.reflex"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'fortitude'" [id]="'fortitude'"
+      [labelText]="'Fortitude'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="30"
+      [(value)]="save.fortitude"
+    ></d20md-inputbox>
+  </div>
+</d20md-modal-base>

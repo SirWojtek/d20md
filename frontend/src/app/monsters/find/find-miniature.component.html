@@ -1,0 +1,43 @@
+<div class="miniature vertical-align" [routerLink]="'/monsters/show/' + monster.id">
+  <div class="hidden-xs col-sm-2 image">
+    <img [src]="monster?.getImage()" class="img-responsive img-circle"/>
+  </div>
+  <div class="col-sm-7 col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3 class="name">{{ monster.name }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-xs-6">
+        <d20md-hd-element [hitDices]="monster.HitDices" [hp]="monster.hp"></d20md-hd-element>
+      </div>
+      <div class="col-sm-4 col-xs-4">
+        <div class="row">
+          <d20md-attack-element [attack]="monster.attack_max"></d20md-attack-element>
+        </div>
+        <div class="row">
+          <d20md-armor-element [armor]="monster.armor_sum"></d20md-armor-element>
+        </div>
+      </div>
+      <div class="col-sm-2 hidden-xs">
+        <d20md-size-element [size]="monster.size"></d20md-size-element>
+      </div>
+      <div class="col-sm-2 col-xs-2">
+        <d20md-type-element [type]="monster.type"></d20md-type-element>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 col-xs-4">
+    <div class="row">
+      <div class="col-xs-12 env-container">
+        <d20md-environment-element [environmentTags]="monster.EnvironmentTags"></d20md-environment-element>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <d20md-cr-element [cr]="monster.challenge_rating"></d20md-cr-element>
+      </div>
+    </div>
+  </div>
+</div>

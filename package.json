@@ -1,0 +1,63 @@
+{
+  "name": "d20site",
+  "version": "1.0.0",
+  "description": "d20 helper site",
+  "license": "ISC",
+  "scripts": {
+    "fill_database": "gulp fill_database",
+    "start:backend": "nodemon -w server.js -w db -w backend -w api server.js",
+    "start:backend:debug": "node --inspect-brk server.js",
+    "start:e2e_env": "concurrently --kill-others \"cd frontend && ng serve -e e2e\" \"yarn start:backend\"",
+    "start": "concurrently --kill-others \"cd frontend && ng serve\" \"yarn start:backend\"",
+    "deploy_backend": "gulp migrate ; gulp seed",
+    "ci_deploy": "gulp ci_deploy",
+    "ci_db": "gulp ci_db",
+    "e2e": "gulp e2e_test"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.381.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
+    "cors": "^2.8.4",
+    "dataloader-sequelize": "^1.7.0",
+    "express": "^4.16.1",
+    "express-graphql": "^0.6.12",
+    "fs-extra": "^4.0.2",
+    "graphql": "^0.13.2",
+    "graphql-relay": "^0.5.5",
+    "graphql-sequelize": "^8.0.0",
+    "graphql-tools": "^2.23.1",
+    "jsonwebtoken": "^8.0.1",
+    "lodash": "^4.17.4",
+    "logrocket": "^0.6.9",
+    "multer": "^1.3.0",
+    "mysql2": "^1.4.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.13.5",
+    "sequelize-cli": "^3.0.0",
+    "sharp": "^0.18.4",
+    "sqlite3": "^4.0.2",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "child-process": "^1.0.2",
+    "gulp": "^4.0.0",
+    "nodemon": "^1.12.1",
+    "npm-check-updates": "^2.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gettor/d20Site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gettor/d20Site/issues"
+  },
+  "homepage": "https://github.com/Gettor/d20Site#readme",
+  "keywords": [
+    "d20"
+  ]
+}

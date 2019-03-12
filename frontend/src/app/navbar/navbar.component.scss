@@ -1,0 +1,53 @@
+@import '../../variables';
+
+nav.navbar {
+  position: sticky;
+  top: 0px;
+  margin-bottom: 0px;
+  min-height: initial;
+  z-index: 10;
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+
+    @media (max-width: $sm-xs-breakpoint) {
+      d20md-icon.visible-xs {
+        display: inline-block !important;
+      }
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      @media (max-width: $lg-md-breakpoint) {
+        display: none;
+      }
+
+      img {
+        margin: 0px 4px;
+      }
+
+      span {
+        font-size: 30px;
+        font-family: Simplifica;
+        padding-top: 3px;
+      }
+    }
+
+    .right-container {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      > * {
+        margin: 4px;
+      }
+    }
+  }
+}

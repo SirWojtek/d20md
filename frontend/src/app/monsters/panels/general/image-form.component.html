@@ -1,0 +1,13 @@
+<d20md-modal-base #modal
+  [modalSizeClass]="'modal-lg'"
+  [headerText]="'Edit image'"
+  [buttons]="modalButtons"
+>
+  <d20md-inputbox
+    [name]="'image'" [id]="'image'"
+    [labelText]="'Image'"
+    [inputType]="'file'"
+    [inputAccept]="'image/*'"
+    (onChange)="onImageUpload($event.target.files)"
+  ></d20md-inputbox>
+</d20md-modal-base>

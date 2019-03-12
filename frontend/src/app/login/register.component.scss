@@ -1,0 +1,35 @@
+div.register-container {
+  display: flex;
+  justify-content: center;
+
+  div.panel {
+    flex: 0 1 50em;
+
+    .img-container {
+      text-align: center;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    .recaptcha {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .terms-of-use {
+      text-align: center;
+    }
+
+    .terms-of-use a {
+      cursor: pointer;
+    }
+  }
+}

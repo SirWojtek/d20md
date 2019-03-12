@@ -1,0 +1,145 @@
+@import '../../variables';
+
+:host table tbody tr td {
+  text-align: center;
+}
+
+.show-monster-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 15px 15px;
+  grid-template-areas:
+    '. name name buttons'
+    'general general right right'
+    'hit saves right right';
+  justify-items: stretch;
+
+  .name-panel-item {
+    grid-area: name;
+    margin: 0px;
+    align-self: center;
+  }
+
+  .buttons-panel-item {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .btn {
+      margin: 5px;
+    }
+  }
+
+  .image-panel-item {
+    grid-area: img;
+  }
+
+  .saves-panel-item {
+    grid-area: saves;
+  }
+
+  .hit-dice-panel-item {
+    grid-area: hit;
+  }
+
+  .general-panel-item {
+    grid-area: general;
+  }
+
+  .right-panel-item {
+    grid-area: right;
+  }
+}
+
+@media (max-width: $md-sm-breakpoint) {
+  .show-monster-wrapper {
+    grid-template-areas:
+      '. name name  buttons'
+      'general general general general'
+      'hit hit saves saves'
+      'right right right right';
+  }
+  .name-panel-item {
+    grid-area: name;
+    margin: 0px;
+    align-self: center;
+  }
+
+  .buttons-panel-item {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .btn {
+      margin: 5px;
+    }
+  }
+
+  .image-panel-item {
+    grid-area: img;
+  }
+
+  .saves-panel-item {
+    grid-area: saves;
+  }
+
+  .hit-dice-panel-item {
+    grid-area: hit;
+  }
+
+  .general-panel-item {
+    grid-area: general;
+  }
+
+  .right-panel-item {
+    grid-area: right;
+  }
+}
+
+@media (max-width: $sm-xs-breakpoint) {
+  .show-monster-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      '. name  buttons'
+      'general general general'
+      'saves saves saves'
+      'hit hit hit'
+      'right right right';
+  }
+  .name-panel-item {
+    grid-area: name;
+    margin: 0px;
+    align-self: center;
+  }
+
+  .buttons-panel-item {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .btn {
+      margin: 5px;
+    }
+  }
+
+  .image-panel-item {
+    grid-area: img;
+  }
+
+  .saves-panel-item {
+    grid-area: saves;
+  }
+
+  .hit-dice-panel-item {
+    grid-area: hit;
+  }
+
+  .general-panel-item {
+    grid-area: general;
+  }
+
+  .right-panel-item {
+    grid-area: right;
+  }
+}

@@ -1,0 +1,20 @@
+<input #test
+  id="search-bar-input"
+  name="search-bar-input"
+  placeholder="Search..."
+  class="form-control input-sm"
+  autocomplete="off"
+  typeaheadOptionField="name"
+  typeaheadOptionsLimit="10"
+  [formControl]="searchControl"
+  [typeahead]="searchResults"
+  [typeaheadItemTemplate]="results"
+  (typeaheadOnSelect)="onSelect($event.item)"
+>
+
+<ng-template #results let-result="item">
+  <div class="result-container">
+    <h5>{{ result.name }}</h5>
+    <span class="label label-default">{{ result.type }}</span>
+  </div>
+</ng-template>

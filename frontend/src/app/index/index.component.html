@@ -1,0 +1,40 @@
+<div class="text-center">
+  <h1>Greetings adventurer!<br>
+  </h1>
+  <p class="introduce">
+    Welcome to d20 monster designer - the site with fresh look on classical d20 game system.
+  </p>
+  <hr>
+  <h3>What do you want to do today?</h3>
+  <div class="shortcut-row">
+    <button class="btn btn-default btn-shortcut"
+      id="search-monster-button"
+      routerLink="/monsters/find"
+    >
+      <img src="assets/img/search-96.png">
+      <h3>Search for existing monsters</h3>
+    </button>
+    <button class="btn btn-default btn-shortcut"
+      id="add-monster-button"
+      [disabled]="isUnlogged() | async"
+      routerLink="/monsters/add"
+    >
+      <img src="assets/img/create-96.png">
+      <h3>Create a monster or character</h3>
+      <small *ngIf="isUnlogged() | async">
+        (Available after login)
+      </small>
+    </button>
+  </div>
+  <h3 style="margin-top: 50px">Why d20 monster designer?</h3>
+  <p class="introduce">
+    d20 monster designer is an interactive book of monsters, spells and feats created by the users themselves.<br>
+    For GMs - this is an irreplaceable tool for the fast and efficient creation of monsters both during the session as before, when the story just arises.<br>
+    For Players – cause they can find here all spells and feats that they might need in the game. They can also store a virtual card of their character.
+  </p>
+  <div class="features-container">
+    <div *ngFor="let feature of features" class="feature-item">
+      <d20md-feature-item [item]="feature"></d20md-feature-item>
+    </div>
+  </div>
+</div>

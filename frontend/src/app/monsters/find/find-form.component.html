@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-xs-10">
+    <d20md-inputbox [name]="'name'" [id]="'name'"
+      [labelText]="'Name'"
+      [inputDivClass]="'col-xs-9'"
+      [(value)]="name"
+      (valueChange)="nameChange.emit($event)"
+    >
+    </d20md-inputbox>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'alphanumeric'"
+      (sortOrder)="onSortChange('name', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-10">
+    <d20md-selectbox [name]="'Size'" id="size"
+      [inputDivClass]="'col-xs-9'"
+      [(value)]="size"
+      (valueChange)="sizeChange.emit($event)"
+      [values]="sizes"
+    ></d20md-selectbox>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'alphanumeric'"
+      (sortOrder)="onSortChange('size', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-10">
+    <d20md-selectbox [name]="'Type'" id="type"
+      [inputDivClass]="'col-xs-9'"
+      [(value)]="type"
+      (valueChange)="typeChange.emit($event)"
+      [values]="types"
+    ></d20md-selectbox>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'alphanumeric'"
+      (sortOrder)="onSortChange('treasure', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row vertical-align">
+  <div class="col-xs-10">
+    <d20md-range-slider [name]="'CR'"
+      [inputDivClass]="'col-xs-9'"
+      [min]="1" [max]="70" [step]="2"
+      [connect]="[false, true, false]"
+      [(ngModel)]="cr"
+      (ngModelChange)="crChange.emit($event)"
+    ></d20md-range-slider>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'numeric'"
+      (sortOrder)="onSortChange('challenge_rating', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row vertical-align">
+  <div class="col-xs-10">
+    <d20md-range-slider [name]="'HD sum'"
+      [inputDivClass]="'col-xs-9'"
+      [min]="1" [max]="150" [step]="5"
+      [connect]="[false, true, false]"
+      [(ngModel)]="hdSum"
+      (ngModelChange)="hdSumChange.emit($event)"
+    ></d20md-range-slider>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'numeric'"
+      (sortOrder)="onSortChange('hd_sum', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row vertical-align">
+  <div class="col-xs-10">
+    <d20md-range-slider [name]="'HP'"
+      [inputDivClass]="'col-xs-9'"
+      [min]="1" [max]="3000" [step]="50"
+      [connect]="[false, true, false]"
+      [(ngModel)]="hp"
+      (ngModelChange)="hpChange.emit($event)"
+    ></d20md-range-slider>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'numeric'"
+      (sortOrder)="onSortChange('hp', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row vertical-align">
+  <div class="col-xs-10">
+    <d20md-range-slider [name]="'AC'"
+      [inputDivClass]="'col-xs-9'"
+      [min]="1" [max]="120" [step]="3"
+      [connect]="[false, true, false]"
+      [(ngModel)]="armorSum"
+      (ngModelChange)="armorSumChange.emit($event)"
+    ></d20md-range-slider>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'numeric'"
+      (sortOrder)="onSortChange('armor_sum', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row vertical-align">
+  <div class="col-xs-10">
+    <d20md-range-slider [name]="'Att bonus'"
+      [inputDivClass]="'col-xs-9'"
+      [min]="0" [max]="110" [step]="3"
+      [connect]="[false, true, false]"
+      [(ngModel)]="attackMax"
+      (ngModelChange)="attackMaxChange.emit($event)"
+    ></d20md-range-slider>
+  </div>
+  <div class="col-xs-2">
+    <d20md-sort-button [sortType]="'numeric'"
+      (sortOrder)="onSortChange('attack_max', $event)"
+    ></d20md-sort-button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-10">
+    <label class="col-xs-3">Env tags</label>
+    <div class="col-xs-9">
+      <d20md-chips *ngFor="let tag of environmentTags"
+        [backgroundColor]="environmentTagColors[tag]"
+      >
+        {{ utils.toUpperCase(tag) }}
+      </d20md-chips>
+    </div>
+  </div>
+  <div class="col-xs-2">
+    <button type="button" title="Add/remove tags" class="btn btn-sm btn-primary"
+      (click)="tagForm.show()"
+    >
+      <d20md-icon [iconName]="'fa-pencil'"></d20md-icon>
+    </button>
+  </div>
+  <d20md-find-tag #tagForm [(tags)]="environmentTags" (tagsChange)="environmentTagsChange.emit($event)">
+  </d20md-find-tag>
+</div>

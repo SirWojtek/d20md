@@ -1,0 +1,13 @@
+<img [src]="'assets/img/' + save + '.svg'" [title]="save" width="96">
+<hr>
+<div class="resistable-container">
+  <div>
+    Spell resistable
+  </div>
+  <div *ngIf="spellResistable">
+    <d20md-icon [iconName]="'fa-check'"></d20md-icon>
+  </div>
+  <div *ngIf="!spellResistable">
+    <d20md-icon [iconName]="'fa-times'"></d20md-icon>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<table *ngIf="attackGroups" class="table">
+  <thead><tr>
+    <th>Name</th>
+    <th class="value-col">Attack bonus</th>
+    <th>Damage</th>
+    <th class="value-col">Range</th>
+  </tr></thead>
+  <tbody>
+    <ng-template ngFor let-attackGroup [ngForOf]="attackGroups">
+      <ng-template ngFor let-attack [ngForOf]="attackGroup.Attacks">
+        <tr [style.color]="getColor(attack)" [ngClass]="getRowClasses(attackGroup, attack)">
+          <td>
+              {{ attack.name }}
+              <d20md-chips
+                *ngIf="attack.is_main"
+                backgroundColor="transparent"
+                [borderColor]="getColor(attack)"
+                [color]="getColor(attack)"
+                >Main</d20md-chips>
+          </td>
+          <td class="value-col">
+            {{ attack.total.attack_bonus }}
+            <d20md-tooltip-button [tooltipText]="getAttackBonusInfo(attack)"></d20md-tooltip-button>
+          </td>
+          <td>
+            <ng-template ngFor let-dmg [ngForOf]="attack.Damages">
+              <d20md-chips [backgroundColor]="attackTypeToColor[dmg.damage_type]">
+                {{ dmg.toString() }}
+              </d20md-chips>
+              <d20md-tooltip-button [tooltipText]="getDamageInfo(dmg)"></d20md-tooltip-button>
+              <br>
+            </ng-template>
+          </td>
+          <td class="value-col">{{ attack.range || 'Melee' }}</td>
+        </tr>
+        <tr *ngIf="showOrRow(attackGroup, attack)">
+          <td colspan="4" class="or-column">
+            <span class="or-span" [style.color]="getColor(attack)">or</span>
+          </td>
+        </tr>
+      </ng-template>
+    </ng-template>
+  </tbody>
+</table>
+<accordion>
+  <accordion-group heading="Legend">
+    <d20md-chips *ngFor="let damageType of attackTypeToColor | keys"
+      [backgroundColor]="attackTypeToColor[damageType]"
+    >{{ damageType || 'unknown' }}</d20md-chips>
+  </accordion-group>
+</accordion>

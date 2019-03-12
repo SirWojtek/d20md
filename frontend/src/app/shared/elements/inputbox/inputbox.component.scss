@@ -1,0 +1,31 @@
+@import '../../../../variables';
+
+.inputbox-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  label {
+    margin: 0px;
+    text-align: left;
+  }
+
+  div {
+    padding: 0px;
+
+    .error-text {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    input {
+      background-color: $input-background-color;
+      color: #000000;
+    }
+
+    input::placeholder {
+      color: $input-placeholder-color;
+    }
+  }
+}

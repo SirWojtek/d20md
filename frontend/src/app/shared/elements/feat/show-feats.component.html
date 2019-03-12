@@ -1,0 +1,25 @@
+
+<div *ngIf="isMoreThanOneTypeOfFeat()" class="btn-group" btnRadioGroup formControlName="typeControl">
+  <label
+    *ngFor="let type of sortedFeats | keys"
+    class="btn btn-primary"
+    tabindex="0"
+    [btnRadio]="type"
+  >{{ type | startCase }}</label>
+</div>
+
+
+<d20md-inputbox *ngIf="shouldShowSearchbox()" name="Search" class="feat-search"
+    labelText="Search"
+    [inputDivClass]="'col-xs-9'"
+    [(value)]="searchInput"
+  ></d20md-inputbox>
+  <accordion>
+    <accordion-group
+      *ngFor="let feat of getFilteredFeats()"
+      [heading]="feat.name"
+    >
+      <div [innerHtml]="feat.benefit"></div>
+      <a class="btn btn-default" [routerLink]="'/feats/show/' + feat.id">Show</a>
+    </accordion-group>
+  </accordion>

@@ -1,0 +1,61 @@
+<div *ngIf="featObs | async as feat" class="panel panel-default" align="center">
+  <div class="panel-heading">
+    <h2>{{ feat.name }}</h2>
+  </div>
+  <div class="panel-body">
+    <div class="first-row">
+      <d20md-feat-type-panel #featTypePanel
+        [featType]="feat.feat_type"
+        [canModify]="canModify"
+        (featTypeChange)="onFeatTypeSave($event)"
+      ></d20md-feat-type-panel>
+      <d20md-prerequisite-panel
+        *ngIf="feat.Prerequisite?.length || canModify"
+        [prerequisites]="feat.Prerequisite"
+        [canModify]="canModify"
+        (prerequisitesChange)="onPrerequisitesSave($event)"
+      ></d20md-prerequisite-panel>
+    </div>
+
+    <tabset>
+      <tab heading="Benefit">
+        <div *ngIf="feat.benefit || canModify" class="tab-container">
+          <d20md-description-panel
+            [description]="feat.benefit"
+            [canModify]="canModify"
+            (descriptionChange)="onBenefitSave($event)"
+          ></d20md-description-panel>
+        </div>
+      </tab>
+      <tab *ngIf="feat.normal || canModify" heading="Normal">
+        <div class="tab-container">
+          <d20md-description-panel
+            [description]="feat.normal"
+            (descriptionChange)="onNormalSave($event)"
+            [canModify]="canModify"
+          ></d20md-description-panel>
+        </div>
+      </tab>
+      <tab *ngIf="feat.special || canModify" heading="Special">
+        <div class="tab-container">
+          <d20md-description-panel
+            [description]="feat.special"
+            (descriptionChange)="onSpecialSave($event)"
+            [canModify]="canModify"
+          ></d20md-description-panel>
+        </div>
+      </tab>
+    </tabset>
+
+    <d20md-monsters-using-panel
+      *ngIf="feat.Monsters?.length"
+      [monsters]="feat.Monsters"
+    ></d20md-monsters-using-panel>
+
+  </div>
+  <div *ngIf="canModify" class="panel-footer">
+    <button class="btn btn-default" (click)="onDeleteFeat()">
+      <d20md-icon [iconName]="'fa-trash'" [text]="'Delete'"></d20md-icon>
+    </button>
+  </div>
+ </div>

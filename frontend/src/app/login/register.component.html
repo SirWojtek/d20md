@@ -1,0 +1,79 @@
+<div class="register-container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="img-container">
+        <img src="assets/img/create-account.svg" width="128" height="128">
+      </div>
+      <h3>Create account for d20 monster designer</h3>
+      <hr>
+      <div *ngIf="created" class="alert alert-success" role="alert">
+        Account created. Check your email for verification code.
+      </div>
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      <div [formGroup]="registerForm">
+        <div class="form-group">
+          <label for="create-email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="create-email"
+            formControlName="email"
+            name="create-email"
+            placeholder="Email"
+            autocomplete="username email"
+          >
+       </div>
+       <div class="form-group">
+         <label for="create-password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="create-password"
+              autocomplete="new-password"
+              placeholder="Password"
+              formControlName="password"
+              name="create-password"
+              autocomplete="new-password"
+            >
+       </div>
+       <div class="form-group">
+         <label for="repeat-password">Repeat password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="repeat-password"
+              autocomplete="repeat-password"
+              placeholder="Repeat password"
+              formControlName="repeatPassword"
+              name="repeat-password"
+              autocomplete="new-password"
+            >
+       </div>
+       <div *ngIf="!disableRecaptcha" class="recaptcha form-group">
+         <re-captcha site_key="6LeAUDcUAAAAAA7GwjdH2MTe6dpJfOHEjExXLEvF"
+           id="recaptcha"
+           [theme]="'dark'"
+           (captchaResponse)="recaptcha = $event"
+           (captchaExpired)="recaptcha = null"
+         ></re-captcha>
+       </div>
+       <p class="terms-of-use">
+         By clicking on "Create an account", you are agreeing to<br>
+         <a [routerLink]="['/', 'policy']">the Terms of Service and the Privacy Policy</a>.
+       </p>
+       <div class="button-container">
+         <button
+           type="button"
+           class="btn btn-success"
+           [disabled]="registerForm.invalid || !recaptcha"
+           (click)="onRegister()"
+          >
+          <d20md-icon [iconName]="'fa-plus'" [text]="'Create an account'"></d20md-icon>
+         </button>
+       </div>
+    </div>
+  </div>
+  </div>
+</div>

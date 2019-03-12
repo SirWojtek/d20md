@@ -1,0 +1,115 @@
+<d20md-navbar></d20md-navbar>
+<div [@.disabled]="disableAnimations" class="app-container">
+  <d20md-loader></d20md-loader>
+  <div class="right-monster">
+    <div class="container">
+      <d20md-breadcrumbs></d20md-breadcrumbs>
+      <router-outlet (activate)="onActivate()"></router-outlet>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container" style="margin-top: 50px; text-align:center;">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+         <div class="col-md-3">
+           <div class="border-dashed">
+            <a href="mailto:guziec.john@gmail.com">
+              <h5>CONTACT</h5>
+            </a>
+           </div>
+         </div>
+         <div class="col-md-3">
+           <div class="border-dashed">
+            <a [routerLink]="'/changelog'">
+              <h5>CHANGELOG</h5>
+            </a>
+           </div>
+         </div>
+         <div class="col-md-3">
+           <div class="border-dashed">
+            <a [routerLink]="'/policy'">
+              <h5>PRIVACY POLICY</h5>
+            </a>
+           </div>
+         </div>
+         <div class="col-md-3">
+           <div class="border-dashed">
+            <a [routerLink]="'/policy'">
+              <h5>TERMS OF SERVICE</h5>
+            </a>
+           </div>
+         </div>
+        </div>
+        <div class="row vertical-align">
+          <div class="col-md-6">
+          <br>
+            <div class="row">
+              <div class="col-xs-12">
+                <h5> Subscribe to our fornightly newletter and always be prepared!</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-inline">
+                  <div class="form-group">
+                      <input type="email" class="form-control input-sm" id="newsletter" placeholder="Join our newsletter!">
+                  </div>
+                  <button class="btn btn-success btn-sm" type="button">Roll In</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 hidden-xs">
+            <br>
+            <div class="row">
+                <div class="col-xs-4">
+                  <a href="https://bitbucket.org/sirwojtek/d20site"><img src="assets/img/footer-icon1.png"></a>
+                </div>
+                <div class="col-xs-4">
+                  <a href="https://www.facebook.com/d20md"><img src="assets/img/footer-icon2.png" class="img-circle"></a>
+                </div>
+                <div class="col-xs-4">
+                  <a href="#"><img src="assets/img/footer-icon3.png"></a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row vertical-align" style="margin-top: 30px">
+            <div class="col-md-offset-2 col-md-5">
+              <h5>Do you find any bugs? Let us know about it.</h5>
+            </div>
+            <div class="col-md-offset-0 col-md-4 col-xs-offset-1 col-xs-6">
+              <a class=" pull-right btn btn-default btn-block" href="https://bitbucket.org/sirwojtek/d20site/issues/new">
+                <img src="assets/img/bug-20.png" width="20" /> Report a bug
+              </a>
+            </div>
+        </div>
+
+      </div>
+      <div style="padding: 0px" class="col-md-3 hidden-sm hidden-xs">
+        <img src="assets/img/quote.png" class="img-responsive" id="quote-msg" alt="Just loving RPG">
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <p class="text-muted">
+        Open Game License v 1.0a Copyright 2000, Wizards of the Coast, Inc.
+      </p>
+      <p class="text-muted">
+        System Reference Document Copyright 2000-2003, Wizards of the Coast, Inc.; Authors Jonathan Tweet, Monte Cook, Skip Williams, Rich baker, Andy Collins, David noonan, Rich Redman, Bruce R. Cordell, based on original material by E. Gary Gygax and Dave Arneson.
+      </p>
+      <p class="text-muted">
+        Unearthed Arcana Copyright 2004, Wizards of the Coast, Inc.; Andy Collins, Jesse Decker, David Noonan, Rich Redman.
+      </p>
+      <p class="text-muted">
+        System Reference Document v3.5 HTML compilation Copyright 2007, Sovelior Meliamne & Jason Olaf Jensen.
+      </p>
+      <p class="text-muted">
+        Some of icons used here are from <a href="http://game-icons.net/">game-icons.net</a> website
+      </p>
+      <a href="https://icons8.com">Icon pack by Icons8</a>
+    </div>
+  </div>
+</footer>

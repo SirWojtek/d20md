@@ -1,0 +1,15 @@
+<table *ngIf="save" class="table table-striped panel-table">
+  <thead><tr>
+    <th>Save</th>
+    <th class="value-col">Total</th>
+    <th class="value-col">Base</th>
+  </tr></thead>
+  <tbody>
+    <tr *ngFor="let saveType of saveTypes"
+      [style.color]="getColor(saveType)">
+      <td>{{ utils.toUpperCase(saveType) }}</td>
+      <td class="value-col total">{{ save.total[saveType] }}</td>
+      <td class="value-col">{{ save[saveType] }}</td>
+    </tr>
+  </tbody>
+</table>

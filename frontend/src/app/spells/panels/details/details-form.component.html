@@ -1,0 +1,12 @@
+<d20md-modal-base [buttons]="modalButtons" [headerText]="'Edit details'">
+  <d20md-selectbox
+    [name]="'Type'"
+    [(value)]="spellType"
+    [values]="spellTypes"
+  ></d20md-selectbox>
+  <d20md-selectbox
+    [name]="'Range'"
+    [(value)]="spellRange"
+    [values]="spellRanges"
+  ></d20md-selectbox>
+</d20md-modal-base>

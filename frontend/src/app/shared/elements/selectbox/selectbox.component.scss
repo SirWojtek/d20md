@@ -1,0 +1,22 @@
+@import '../../../../variables';
+
+.selectbox-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  label {
+    margin: 0px;
+    text-align: left;
+  }
+
+  div {
+    padding: 0px;
+
+    select {
+      background-color: $input-background-color;
+      color: #000000;
+    }
+  }
+}

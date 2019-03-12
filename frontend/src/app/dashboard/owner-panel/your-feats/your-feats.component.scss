@@ -1,0 +1,30 @@
+@import '../../../../variables';
+
+.quick-search-container {
+  display: flex;
+  justify-content: space-between;
+
+  .name-search {
+    flex-grow: 1;
+    max-width: 500px;
+  }
+
+  .type-search {
+    margin-left: 16px;
+    flex-grow: 1;
+    max-width: 300px;
+  }
+
+  @media (max-width: $sm-xs-breakpoint) {
+    flex-direction: column;
+
+    .name-search {
+      max-width: inherit;
+    }
+
+    .type-search {
+      max-width: inherit;
+      margin-left: 0px;
+    }
+  }
+}

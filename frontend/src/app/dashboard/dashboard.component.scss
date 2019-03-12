@@ -1,0 +1,24 @@
+@import '../../variables';
+
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+
+  .main-container {
+    flex: 11 0 auto;
+    margin-right: 8px;
+  }
+
+  .history-container {
+    flex: 1 0 20em;
+  }
+
+  @media (max-width: $md-sm-breakpoint) {
+    .main-container {
+      margin-right: 0px;
+    }
+    .history-container {
+      display: none;
+    }
+  }
+}

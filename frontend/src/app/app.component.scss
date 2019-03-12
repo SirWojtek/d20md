@@ -1,0 +1,49 @@
+@import '../variables';
+
+#quote-msg {
+  height: auto;
+  width: auto;
+  max-width: 250px;
+  max-height: 250px;
+}
+
+.app-container {
+  margin-top: 16px;
+  background-image: url('../assets/img/background-logo.png');
+  background-size: 450px;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+
+  .right-monster {
+    background-image: url('../assets/img/background-logo.png');
+    background-size: 450px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    padding-bottom: 50px;
+    min-height: 624px;
+  }
+}
+
+@media (max-width: $md-sm-breakpoint) {
+  .app-container {
+    background-position: bottom center;
+
+    .right-monster {
+      background-image: none;
+    }
+  }
+}
+
+footer.footer {
+  background-color: #1d1d1d;
+  border-top: 1px solid #464545;
+
+  .border-dashed {
+    border: 1px dashed grey;
+  }
+
+  a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -1,0 +1,62 @@
+<div *ngIf="spellObs | async as spell" class="panel panel-default" align="center">
+  <div class="panel-heading">
+    <h2>{{ spell.name }}</h2>
+  </div>
+
+  <div class="panel-body tab-container">
+
+    <div class="row">
+      <div class="col-md-4">
+        <d20md-saves-panel #savesPanel
+          [spellResistable]="spell.permits_sr"
+          [save]="spell.save_type"
+          [canModify]="canModify"
+          (spellResistableChange)="onSpellResistableChange($event)"
+          (saveChange)="onSaveChange($event)"
+        ></d20md-saves-panel>
+      </div>
+      <div class="col-md-4">
+        <d20md-levels-panel #levelsPannel
+          [spellLevels]="spell.SpellLevels"
+          [canModify]="canModify"
+          (spellLevelsChange)="onSpellLevelsChange($event)"
+        ></d20md-levels-panel>
+      </div>
+      <div class="col-md-4">
+        <d20md-details-panel #detailsPanel
+          [spellType]="spell.spell_type"
+          [spellRange]="spell.spell_range"
+          [canModify]="canModify"
+          (spellTypeChange)="onSpellTypeChange($event)"
+          (spellRangeChange)="onSpellRangeChange($event)"
+        ></d20md-details-panel>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <d20md-description-panel
+          [description]="spell.description"
+          (descriptionChange)="onDescriptionChange($event)"
+          [canModify]="canModify"
+        ></d20md-description-panel>
+      </div>
+    </div>
+
+    <div *ngIf="spell.Monsters?.length" class="row">
+      <div class="col-md-12">
+        <d20md-monsters-using-panel [monsters]="spell.Monsters"></d20md-monsters-using-panel>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="canModify" class="panel-footer">
+    <button class="btn btn-default" (click)="onDeleteSpell()">
+      <d20md-icon [iconName]="'fa-trash'" [text]="'Delete'"></d20md-icon>
+   </button>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,52 @@
+<div class="col-xs-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Current spells</div>
+    <div class="panel-body">
+      <button *ngFor="let spell of spells"
+        class="btn btn-danger spell-button"
+        (click)="onDelete(spell)"
+      >
+        {{ spell.name }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-xs-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">All spells</div>
+    <div class="panel-body">
+      <div>
+        <d20md-inputbox [name]="'name'" [id]="'name'"
+          [labelText]="'Name'"
+          [inputDivClass]="'col-xs-9'"
+          [(value)]="searchFields.name"
+          (valueChange)="onSearch()"
+        ></d20md-inputbox>
+      </div>
+      <div>
+        <d20md-range-slider [name]="'Level'"
+          [inputDivClass]="'col-xs-9'"
+          [min]="0" [max]="9" [step]="1"
+          [connect]="[false, true, false]"
+          [(ngModel)]="levelRange"
+          (ngModelChange)="onLevelChange()"
+        ></d20md-range-slider>
+      </div>
+      <div>
+        <d20md-inputbox [name]="'class'" [id]="'class'"
+          [labelText]="'Class'"
+          [inputDivClass]="'col-xs-9'"
+          [(value)]="searchFields.class_name"
+          (valueChange)="onSearch()"
+        ></d20md-inputbox>
+      </div>
+      <button *ngFor="let spell of foundSpells"
+        class="btn btn-primary spell-button"
+        (click)="onAdd(spell)"
+        [disabled]="isSpellAdded(spell)"
+      >
+        {{ spell.name }}
+      </button>
+    </div>
+  </div>
+</div>

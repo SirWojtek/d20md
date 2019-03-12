@@ -1,0 +1,12 @@
+<div class="panel panel-primary">
+  <div class="panel-heading"><b>Saves</b></div>
+  <div class="panel-body">
+  <d20md-show-save [save]="save"></d20md-show-save>
+  </div>
+  <div *ngIf="canModify" class="panel-footer">
+    <button type="button" class="btn btn-default" (click)="editor.show(save)">Edit</button>
+  </div>
+</div>
+<d20md-save-form #editor
+  (saveChange)="onSaveChange($event)"
+></d20md-save-form>

@@ -1,0 +1,35 @@
+<div class="find-container">
+
+  <button class="btn btn-sm btn-default hide-filters-btn" (click)="hideFilters=!hideFilters">
+    <d20md-icon *ngIf="!hideFilters" iconName="fa-angle-double-up fa-2x"></d20md-icon>
+    <d20md-icon *ngIf="hideFilters" iconName="fa-angle-double-down fa-2x"></d20md-icon>
+  </button>
+
+  <div *ngIf="!hideFilters" class="filters-container">
+    <d20md-find-form
+      (nameChange)="onSearchTermChange('name', $event)"
+      (sizeChange)="onSearchTermChange('size', $event)"
+      (typeChange)="onSearchTermChange('type', $event)"
+      (crChange)="onSearchTermRangeChange('challenge_rating', $event)"
+      (hdSumChange)="onSearchTermRangeChange('hd_sum', $event)"
+      (hpChange)="onSearchTermRangeChange('hp', $event)"
+      (armorSumChange)="onSearchTermRangeChange('armor_sum', $event)"
+      (attackMaxChange)="onSearchTermRangeChange('attack_max', $event)"
+      (environmentTagsChange)="onSearchTermTagsChange('environment_tags', $event)"
+      (sortMapChange)="onSortChange($event)"
+    ></d20md-find-form>
+  </div>
+
+  <div class="miniatures-container" #monsterMiniatures>
+    <div @slideInOutRight>
+      <d20md-find-miniature *ngFor="let monster of results" [monster]="monster"></d20md-find-miniature>
+    </div>
+    <div *ngIf="results.length">
+      <pagination [totalItems]="page.total" [(ngModel)]="page.current" (ngModelChange)="onQueryChange()"
+        [itemsPerPage]="page.size" [maxSize]="10" class="pagination-sm" [boundaryLinks]="true"
+      ></pagination>
+    </div>
+  </div>
+
+</div>
+

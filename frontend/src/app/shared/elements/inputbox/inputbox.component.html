@@ -1,0 +1,32 @@
+<div [ngClass]="{
+  'has-error': errorText,
+  'inputbox-container': true
+}">
+  <label *ngIf="labelText" [attr.for]="id">
+    {{ labelText || utils.toUpperCase(name) }}
+  </label>
+  <div [ngClass]="inputDivClass">
+    <span *ngIf="inputType == 'range'">{{ value }}</span>
+    <input
+       [attr.class]="inputClass"
+       [attr.type]="inputType"
+       [attr.name]="name"
+       [attr.placeholder]="inputPlaceholder"
+       [attr.id]="id"
+       [attr.accept]="inputAccept"
+       [attr.maxlength]="maxLength"
+       [attr.min]="rangeMin"
+       [attr.max]="rangeMax"
+       [attr.step]="rangeStep"
+       [attr.aria-describedby]="id + '-helpbox'"
+       [ngModel]="value"
+       (ngModelChange)="onModelChange($event)"
+       (change)="onChange.emit($event)"
+       (focusout)="onFocusOut.emit($event)"
+    >
+    <span class="help-block error-text"
+      [attr.id]="id + '-helpbox'"
+      *ngIf="errorText"
+    >{{ errorText }}</span>
+  </div>
+</div>

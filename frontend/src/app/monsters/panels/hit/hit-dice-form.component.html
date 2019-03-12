@@ -1,0 +1,22 @@
+<d20md-modal-base [buttons]="modalButtons">
+  <form *ngIf="value" class="form-horizontal">
+    <d20md-inputbox
+      [name]="'hd_amount'" [id]="'hd-amount'"
+      [labelText]="'HD amount'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="100" [rangeStep]="1"
+      [(value)]="value.hd_amount"
+    ></d20md-inputbox>
+    <d20md-selectbox
+      [name]="'HD type'"
+      [(value)]="value.hd_type"
+      [values]="hdTypes"
+    ></d20md-selectbox>
+    <d20md-inputbox
+      [name]="'description'" [id]="'description'"
+      [labelText]="'Description'"
+      [maxLength]="20"
+      [(value)]="value.description"
+    ></d20md-inputbox>
+  </form>
+</d20md-modal-base>

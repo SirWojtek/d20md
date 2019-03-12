@@ -1,0 +1,50 @@
+<d20md-modal-base #modal
+  [modalSizeClass]="'modal-lg'"
+  [headerText]="'Edit attribute'"
+  [buttons]="modalButtons"
+>
+  <div *ngIf="attribute" class="form-horizontal">
+    <d20md-inputbox
+      [name]="'strength'" [id]="'strength'"
+      [labelText]="'Strength'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="50"
+      [(value)]="attribute.strength"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'dexterity'" [id]="'dexterity'"
+      [labelText]="'Dexterity'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="50"
+      [(value)]="attribute.dexterity"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'constitution'" [id]="'constitution'"
+      [labelText]="'Constitution'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="50"
+      [(value)]="attribute.constitution"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'intelligence'" [id]="'intelligence'"
+      [labelText]="'Intelligence'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="50"
+      [(value)]="attribute.intelligence"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'wisdom'" [id]="'wisdom'"
+      [labelText]="'Wisdom'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="50"
+      [(value)]="attribute.wisdom"
+    ></d20md-inputbox>
+    <d20md-inputbox
+      [name]="'charisma'" [id]="'charisma'"
+      [labelText]="'Charisma'"
+      [inputType]="'range'"
+      [rangeMin]="0" [rangeMax]="50"
+      [(value)]="attribute.charisma"
+    ></d20md-inputbox>
+  </div>
+</d20md-modal-base>

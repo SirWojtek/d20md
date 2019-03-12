@@ -1,0 +1,32 @@
+<div class="find-grid">
+  <div class="filters-container">
+    <div class="phrase-field">
+      <d20md-inputbox [name]="'phrase'" [id]="'phrase'"
+        [labelText]="'Phrase'"
+        [inputDivClass]="'col-xs-9'"
+        [(value)]="searchFields.phrase"
+        (valueChange)="onFilterChange()"
+      ></d20md-inputbox>
+    </div>
+    <div class="type-field">
+      <d20md-selectbox [name]="'Type'" [id]="'type'"
+        [inputDivClass]="'col-xs-9'"
+        [(value)]="searchFields.feat_type"
+        (valueChange)="onFilterChange()"
+        [values]="featTypes"
+      ></d20md-selectbox>
+    </div>
+  </div>
+  <div class="miniatures-container" #miniaturesContainer>
+    <div @slideInOutRight class="miniatures-flex-container">
+      <div class="miniature-container" *ngFor="let result of feats">
+        <d20md-feat-miniature [feat]="result" [searchPhrase]="searchFields.phrase"></d20md-feat-miniature>
+      </div>
+    </div>
+    <div *ngIf="feats.length" class="pagination-container">
+      <pagination [totalItems]="page.total" [(ngModel)]="page.current" (ngModelChange)="onQueryChange()"
+        [itemsPerPage]="page.size" [maxSize]="10" class="pagination-sm" [boundaryLinks]="true"
+      ></pagination>
+    </div>
+  </div>
+</div>

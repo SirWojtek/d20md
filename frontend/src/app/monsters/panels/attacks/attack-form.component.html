@@ -1,0 +1,76 @@
+<d20md-modal-base [buttons]="modalButtons" [headerText]="'Edit attack'">
+<ng-template [ngIf]="value">
+  <div class="panel panel-primary">
+    <div class="panel-heading"><b>Attack properties</b></div>
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <d20md-inputbox
+          [name]="'name'" [id]="'attack-name'"
+          [labelText]="'Name'"
+          [inputType]="'name'"
+          [(value)]="value.name"
+        ></d20md-inputbox>
+        <d20md-inputbox
+          [name]="'attack-bonus'" [id]="'attack-bonus'"
+          [labelText]="'Attack bonus'"
+          [inputType]="'range'"
+          [rangeMin]="-20" [rangeMax]="120" [rangeStep]="1"
+          [(value)]="value.attack_bonus"
+        ></d20md-inputbox>
+        <d20md-inputbox
+          [name]="'attack-range'" [id]="'attack-range'"
+          [labelText]="'Range'"
+          [inputType]="'range'"
+          [rangeMin]="0" [rangeMax]="250" [rangeStep]="1"
+          [(value)]="value.range"
+        ></d20md-inputbox>
+        <d20md-selectbox
+          [name]="'Type'"
+          [(value)]="value.attack_type"
+          [values]="attackTypes"
+        ></d20md-selectbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"><b>Add damage</b></div>
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <d20md-inputbox
+          [name]="'damage-dice'" [id]="'damage-dice'"
+          [labelText]="'Damage dice'"
+          [inputType]="'text'"
+          [(value)]="newDamage.dice"
+        ></d20md-inputbox>
+        <d20md-inputbox
+          [name]="'damage-description'" [id]="'damage-description'"
+          [labelText]="'Description'"
+          [inputType]="'text'"
+          [(value)]="newDamage.description"
+        ></d20md-inputbox>
+        <d20md-selectbox
+          [placeholder]="'Type'"
+          [name]="'Type'"
+          [(value)]="newDamage.type"
+          [values]="damageTypes"
+        ></d20md-selectbox>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <alert *ngIf="damageError" type="danger" class="damage-error">
+      Wrong damage dice format. <br>
+      Correct format is <b>4k6+12/x2</b> or <b>1k4/18-20</b>.
+    </alert>
+    <alert *ngIf="diceError" type="danger" class="damage-error">
+      Incorrect dice. Could be: <b>0, 2, 3, 4, 6, 8, 10, 12, 20</b>.
+    </alert>
+    <button type="button" class="btn btn-success" id="damage-add" (click)="onDamageAdd()">Add</button>
+  </div>
+  <d20md-damage-table
+    [damages]="value.Damages"
+    (onDelete)="onDamageDelete($event)"
+  ></d20md-damage-table>
+</ng-template>
+</d20md-modal-base>

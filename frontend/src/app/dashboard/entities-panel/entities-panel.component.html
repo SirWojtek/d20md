@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+  <div *ngIf="title" class="panel-heading">
+    <h3 class="panel-title">{{ title }}</h3>
+  </div>
+  <div class="panel-body">
+    <div *ngIf="entities && entities.length; else noItems">
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngFor="let item of getPage()">
+            <td>
+              <span class="name-cell" [routerLink]="getLink(item)">{{ item.name }}</span>
+            </td>
+            <td class="type-cell">
+              <d20md-chips [backgroundColor]="getColor(item.type)">{{ item.type }}</d20md-chips>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination-container" *ngIf="entities.length > itemsPerPage">
+        <pager
+          pageBtnClass="btn-sm"
+          previousText="<"
+          nextText=">"
+          [itemsPerPage]="itemsPerPage"
+          [maxSize]="5"
+          [totalItems]="entities.length"
+          [formControl]="paginationControl"
+          [boundaryLinks]="true"
+        ></pager>
+      </div>
+    </div>
+
+    <ng-template #noItems>
+      <div class="no-items-placeholder">
+        <img src="assets/img/no-monsters.svg" width="128" height="128" />
+        <h4>There is no items to be shown</h4>
+      </div>
+    </ng-template>
+  </div>
+</div>
+

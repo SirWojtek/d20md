@@ -1,0 +1,5 @@
+<d20md-modal-base [buttons]="modalButtons" headerText="Confirm deletion">
+  <div *ngIf="entity">
+    Are you sure you want to delete <b>{{ entity.name }}</b>?
+  </div>
+</d20md-modal-base>

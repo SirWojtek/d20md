@@ -10,8 +10,6 @@
     "start:e2e_env": "concurrently --kill-others \"cd frontend && ng serve -e e2e\" \"yarn start:backend\"",
     "start": "concurrently --kill-others \"cd frontend && ng serve\" \"yarn start:backend\"",
     "deploy_backend": "gulp migrate ; gulp seed",
-    "ci_deploy": "gulp ci_deploy",
-    "ci_db": "gulp ci_db",
     "e2e": "gulp e2e_test"
   },
   "dependencies": {

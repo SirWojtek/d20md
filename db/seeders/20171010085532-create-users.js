@@ -13,6 +13,14 @@ module.exports = {
         verificationCode: null,
         createdAt: new Date(),
         updatedAt: new Date(),
+      },
+      {
+        email: 'momatoku+admin@gmail.com',
+        password: 'DevTest',
+        usertype: 'admin',
+        verificationCode: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ]);
   },

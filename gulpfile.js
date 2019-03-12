@@ -46,8 +46,8 @@ gulp.task('migrate', (cb) => {
   exec('sequelize db:migrate', createExecCallback(cb));
 });
 
-gulp.task('migrate_undo', (cb) => {
-  exec('sequelize db:migrate:undo:all', createExecCallback(cb));
+gulp.task('clean_database', (cb) => {
+  exec('sequelize db:drop && sequelize db:create', createExecCallback(cb));
 });
 
 gulp.task('seed', (cb) => {
@@ -68,7 +68,8 @@ gulp.task("run_e2e", (cb) => {
 });
 
 gulp.task("e2e_test", gulp.series(
-  'migrate_undo',
+  'clean_database',
   'migrate',
+  'seed',
   'run_e2e',
 ));

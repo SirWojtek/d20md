@@ -9,8 +9,8 @@ const DEFAULT_INSTANCE = {
 module.exports = function(sequelize, DataTypes) {
   var validator = {
     min: {
-      args: [0],
-      msg: 'Save throw cannot be lower than 0',
+      args: [-5],
+      msg: 'Save throw cannot be lower than -5',
     },
     max: {
       args: [100],

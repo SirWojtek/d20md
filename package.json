@@ -13,7 +13,7 @@
     "lint": "cd frontend && yarn lint",
     "build": "cd frontend && yarn build",
     "build:aot": "cd frontend && yarn build:aot",
-    "e2e": "gulp e2e_test"
+    "e2e:ci": "gulp ci_e2e_test"
   },
   "dependencies": {
     "aws-sdk": "^2.381.0",

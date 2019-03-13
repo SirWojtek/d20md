@@ -12,7 +12,7 @@
     "deploy_backend": "gulp migrate ; gulp seed",
     "lint": "cd frontend && yarn lint",
     "build": "cd frontend && yarn build",
-    "build:eot": "cd frontend && yarn build:aot",
+    "build:aot": "cd frontend && yarn build:aot",
     "e2e": "gulp e2e_test"
   },
   "dependencies": {

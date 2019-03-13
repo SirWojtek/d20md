@@ -1,4 +1,8 @@
 dist: trusty
+services:
+  - mysql
+env:
+  - NODE_ENV=travis
 language: node_js
 node_js:
   - 10

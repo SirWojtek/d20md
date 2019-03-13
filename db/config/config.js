@@ -10,6 +10,15 @@ module.exports = {
     logging: false,
     seederStorage: "sequelize"
   },
+  travis: {
+    username: "travis",
+    database: "d20md",
+    host: "localhost",
+    port: 3306,
+    dialect: "mysql",
+    logging: false,
+    seederStorage: "sequelize"
+  },
   production: {
     username: "d20MD",
     password: process.env.DB_PASSWORD,

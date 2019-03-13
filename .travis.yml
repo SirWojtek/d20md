@@ -5,7 +5,7 @@ env:
   - NODE_ENV=travis
 language: node_js
 node_js:
-  - 10
+  - 8
   - node
 cache: yarn
 install:

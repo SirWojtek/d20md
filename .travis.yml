@@ -17,4 +17,4 @@ script:
   - yarn build
   - yarn build:aot
   - yarn e2e:ci
-
+  - killall node

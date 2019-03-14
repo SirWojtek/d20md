@@ -62,7 +62,8 @@ gulp.task("run_e2e", (cb) => {
   const serverProcess = exec('./server.js', createExecCallback());
 
   exec('cd frontend && yarn e2e:headless', createExecCallback((err) => {
-    serverProcess.kill();
+    console.log('Killing the backend');
+    serverProcess.kill('SIGKILL');
     cb(err);
   }));
 });

@@ -13,8 +13,9 @@ cache: yarn
 install:
   - yarn && cd frontend && yarn && cd -
 script:
-  # - yarn lint
-  # - yarn build
-  # - yarn build:aot
+  - yarn lint
+  - yarn build
+  - yarn build:aot
+  - ./server.js &
   - cd frontend && yarn e2e:headless && cd -
-  # - yarn e2e:ci
+  - killall node

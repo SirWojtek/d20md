@@ -13,8 +13,8 @@ cache: yarn
 install:
   - yarn && cd frontend && yarn && cd -
 script:
-  - yarn lint
-  - yarn build
-  - yarn build:aot
-  - yarn e2e:ci
-  - killall node
+  # - yarn lint
+  # - yarn build
+  # - yarn build:aot
+  - cd frontend && yarn e2e:headless && cd -
+  # - yarn e2e:ci

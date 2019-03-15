@@ -16,6 +16,4 @@ script:
   - yarn lint
   - yarn build
   - yarn build:aot
-  - ./server.js &
-  - cd frontend && yarn e2e:headless && cd -
-  - killall node
+  - ./server.js & && cd frontend && yarn e2e:headless && killall node

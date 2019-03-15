@@ -61,9 +61,9 @@ gulp.task('seed_undo', (cb) => {
 gulp.task("run_e2e", (cb) => {
   const serverProcess = exec('./server.js', createExecCallback());
 
-  exec('cd frontend && yarn e2e:headless', createExecCallback((err) => {
-    console.log('Killing the backend');
+  const testProcess = exec('cd frontend && yarn e2e:headless', createExecCallback((err) => {
     serverProcess.kill('SIGKILL');
+    testProcess.kill('SIGKILL');
     cb(err);
   }));
 });

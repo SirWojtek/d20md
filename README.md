@@ -1,5 +1,6 @@
 # d20md
 [![Build Status](https://travis-ci.com/SirWojtek/d20md.svg?branch=master)](https://travis-ci.com/SirWojtek/d20md)
+
 Side contains helpful tool for d20 players & game masters.
 
 ## About
@@ -20,5 +21,6 @@ This repository contains two server sides:
 4. Command `yarn start` will run backend and frontent.
 
 ## mysql config
+
 You may need to add the following line to `mysql.cfn`:
 `max_allowed_packet=8M`

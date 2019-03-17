@@ -12,8 +12,7 @@
     "deploy_backend": "gulp migrate ; gulp seed",
     "lint": "cd frontend && yarn lint",
     "build": "cd frontend && yarn build",
-    "build:aot": "cd frontend && yarn build:aot",
-    "e2e:ci": "gulp ci_e2e_test"
+    "build:aot": "cd frontend && yarn build:aot"
   },
   "dependencies": {
     "aws-sdk": "^2.381.0",

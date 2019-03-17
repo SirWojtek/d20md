@@ -58,15 +58,8 @@ gulp.task('seed_undo', (cb) => {
   exec('sequelize db:seed:undo:all', createExecCallback(cb));
 });
 
-gulp.task("run_e2e", (cb) => {
-  // const serverProcess = exec('./server.js', createExecCallback());
-
-  exec('cd frontend && yarn e2e:headless', createExecCallback(cb));
-});
-
-gulp.task("ci_e2e_test", gulp.series(
+gulp.task("prepare_db", gulp.series(
   'create_db',
   'migrate',
   'seed',
-  'run_e2e',
 ));

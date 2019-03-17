@@ -12,8 +12,10 @@ node_js:
 cache: yarn
 install:
   - yarn && cd frontend && yarn && cd -
+before_script:
+  - yarn global add gulp
 script:
   - yarn lint
   - yarn build
   - yarn build:aot
-  - ./server.js & && cd frontend && yarn e2e:headless && killall node
+  - ./ci-e2e-test.sh

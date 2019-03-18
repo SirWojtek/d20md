@@ -30,7 +30,7 @@ module.exports = {
       user : "admin",
       host : process.env.CONTAINER_IP,
       ref  : "origin/release",
-      repo : "git@bitbucket.org:sirwojtek/d20site.git",
+      repo : "https://github.com/sirwojtek/d20md",
       path : "/home/admin/d20md",
       "post-deploy" : "yarn && NODE_ENV=production yarn deploy_backend && pm2 startOrRestart ecosystem.config.js --env production"
     },

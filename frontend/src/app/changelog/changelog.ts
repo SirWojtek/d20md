@@ -6,6 +6,13 @@ export interface IChange {
 
 export const changelog: IChange[] = [
   {
+    title: 'Updated links after moving to Github',
+    date: new Date('2019-03-18'),
+    content: `
+    Updated links in the footer after moving d20md repository to Github.
+    `,
+  },
+  {
     title: 'Reset & change password pages',
     date: new Date('2019-03-10'),
     content: `

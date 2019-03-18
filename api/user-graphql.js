@@ -12,6 +12,10 @@ const { spellType } = require('./spell-graphql');
 const { featType } = require('./feat-graphql');
 const models = require('../db/models');
 
+// NOTE: this object is filled in graphql-sequelize with enum types
+// to avoid typename duplication
+const userEnumCache = {};
+
 const viewLogType = new GraphQLObjectType({
   name: 'ViewLogType',
   fields: {
@@ -22,27 +26,27 @@ const viewLogType = new GraphQLObjectType({
 const monsterLogType = new GraphQLObjectType({
   name: 'MonsterLogType',
   fields: {
-    ...attributeFields(models.Monster),
+    ...attributeFields(models.Monster, { cache: userEnumCache }),
     MonsterViewLog: { type: viewLogType },
   }
 });
 const spellLogType = new GraphQLObjectType({
   name: 'SpellLogType',
   fields: {
-    ...attributeFields(models.Spell),
+    ...attributeFields(models.Spell, { cache: userEnumCache }),
     SpellViewLog: { type: viewLogType },
   }
 });
 const featLogType = new GraphQLObjectType({
   name: 'FeatLogType',
   fields: {
-    ...attributeFields(models.Feat),
+    ...attributeFields(models.Feat, { cache: userEnumCache }),
     FeatViewLog: { type: viewLogType },
   }
 });
 
-const userType = new GraphQLObjectType({
-  name: 'User',
+const userHistoryType = new GraphQLObjectType({
+  name: 'UserHistory',
   fields: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     MonsterViewLogs: {
@@ -60,11 +64,44 @@ const userType = new GraphQLObjectType({
   }
 });
 
+const monsterFavouriteType = new GraphQLObjectType({
+  name: 'MonsterFavouriteType',
+  fields: attributeFields(models.Monster, { cache: userEnumCache }),
+});
+const spellFavouriteType = new GraphQLObjectType({
+  name: 'SpellFavouriteType',
+  fields: attributeFields(models.Spell, { cache: userEnumCache }),
+});
+const featFavouriteType = new GraphQLObjectType({
+  name: 'FeatFavouriteType',
+  fields: attributeFields(models.Feat, { cache: userEnumCache }),
+});
+
+const userFavouriteType = new GraphQLObjectType({
+  name: 'UserFavourite',
+  fields: {
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    MonsterFavourites: {
+      type: new GraphQLList(monsterFavouriteType),
+      resolve: resolver(models.User.associations.MonsterFavourites),
+    },
+    SpellFavourites: {
+      type: new GraphQLList(spellFavouriteType),
+      resolve: resolver(models.User.associations.SpellFavourites),
+    },
+    FeatFavourites: {
+      type: new GraphQLList(featFavouriteType),
+      resolve: resolver(models.User.associations.FeatFavourites),
+    },
+  }
+});
+
 module.exports = {
-  userType,
+  userHistoryType,
+  userFavouriteType,
   userQueries: {
     userHistory: {
-      type: userType,
+      type: userHistoryType,
       resolve: resolver(models.User, {
         before: (findOptions, args, context) => {
           const userId = _.get(context, 'user.id');
@@ -110,6 +147,63 @@ module.exports = {
           }
           if (user.FeatViewLogs) {
             user.FeatViewLogs = user.FeatViewLogs.slice(0, 10);
+          }
+
+          return user;
+        }
+      }),
+    },
+    userFavourites: {
+      type: userFavouriteType,
+      args: {
+        offset: { type: new GraphQLNonNull(GraphQLInt) },
+        limit: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: resolver(models.User, {
+        before: (findOptions, args, context) => {
+          const userId = _.get(context, 'user.id');
+          if (!userId) {
+            throw Error('Cannot determine userId');
+          }
+
+          findOptions = {
+            ...findOptions,
+            where: { id: userId },
+            // order: [
+              // [ models.sequelize.literal('`MonsterViewLogs->MonsterViewLog`.`updatedAt`'), 'DESC' ],
+              // [ models.sequelize.literal('`SpellViewLogs->SpellViewLog`.`updatedAt`'), 'DESC' ],
+              // [ models.sequelize.literal('`FeatViewLogs->FeatViewLog`.`updatedAt`'), 'DESC' ],
+            // ],
+            include: [
+              {
+                association: models.User.associations.MonsterFavourites,
+              },
+              {
+                association: models.User.associations.SpellFavourites,
+              },
+              {
+                association: models.User.associations.FeatFavourites,
+              },
+            ]
+          };
+
+          return findOptions;
+        },
+        after: (user, args, context) => {
+          if (!user) {
+            return;
+          }
+
+          // NOTE: poor solution because there is no support for offset/limit for n:m relations:
+          // https://github.com/sequelize/sequelize/issues/4376
+          if (user.MonsterViewLogs) {
+            user.MonsterViewLogs = user.MonsterViewLogs.slice(args.offset, args.limit);
+          }
+          if (user.SpellViewLogs) {
+            user.SpellViewLogs = user.SpellViewLogs.slice(args.offset, args.limit);
+          }
+          if (user.FeatViewLogs) {
+            user.FeatViewLogs = user.FeatViewLogs.slice(args.offset, args.limit);
           }
 
           return user;

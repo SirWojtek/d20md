@@ -200,6 +200,7 @@ module.exports = function(sequelize, DataTypes) {
     Monster.belongsToMany(models.Spell, { through: 'MonsterSpellInstances' });
     Monster.belongsToMany(models.Feat, { through: 'MonsterFeatInstances' });
     Monster.belongsToMany(models.User, { as: 'MonsterViewLogs', through: 'MonsterViewLog' });
+    Monster.belongsToMany(models.User, { as: 'MonsterFavourites', through: 'MonsterFavourite' });
 
     Monster.hasMany(models.AttackGroup, {onDelete: 'cascade', hooks: true});
     Monster.hasMany(models.HitDice, {onDelete: 'cascade', hooks: true});

@@ -196,14 +196,14 @@ module.exports = {
 
           // NOTE: poor solution because there is no support for offset/limit for n:m relations:
           // https://github.com/sequelize/sequelize/issues/4376
-          if (user.MonsterViewLogs) {
-            user.MonsterViewLogs = user.MonsterViewLogs.slice(args.offset, args.limit);
+          if (user.MonsterFavourites) {
+            user.MonsterFavourites = user.MonsterFavourites.slice(args.offset, args.limit);
           }
-          if (user.SpellViewLogs) {
-            user.SpellViewLogs = user.SpellViewLogs.slice(args.offset, args.limit);
+          if (user.SpellFavourites) {
+            user.SpellFavourites = user.SpellFavourites.slice(args.offset, args.limit);
           }
-          if (user.FeatViewLogs) {
-            user.FeatViewLogs = user.FeatViewLogs.slice(args.offset, args.limit);
+          if (user.FeatFavourites) {
+            user.FeatFavourites = user.FeatFavourites.slice(args.offset, args.limit);
           }
 
           return user;

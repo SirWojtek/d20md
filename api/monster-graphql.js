@@ -93,7 +93,7 @@ const monsterType = new GraphQLObjectType({
 
         return models.Monster.associations.MonsterFavourites.throughModel.findOne({
           where: { MonsterId: obj.id, UserId: userId }
-        }).then(f => f ? true : false)
+        }).then(f => f ? true : false);
       }
     },
     favouritesCount: {

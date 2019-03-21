@@ -4,7 +4,8 @@ const {
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean,
 } = require('graphql');
 const _ = require('lodash');
 const models = require('../db/models');
@@ -34,7 +35,27 @@ const featType = new GraphQLObjectType({
     User: {
       type: simpleUserType,
       resolve: resolver(models.Feat.associations.User)
-    }
+    },
+    isInFavourites: {
+      type: GraphQLBoolean,
+      resolve: (obj, args, context) => {
+        const userId = _.get(context, 'body.variables.userId');
+        if (!userId) {
+          return null;
+        }
+
+        return models.Feat.associations.FeatFavourites.throughModel.findOne({
+          where: { FeatId: obj.id, UserId: userId }
+        }).then(f => f ? true : false);
+      }
+    },
+    favouritesCount: {
+      type: GraphQLInt,
+      resolve: (obj, args, context) =>
+        models.Feat.associations.FeatFavourites.throughModel.count({
+            where: { FeatId: obj.id }
+        }),
+    },
   }
 });
 

@@ -5,7 +5,8 @@ const {
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean,
 } = require('graphql');
 const models = require('../db/models');
 const common = require('../backend/common');
@@ -34,7 +35,27 @@ const spellType = new GraphQLObjectType({
     User: {
       type: simpleUserType,
       resolve: resolver(models.Spell.associations.User)
-    }
+    },
+    isInFavourites: {
+      type: GraphQLBoolean,
+      resolve: (obj, args, context) => {
+        const userId = _.get(context, 'body.variables.userId');
+        if (!userId) {
+          return null;
+        }
+
+        return models.Spell.associations.SpellFavourites.throughModel.findOne({
+          where: { SpellId: obj.id, UserId: userId }
+        }).then(f => f ? true : false);
+      }
+    },
+    favouritesCount: {
+      type: GraphQLInt,
+      resolve: (obj, args, context) =>
+        models.Spell.associations.SpellFavourites.throughModel.count({
+            where: { SpellId: obj.id }
+        }),
+    },
   }
 });
 

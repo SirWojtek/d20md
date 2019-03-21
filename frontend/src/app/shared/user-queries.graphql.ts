@@ -20,39 +20,3 @@ export const changePasswordMutation = gql`
     changePassword(newPassword: $newPassword)
   }
 `;
-
-export const addMonsterToFavouritesMutation = gql`
-  mutation addMonsterToFavouritesMutation($id: Id!) {
-    addMonsterToFavourites(id: $id)
-  }
-`;
-
-export const addSpellToFavouritesMutation = gql`
-  mutation addSpellToFavouritesMutation($id: Id!) {
-    addSpellToFavourites(id: $id)
-  }
-`;
-
-export const addFeatToFavouritesMutation = gql`
-  mutation addFeatToFavouritesMutation($id: Id!) {
-    addFeatToFavourites(id: $id)
-  }
-`;
-
-export const removeMonsterFromFavouritesMutation = gql`
-  mutation removeMonsterFromFavouritesMutation($id: Id!) {
-    removeMonsterFromFavourites(id: $id)
-  }
-`;
-
-export const removeSpellFromFavouritesMutation = gql`
-  mutation removeSpellFromFavouritesMutation($id: Id!) {
-    removeSpellFromFavourites(id: $id)
-  }
-`;
-
-export const removeFeatFromFavouritesMutation = gql`
-  mutation removeFeatFromFavouritesMutation($id: Id!) {
-    removeFeatFromFavourites(id: $id)
-  }
-`;

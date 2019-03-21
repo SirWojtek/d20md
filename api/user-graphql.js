@@ -155,6 +155,10 @@ module.exports = {
     },
     userFavourites: {
       type: userFavouriteType,
+      args: {
+        offset: { type: new GraphQLNonNull(GraphQLInt) },
+        limit: { type: new GraphQLNonNull(GraphQLInt) },
+      },
       resolve: resolver(models.User, {
         before: (findOptions, args, context) => {
           const userId = _.get(context, 'user.id');
@@ -185,6 +189,25 @@ module.exports = {
 
           return findOptions;
         },
+        after: (user, args, context) => {
+          if (!user) {
+            return;
+          }
+
+          // NOTE: poor solution because there is no support for offset/limit for n:m relations:
+          // https://github.com/sequelize/sequelize/issues/4376
+          if (user.MonsterFavourites) {
+            user.MonsterFavourites = user.MonsterFavourites.slice(args.offset, args.limit);
+          }
+          if (user.SpellFavourites) {
+            user.SpellFavourites = user.SpellFavourites.slice(args.offset, args.limit);
+          }
+          if (user.FeatFavourites) {
+            user.FeatFavourites = user.FeatFavourites.slice(args.offset, args.limit);
+          }
+
+          return user;
+        }
       }),
     }
   },

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const getMonsterFavouritesQuery = gql`
-  {
-    userFavourites {
+  query getMonsterFavourites($offset: Int!, $limit: Int!) {
+    userFavourites(offset: $offset, limit: $limit) {
       MonsterFavourites {
         id
         name
@@ -12,8 +12,8 @@ export const getMonsterFavouritesQuery = gql`
 `;
 
 export const getSpellFavouritesQuery = gql`
-  {
-    userFavourites {
+  query getSpellFavourites($offset: Int!, $limit: Int!) {
+    userFavourites(offset: $offset, limit: $limit) {
       SpellFavourites {
         id
         name
@@ -23,11 +23,13 @@ export const getSpellFavouritesQuery = gql`
 `;
 
 export const getFeatFavouritesQuery = gql`
-  {
-    userFavourites {
-      FeatFavourites {
-        id
-        name
+  query getFeatFavourites($offset: Int!, $limit: Int!) {
+    userFavourites(offset: $offset, limit: $limit) {
+      userFavourites {
+        FeatFavourites {
+          id
+          name
+        }
       }
     }
   }

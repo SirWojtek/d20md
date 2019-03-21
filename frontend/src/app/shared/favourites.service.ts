@@ -45,14 +45,20 @@ export interface FavouriteItem {
 export class FavouritesService {
   constructor(private graphQLService: GraphQLService) {}
 
-  getFavourites(type: EntityType): Observable<FavouriteItem[]> {
+  getFavourites(
+    offset: number,
+    limit: number,
+    type: EntityType,
+  ): Observable<FavouriteItem[]> {
     const query = entityToGetQuery[type];
-    return this.graphQLService.queryAuth({query}).map(res =>
-      res.data.userFavourites[type + 'Favourites'].map(f => ({
-        id: f.id,
-        name: f.name,
-      })),
-    );
+    return this.graphQLService
+      .queryAuth({query, variables: {offset, limit}})
+      .map(res =>
+        res.data.userFavourites[type + 'Favourites'].map(f => ({
+          id: f.id,
+          name: f.name,
+        })),
+      );
   }
 
   addToFavourites(id: number, type: EntityType): Observable<void> {

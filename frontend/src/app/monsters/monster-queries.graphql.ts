@@ -28,6 +28,8 @@ export const getQueryMap = {
         hp
         initiative
         type
+        isInFavourites
+        favouritesCount
         Save {
           fortitude
           will

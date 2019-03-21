@@ -67,6 +67,8 @@ export class Monster implements JsonSerializable {
     public EnvironmentTags: environmentTag.EnvironmentTag[] = [],
     public Image = new image.Image(),
     public User = new user.User(),
+    public isInFavourites = false,
+    public favouritesCount = 0,
   ) {
     this.afterConstructionFromJson();
   }

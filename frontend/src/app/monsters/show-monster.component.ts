@@ -18,7 +18,6 @@ import {EntityType} from '../shared/model/entity';
 })
 export class ShowMonsterComponent implements OnInit, OnDestroy {
   monster: Monster;
-  isInFavouritesObs: Observable<boolean>;
   canModify: boolean;
   isLoggedIn: boolean;
 
@@ -44,7 +43,6 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
           'd20MD - View Monsters - ' + this.monster.name,
         );
         this.setPermisions();
-        this.initFavourites();
       });
   }
 
@@ -55,13 +53,13 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
   onAddToFavourites() {
     this.favouritesService
       .addToFavourites(this.monster.id, EntityType.Monster)
-      .subscribe(() => this.initFavourites());
+      .subscribe(() => (this.monster.isInFavourites = true));
   }
 
   onRemoveFromFavourites() {
     this.favouritesService
       .removeFromFavourites(this.monster.id, EntityType.Monster)
-      .subscribe(() => this.initFavourites());
+      .subscribe(() => (this.monster.isInFavourites = false));
   }
 
   onDescriptionSave() {
@@ -89,11 +87,5 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
     this.userService
       .canEdit(this.monster)
       .subscribe(canEdit => (this.canModify = canEdit));
-  }
-
-  private initFavourites() {
-    this.isInFavouritesObs = this.favouritesService
-      .getFavourites(EntityType.Monster)
-      .map(favourites => favourites.some(f => f.id === this.monster.id));
   }
 }

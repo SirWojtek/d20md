@@ -4,8 +4,10 @@ const {
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean,
 } = require('graphql');
+const _ = require('lodash');
 const models = require('../db/models');
 const common = require('../backend/common');
 const { simpleUserType } = require('./simple-user-graphql');
@@ -80,6 +82,26 @@ const monsterType = new GraphQLObjectType({
     User: {
       type: simpleUserType,
       resolve: resolver(models.Monster.associations.User),
+    },
+    isInFavourites: {
+      type: GraphQLBoolean,
+      resolve: (obj, args, context) => {
+        const userId = _.get(context, 'body.variables.userId');
+        if (!userId) {
+          return null;
+        }
+
+        return models.Monster.associations.MonsterFavourites.throughModel.findOne({
+          where: { MonsterId: obj.id, UserId: userId }
+        }).then(f => f ? true : false)
+      }
+    },
+    favouritesCount: {
+      type: GraphQLInt,
+      resolve: (obj, args, context) =>
+        models.Monster.associations.MonsterFavourites.throughModel.count({
+            where: { MonsterId: obj.id }
+        }),
     },
   }
 });

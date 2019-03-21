@@ -3,7 +3,7 @@
 
   <div *ngIf="canModify || isLoggedIn" class="buttons-panel-item">
     <button
-      *ngIf="(isInFavouritesObs | async) else addToFavourites"
+      *ngIf="monster.isInFavourites else addToFavourites"
       id="remove-from-favourites"
       class="btn btn-btn-warning"
       (click)="onRemoveFromFavourites()"

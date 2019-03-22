@@ -1,0 +1,21 @@
+<button
+  *ngIf="isFavourite else addToFavourites"
+  id="remove-from-favourites"
+  class="btn btn-info"
+  (click)="onClick.emit()"
+>
+  <i class="fas fa-star" aria-hidden="true"></i>
+  <span class="badge">{{ favouritesCount }}</span>
+</button>
+
+<ng-template #addToFavourites>
+  <button
+    id="add-to-favourites"
+    class="btn btn-info"
+    (click)="onClick.emit()"
+  >
+    <i class="far fa-star" aria-hidden="true"></i>
+    <span class="badge">{{ favouritesCount }}</span>
+  </button>
+</ng-template>
+

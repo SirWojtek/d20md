@@ -34,6 +34,7 @@ import {ShowFeatsComponent} from './feat/show-feats.component';
 import {FeatEditorComponent} from './feat/feat-editor.component';
 import {UnderDevelopmentComponent} from './under-development/under-development.component';
 import {MiniatureShowComponent} from './miniature/miniature-show.component';
+import {FavouriteMarkComponent} from './favourite-mark/favourites-mark.component';
 
 @NgModule({
   imports: [
@@ -77,6 +78,7 @@ import {MiniatureShowComponent} from './miniature/miniature-show.component';
     FeatFormComponent,
     FeatEditorComponent,
     UnderDevelopmentComponent,
+    FavouriteMarkComponent,
   ],
   providers: [pipes.StartCasePipe],
   exports: [
@@ -106,6 +108,7 @@ import {MiniatureShowComponent} from './miniature/miniature-show.component';
     ShowFeatsComponent,
     FeatFormComponent,
     UnderDevelopmentComponent,
+    FavouriteMarkComponent,
   ],
 })
 export class ElementsModule {}

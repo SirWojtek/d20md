@@ -59,7 +59,7 @@ export class NavbarComponent {
         buildElement({
           id: 'find-monster',
           name: 'Monster',
-          iconClass: 'fa-optin-monster',
+          iconClass: 'fa-pastafarianism',
           routerLink: '/monsters/find',
         }),
         buildElement({
@@ -85,7 +85,7 @@ export class NavbarComponent {
         buildElement({
           id: 'add-monster',
           name: 'Monster',
-          iconClass: 'fa-optin-monster',
+          iconClass: 'fa-pastafarianism',
           routerLink: '/monsters/add',
         }),
         buildElement({
@@ -105,7 +105,7 @@ export class NavbarComponent {
     buildElement({
       id: 'settings',
       name: 'Settings',
-      iconClass: 'fa-gears',
+      iconClass: 'fa-cog',
       canBeShowed: () => this.isLoggedIn,
       content: [
         buildElement({
@@ -117,7 +117,7 @@ export class NavbarComponent {
         buildElement({
           id: 'logout',
           name: 'Logout',
-          iconClass: 'fa-sign-out',
+          iconClass: 'fa-sign-out-alt',
           clickCallback: dropdown => this.onLogout(dropdown),
         }),
       ],

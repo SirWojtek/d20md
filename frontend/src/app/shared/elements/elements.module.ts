@@ -34,7 +34,7 @@ import {ShowFeatsComponent} from './feat/show-feats.component';
 import {FeatEditorComponent} from './feat/feat-editor.component';
 import {UnderDevelopmentComponent} from './under-development/under-development.component';
 import {MiniatureShowComponent} from './miniature/miniature-show.component';
-import {FavouriteMarkComponent} from './favourite-mark/favourites-mark.component';
+import {FavouriteMarkComponent} from './favourites-mark/favourites-mark.component';
 
 @NgModule({
   imports: [

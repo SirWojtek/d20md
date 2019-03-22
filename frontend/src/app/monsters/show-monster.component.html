@@ -2,27 +2,14 @@
   <h2 class="name-panel-item">{{ monster.name }}</h2>
 
   <div *ngIf="canModify || isLoggedIn" class="buttons-panel-item">
-    <button
-      *ngIf="monster.isInFavourites else addToFavourites"
-      id="remove-from-favourites"
-      class="btn btn-btn-warning"
-      (click)="onRemoveFromFavourites()"
-    >
-      <d20md-icon iconName="fa-trash" text="Remove from Favourites"></d20md-icon>
-    </button>
+    <d20md-favourites-mark
+      [isFavourite]="monster.isInFavourites"
+      [favouritesCount]="monster.favouritesCount"
+      (onClick)="onFavouritesClick()"
+    ></d20md-favourites-mark>
 
-    <ng-template #addToFavourites>
-      <button
-        id="add-to-favourites"
-        class="btn btn-primary"
-        (click)="onAddToFavourites()"
-      >
-        <d20md-icon iconName="fa-trash" text="Add to Favourites"></d20md-icon>
-      </button>
-    </ng-template>
-
-      <button id="delete-monster" class="btn btn-default" (click)="onDeleteMonster()">
-        <d20md-icon iconName="fa-trash" text="Delete"></d20md-icon>
+      <button id="delete-monster" class="btn btn-danger" (click)="onDeleteMonster()">
+        <d20md-icon iconName="fa-trash"></d20md-icon>
       </button>
   </div>
 

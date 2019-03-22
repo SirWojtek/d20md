@@ -50,16 +50,22 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
     this.routeSub.unsubscribe();
   }
 
-  onAddToFavourites() {
-    this.favouritesService
-      .addToFavourites(this.monster.id, EntityType.Monster)
-      .subscribe(() => (this.monster.isInFavourites = true));
-  }
-
-  onRemoveFromFavourites() {
-    this.favouritesService
-      .removeFromFavourites(this.monster.id, EntityType.Monster)
-      .subscribe(() => (this.monster.isInFavourites = false));
+  onFavouritesClick() {
+    if (this.monster.isInFavourites) {
+      this.favouritesService
+        .removeFromFavourites(this.monster.id, EntityType.Monster)
+        .subscribe(() => {
+          this.monster.isInFavourites = false;
+          this.monster.favouritesCount -= 1;
+        });
+    } else {
+      this.favouritesService
+        .addToFavourites(this.monster.id, EntityType.Monster)
+        .subscribe(() => {
+          this.monster.isInFavourites = true;
+          this.monster.favouritesCount += 1;
+        });
+    }
   }
 
   onDescriptionSave() {

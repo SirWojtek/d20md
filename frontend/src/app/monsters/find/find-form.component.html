@@ -139,7 +139,7 @@
     <button type="button" title="Add/remove tags" class="btn btn-sm btn-primary"
       (click)="tagForm.show()"
     >
-      <d20md-icon [iconName]="'fa-pencil'"></d20md-icon>
+      <d20md-icon iconName="fa-plus-square"></d20md-icon>
     </button>
   </div>
   <d20md-find-tag #tagForm [(tags)]="environmentTags" (tagsChange)="environmentTagsChange.emit($event)">

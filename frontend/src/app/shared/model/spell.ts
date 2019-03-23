@@ -16,6 +16,8 @@ export class Spell implements JsonSerializable {
     public spell_type: string = 'abjuration',
     public spell_range: string = 'self',
     public views: number = 0,
+    public isInFavourites = false,
+    public favouritesCount = 0,
     public SpellLevels: SpellLevel[] = [],
     public User = new user.User(),
     public Monsters: Monster[] = [],

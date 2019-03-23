@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/concatAll';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,15 +9,18 @@ import {Spell} from '../shared/model/spell';
 import {UserService} from '../shared/user/user.service';
 import {SpellsService} from './spells.service';
 import {SpellLevel} from '../shared/model/spell-level';
+import {FavouritesService} from '../shared/favourites.service';
+import {EntityType} from '../shared/model/entity';
 
 @Component({
   templateUrl: './show-spell.component.html',
+  styleUrls: ['./show-spell.component.scss'],
 })
 export class ShowSpellComponent implements OnInit {
   spellObs: Observable<Spell>;
   canModify: boolean;
 
-  private spellId: number;
+  private spellSubject = new ReplaySubject<Spell>();
 
   constructor(
     private route: ActivatedRoute,
@@ -24,62 +28,91 @@ export class ShowSpellComponent implements OnInit {
     private titleService: Title,
     private spellsService: SpellsService,
     private userService: UserService,
-  ) {}
+    private favouritesService: FavouritesService,
+  ) {
+    this.spellObs = this.spellSubject.asObservable();
+  }
 
   ngOnInit() {
-    this.spellObs = this.route.params
-      .flatMap(params => this.spellsService.getSpell(+params['id'], 'basic'))
-      .do(spell => {
+    this.route.params
+      .flatMap(params => this.spellsService.getSpell(+params['id']))
+      .subscribe(spell => {
         this.titleService.setTitle('d20MD - View Spells - ' + spell.name);
         this.setCanModify(spell);
-        this.spellId = spell.id;
+        this.spellSubject.next(spell);
       });
   }
 
-  onSpellResistableChange(permits_sr: boolean) {
-    this.spellObs = this.spellsService.updateSpell({
-      id: this.spellId,
-      permits_sr,
-    });
+  onFavouritesClick(spell: Spell) {
+    if (spell.isInFavourites) {
+      this.favouritesService
+        .removeFromFavourites(spell.id, EntityType.Spell)
+        .flatMap(() => this.spellsService.getSpell(spell.id))
+        .subscribe(updated => this.spellSubject.next(updated));
+    } else {
+      this.favouritesService
+        .addToFavourites(spell.id, EntityType.Spell)
+        .flatMap(() => this.spellsService.getSpell(spell.id))
+        .subscribe(updated => this.spellSubject.next(updated));
+    }
   }
 
-  onSaveChange(save_type: string) {
-    this.spellObs = this.spellsService.updateSpell({
-      id: this.spellId,
-      save_type,
-    });
+  onSpellResistableChange(id: number, permits_sr: boolean) {
+    this.spellsService
+      .updateSpell({
+        id,
+        permits_sr,
+      })
+      .subscribe(spell => this.spellSubject.next(spell));
   }
 
-  onSpellLevelsChange(spellLevels: SpellLevel[]) {
-    this.spellObs = this.spellsService.updateSpell({
-      id: this.spellId,
-      SpellLevels: spellLevels,
-    });
+  onSaveChange(id: number, save_type: string) {
+    this.spellsService
+      .updateSpell({
+        id,
+        save_type,
+      })
+      .subscribe(spell => this.spellSubject.next(spell));
   }
 
-  onSpellTypeChange(spell_type: string) {
-    this.spellObs = this.spellsService.updateSpell({
-      id: this.spellId,
-      spell_type,
-    });
+  onSpellLevelsChange(id: number, spellLevels: SpellLevel[]) {
+    this.spellsService
+      .updateSpell({
+        id,
+        SpellLevels: spellLevels,
+      })
+      .subscribe(spell => this.spellSubject.next(spell));
   }
 
-  onSpellRangeChange(spell_range: string) {
-    this.spellObs = this.spellsService.updateSpell({
-      id: this.spellId,
-      spell_range,
-    });
+  onSpellTypeChange(id: number, spell_type: string) {
+    this.spellsService
+      .updateSpell({
+        id,
+        spell_type,
+      })
+      .subscribe(spell => this.spellSubject.next(spell));
   }
 
-  onDescriptionChange(description: string) {
-    this.spellObs = this.spellsService.updateSpell({
-      id: this.spellId,
-      description,
-    });
+  onSpellRangeChange(id: number, spell_range: string) {
+    this.spellsService
+      .updateSpell({
+        id,
+        spell_range,
+      })
+      .subscribe(spell => this.spellSubject.next(spell));
   }
 
-  onDeleteSpell() {
-    this.spellsService.deleteSpell(this.spellId).subscribe(() => {
+  onDescriptionChange(id: number, description: string) {
+    this.spellsService
+      .updateSpell({
+        id,
+        description,
+      })
+      .subscribe(spell => this.spellSubject.next(spell));
+  }
+
+  onDeleteSpell(id: number) {
+    this.spellsService.deleteSpell(id).subscribe(() => {
       this.router.navigateByUrl('spells/find');
     });
   }

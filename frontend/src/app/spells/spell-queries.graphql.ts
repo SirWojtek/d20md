@@ -1,32 +1,32 @@
 import gql from 'graphql-tag';
 
-export const getQueryMap = {
-  basic: gql`
-    query basic($id: Int!, $userId: Int) {
-      spell(id: $id, userId: $userId) {
+export const getSpellQuery = gql`
+  query basic($id: Int!, $userId: Int) {
+    spell(id: $id, userId: $userId) {
+      id
+      name
+      description
+      save_type
+      permits_sr
+      spell_type
+      spell_range
+      range_info
+      isInFavourites
+      favouritesCount
+      SpellLevels {
+        class_name
+        level
+      }
+      Monsters {
         id
         name
-        description
-        save_type
-        permits_sr
-        spell_type
-        spell_range
-        range_info
-        SpellLevels {
-          class_name
-          level
-        }
-        Monsters {
-          id
-          name
-        }
-        User {
-          id
-        }
+      }
+      User {
+        id
       }
     }
-  `,
-};
+  }
+`;
 
 export const findSpellsQuery = gql`
   query findSpells(

@@ -1,0 +1,23 @@
+.heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    flex: 1 0 0;
+  }
+
+  h2 {
+    margin: 8px 0px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    d20md-favourites-mark {
+      margin-right: 8px;
+    }
+  }
+}

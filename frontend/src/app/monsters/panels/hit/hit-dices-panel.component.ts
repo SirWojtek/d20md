@@ -47,20 +47,29 @@ export class HitDicesPanelComponent implements OnInit {
   }
 
   onTableEditorSave(hitDices: HitDice[]) {
-    this.monsterObs = this.monstersService.updateMonster({
-      id: this.monsterId,
-      HitDices: hitDices,
-    });
+    this.monsterObs = this.monstersService.updateMonster(
+      {
+        id: this.monsterId,
+        HitDices: hitDices,
+      },
+      'basic',
+    );
   }
 
   onGenerate(monster: Monster) {
-    this.monsterObs = this.monstersService.updateMonster(toJson(monster));
+    this.monsterObs = this.monstersService.updateMonster(
+      toJson(monster),
+      'basic',
+    );
   }
 
   onHpSave(newHp: number) {
-    this.monsterObs = this.monstersService.updateMonster({
-      id: this.monsterId,
-      hp: newHp,
-    });
+    this.monsterObs = this.monstersService.updateMonster(
+      {
+        id: this.monsterId,
+        hp: newHp,
+      },
+      'basic',
+    );
   }
 }

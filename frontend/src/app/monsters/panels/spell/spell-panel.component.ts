@@ -50,7 +50,10 @@ export class SpellPanelComponent {
 
   onSpellsChange(newSpells: Spell[]) {
     this.spellsObs = this.monstersService
-      .updateMonster({id: this.monsterId, Spells: newSpells.map(toJson)})
+      .updateMonster(
+        {id: this.monsterId, Spells: newSpells.map(toJson)},
+        'spells',
+      )
       .map(monster => monster.Spells);
   }
 }

@@ -50,7 +50,10 @@ export class AttacksPanelComponent {
 
   onAttackGroupChange(newVal: AttackGroup[]) {
     this.attackGroupsObs = this.monstersService
-      .updateMonster({id: this.monsterId, AttackGroups: newVal.map(toJson)})
+      .updateMonster(
+        {id: this.monsterId, AttackGroups: newVal.map(toJson)},
+        'attacks',
+      )
       .map(monster => monster.AttackGroups);
   }
 }

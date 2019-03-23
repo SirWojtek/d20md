@@ -70,16 +70,19 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
 
   onDescriptionSave() {
     this.monstersService
-      .updateMonster({
-        id: this.monster.id,
-        description: this.monster.description,
-      })
+      .updateMonster(
+        {
+          id: this.monster.id,
+          description: this.monster.description,
+        },
+        'description',
+      )
       .subscribe(updated => (this.monster.description = updated.description));
   }
 
   onFeatsSave() {
     this.monstersService
-      .updateMonster({id: this.monster.id, Feats: this.monster.Feats})
+      .updateMonster({id: this.monster.id, Feats: this.monster.Feats}, 'feats')
       .subscribe(updated => (this.monster.Feats = updated.Feats));
   }
 

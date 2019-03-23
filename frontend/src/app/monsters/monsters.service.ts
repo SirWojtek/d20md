@@ -43,24 +43,25 @@ export class MonstersService {
       );
   }
 
-  updateMonster(monster: Partial<Monster>): Observable<Monster> {
+  updateMonster(
+    monster: Partial<Monster>,
+    queryType: string,
+  ): Observable<Monster> {
     return (
       this.http
         .post(this.actionUrl + '/update/', JSON.stringify(monster), {
           headers: jsonHeader,
         })
         // FIXME: remove after move to GraphQL mutations
-        .flatMap(
-          () =>
-            this.graphQLService.resetStore().then(() => {
-              // NOTE: because other parameters relly on Attributes
-              if (monster.Attribute) {
-                this.hasChanged.next();
-              }
-            }),
-          response => response,
+        .flatMap(() =>
+          this.graphQLService.resetStore().then(() => {
+            // NOTE: because other parameters relly on Attributes
+            if (monster.Attribute) {
+              this.hasChanged.next();
+            }
+          }),
         )
-        .map(response => fromJson(response, Monster))
+        .flatMap(() => this.getMonster(monster.id, queryType))
     );
   }
 

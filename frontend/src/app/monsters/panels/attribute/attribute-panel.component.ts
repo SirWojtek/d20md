@@ -40,7 +40,10 @@ export class AttributePanelComponent {
 
   onAttributeChange(newVal: Attribute) {
     this.attributesObs = this.monstersService
-      .updateMonster({id: this.monsterId, Attribute: toJson(newVal)})
+      .updateMonster(
+        {id: this.monsterId, Attribute: toJson(newVal)},
+        'attributes',
+      )
       .map(monster => monster.Attribute);
   }
 

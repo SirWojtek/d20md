@@ -48,7 +48,7 @@ export class SkillPanelComponent {
 
   onSkillChange(newSkill: Skill) {
     this.skillObs = this.monstersService
-      .updateMonster({id: this.monsterId, Skill: toJson(newSkill)})
+      .updateMonster({id: this.monsterId, Skill: toJson(newSkill)}, 'skills')
       .map(monster => monster.Skill);
   }
 }

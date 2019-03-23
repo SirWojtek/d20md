@@ -1,0 +1,17 @@
+.mark-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #375a7f;
+  border-radius: 4px;
+
+  button {
+    border-radius: 4px 0px 0px 4px;
+  }
+
+  span.badge {
+    padding: 0 16px;
+    background-color: #375a7f;
+  }
+}

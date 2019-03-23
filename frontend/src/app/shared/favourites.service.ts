@@ -68,7 +68,7 @@ export class FavouritesService {
         mutation,
         variables: {id},
       })
-      .map(res => null);
+      .flatMap(() => this.graphQLService.resetStore());
   }
 
   removeFromFavourites(id: number, type: EntityType): Observable<void> {
@@ -78,6 +78,6 @@ export class FavouritesService {
         mutation,
         variables: {id},
       })
-      .map(res => null);
+      .flatMap(() => this.graphQLService.resetStore());
   }
 }

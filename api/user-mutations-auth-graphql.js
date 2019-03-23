@@ -77,7 +77,7 @@ module.exports = {
             throw new Error('User does not exists');
           }
           if (!spell) {
-            throw new Error('Monster does not exists');
+            throw new Error('Spell does not exists');
           }
 
           return user.addSpellFavourite(spell);
@@ -150,9 +150,6 @@ module.exports = {
         }).then(user => {
           if (!user) {
             throw new Error('User does not exists');
-          }
-          if (!spell) {
-            throw new Error('Monster does not exists');
           }
 
           return user.setSpellFavourites(

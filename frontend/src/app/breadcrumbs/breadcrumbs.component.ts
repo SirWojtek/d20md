@@ -43,7 +43,7 @@ export class BreadcrumbsComponent {
     {
       matchingUrl: /feats\/show\/\d+$/,
       resolveFunc: urlPart => {
-        return this.featsService.getFeat(+urlPart, null).map(m => m.name);
+        return this.featsService.getFeat(+urlPart).map(m => m.name);
       },
     },
     {

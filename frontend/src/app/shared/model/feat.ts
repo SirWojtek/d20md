@@ -14,6 +14,8 @@ export class Feat implements JsonSerializable {
     public normal: string = '',
     public special: string = '',
     public views: number = 0,
+    public isInFavourites = false,
+    public favouritesCount = 0,
     public Prerequisite: Feat[] = [],
     public User: user.User = new user.User(),
     public Monsters: Monster[] = [],

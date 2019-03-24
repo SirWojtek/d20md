@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {slideInOutTop, slideInOutBottom, fadeIn} from '../../animations';
+import {slideInOutTop, slideInOutBottom} from '../../animations';
 
 @Component({
   selector: 'd20md-favourites-mark',

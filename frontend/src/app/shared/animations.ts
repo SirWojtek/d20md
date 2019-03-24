@@ -52,10 +52,11 @@ export const slideInOutBottom = trigger('slideInOutBottom', [
   ]),
 ]);
 
-export const fadeIn = trigger('fadeIn', [
-  transition(':enter', [
-    style({opacity: 0}),
-    animate('300ms ease-in', style({opacity: 1})),
-  ]),
-  transition(':leave', [animate('300ms ease-in', style({opacity: 0}))]),
-]);
+// NOTE: enable when need to use
+// export const fadeIn = trigger('fadeIn', [
+// transition(':enter', [
+// style({opacity: 0}),
+// animate('300ms ease-in', style({opacity: 1})),
+// ]),
+// transition(':leave', [animate('300ms ease-in', style({opacity: 0}))]),
+// ]);

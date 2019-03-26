@@ -2,10 +2,16 @@ import gql from 'graphql-tag';
 
 export const getMonsterFavouritesQuery = gql`
   query getMonsterFavourites($offset: Int!, $limit: Int!) {
-    userFavourites(offset: $offset, limit: $limit) {
-      MonsterFavourites {
+    monsterFavourites(offset: $offset, limit: $limit) {
+      count
+      monsters {
         id
         name
+        type
+        HitDices {
+          hd_type
+          hd_amount
+        }
       }
     }
   }
@@ -13,10 +19,12 @@ export const getMonsterFavouritesQuery = gql`
 
 export const getSpellFavouritesQuery = gql`
   query getSpellFavourites($offset: Int!, $limit: Int!) {
-    userFavourites(offset: $offset, limit: $limit) {
-      SpellFavourites {
+    spellFavourites(offset: $offset, limit: $limit) {
+      count
+      spells {
         id
         name
+        spell_type
       }
     }
   }
@@ -24,13 +32,26 @@ export const getSpellFavouritesQuery = gql`
 
 export const getFeatFavouritesQuery = gql`
   query getFeatFavourites($offset: Int!, $limit: Int!) {
-    userFavourites(offset: $offset, limit: $limit) {
-      userFavourites {
-        FeatFavourites {
-          id
-          name
-        }
+    featFavourites(offset: $offset, limit: $limit) {
+      count
+      feats {
+        id
+        name
       }
+    }
+  }
+`;
+
+export const getFavouritesCountQuery = gql`
+  {
+    monsterFavourites(offset: 0, limit: 0) {
+      count
+    }
+    spellFavourites(offset: 0, limit: 0) {
+      count
+    }
+    featFavourites(offset: 0, limit: 0) {
+      count
     }
   }
 `;

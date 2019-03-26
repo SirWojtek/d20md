@@ -12,6 +12,7 @@ import {
   removeMonsterFromFavouritesMutation,
   removeSpellFromFavouritesMutation,
   removeFeatFromFavouritesMutation,
+  getFavouritesCountQuery,
 } from './favourites-queries.graphql';
 
 const entityToAddToFavouriteMutation: {
@@ -41,6 +42,8 @@ export interface FavouriteItem {
   name: string;
 }
 
+export type FavouritesCount = {[key in keyof typeof EntityType]: number};
+
 @Injectable()
 export class FavouritesService {
   constructor(private graphQLService: GraphQLService) {}
@@ -49,16 +52,30 @@ export class FavouritesService {
     offset: number,
     limit: number,
     type: EntityType,
-  ): Observable<FavouriteItem[]> {
+  ): Observable<{items: FavouriteItem[]; count: number}> {
     const query = entityToGetQuery[type];
+    const lowerCaseType = type.toLowerCase();
     return this.graphQLService
       .queryAuth({query, variables: {offset, limit}})
-      .map(res =>
-        res.data.userFavourites[type + 'Favourites'].map(f => ({
-          id: f.id,
-          name: f.name,
-        })),
-      );
+      .map(res => ({
+        items: res.data[`${lowerCaseType}Favourites`][`${lowerCaseType}s`].map(
+          f => ({
+            id: f.id,
+            name: f.name,
+          }),
+        ),
+        count: res.data[`${lowerCaseType}Favourites`].count,
+      }));
+  }
+
+  getFavouritesCount(): Observable<FavouritesCount> {
+    return this.graphQLService
+      .queryAuth({query: getFavouritesCountQuery})
+      .map(res => ({
+        [EntityType.Monster]: res.data.monsterFavourites.count,
+        [EntityType.Spell]: res.data.spellFavourites.count,
+        [EntityType.Feat]: res.data.featFavourites.count,
+      }));
   }
 
   addToFavourites(id: number, type: EntityType): Observable<void> {

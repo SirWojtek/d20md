@@ -12,6 +12,7 @@ const models = require('../db/models');
 const common = require('../backend/common');
 const { simpleUserType } = require('./simple-user-graphql');
 const { simpleMonster } = require('./simple-monster-graphql');
+const { enumCache } = require('./enum-cache');
 
 const prerequisiteType = new GraphQLObjectType({
   name: 'Prerequisite',
@@ -23,7 +24,7 @@ const prerequisiteType = new GraphQLObjectType({
 const featType = new GraphQLObjectType({
   name: 'Feat',
   fields: {
-    ...attributeFields(models.Feat),
+    ...attributeFields(models.Feat, { cache: enumCache }),
     Prerequisite: {
       type: new GraphQLList(prerequisiteType),
       resolve: resolver(models.Feat.associations.Prerequisite)
@@ -69,6 +70,7 @@ const featsWithCount = new GraphQLObjectType({
 
 module.exports = {
   featType,
+  featsWithCount,
   featQueries: {
     feat: {
       type: featType,

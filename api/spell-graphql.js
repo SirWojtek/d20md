@@ -12,6 +12,7 @@ const models = require('../db/models');
 const common = require('../backend/common');
 const { simpleUserType } = require('./simple-user-graphql');
 const { simpleMonster } = require('./simple-monster-graphql');
+const { enumCache } = require('./enum-cache');
 
 const levelFields = [ 'class_name', 'level' ];
 
@@ -23,7 +24,7 @@ const spellLevelType = new GraphQLObjectType({
 const spellType = new GraphQLObjectType({
   name: 'Spell',
   fields: {
-    ...attributeFields(models.Spell),
+    ...attributeFields(models.Spell, { cache: enumCache }),
     SpellLevels: {
       type: new GraphQLList(spellLevelType),
       resolve: resolver(models.Spell.associations.SpellLevels)
@@ -59,7 +60,7 @@ const spellType = new GraphQLObjectType({
   }
 });
 
-const spellWithCount = new GraphQLObjectType({
+const spellsWithCount = new GraphQLObjectType({
   name: 'SpellWithCount',
   fields: {
     spells: { type: new GraphQLList(spellType) },
@@ -69,6 +70,7 @@ const spellWithCount = new GraphQLObjectType({
 
 module.exports = {
   spellType,
+  spellsWithCount,
   spellQueries: {
     spell: {
       type: spellType,
@@ -85,7 +87,7 @@ module.exports = {
       })
     },
     spells: {
-      type: spellWithCount,
+      type: spellsWithCount,
       args: {
         name: { type: GraphQLString, },
         spell_type: { type: GraphQLString, },

@@ -14,11 +14,12 @@ const { simpleUserType } = require('./simple-user-graphql');
 const { featType } = require('./feat-graphql');
 const { spellType } = require('./spell-graphql');
 const monsterTypes = require('./monster-types-graphql');
+const { enumCache } = require('./enum-cache');
 
 const monsterType = new GraphQLObjectType({
   name: 'Monster',
   fields: {
-    ...attributeFields(models.Monster),
+    ...attributeFields(models.Monster, { cache: enumCache }),
     Image: {
       type: monsterTypes.imageType,
       resolve: resolver(models.Monster.associations.Image),
@@ -106,7 +107,7 @@ const monsterType = new GraphQLObjectType({
   }
 });
 
-const monsterWithCount = new GraphQLObjectType({
+const monstersWithCount = new GraphQLObjectType({
   name: 'MonsterWithCount',
   fields: {
     monsters: { type: new GraphQLList(monsterType) },
@@ -116,6 +117,7 @@ const monsterWithCount = new GraphQLObjectType({
 
 module.exports = {
   monsterType,
+  monstersWithCount,
   monsterQueries: {
     monster: {
       type: monsterType,
@@ -135,7 +137,7 @@ module.exports = {
       }),
     },
     monsters: {
-      type: monsterWithCount,
+      type: monstersWithCount,
       args: {
         name: { type: GraphQLString, },
         size: { type: GraphQLString, },

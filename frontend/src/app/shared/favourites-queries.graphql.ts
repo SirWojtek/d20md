@@ -28,13 +28,24 @@ export const getMonsterFavouritesQuery = gql`
 `;
 
 export const getSpellFavouritesQuery = gql`
-  query getSpellFavourites($offset: Int!, $limit: Int!) {
-    spellFavourites(offset: $offset, limit: $limit) {
+  query getSpellFavourites(
+    $name: String
+    $type: String
+    $offset: Int!
+    $limit: Int!
+  ) {
+    spellFavourites(
+      name: $name
+      spell_type: $type
+      offset: $offset
+      limit: $limit
+    ) {
       count
       spells {
         id
         name
         spell_type
+        save_type
       }
     }
   }

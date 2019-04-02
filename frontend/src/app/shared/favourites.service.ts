@@ -16,6 +16,7 @@ import {
 } from './favourites-queries.graphql';
 import {Monster} from './model/monster';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Spell} from './model/spell';
 
 const entityToAddToFavouriteMutation: {
   [type in keyof typeof EntityType]: string
@@ -61,6 +62,23 @@ export class FavouritesService {
         .map(res => ({
           items: res.data.monsterFavourites.monsters,
           count: res.data.monsterFavourites.count,
+        })),
+    );
+  }
+
+  getSpellFavourites(
+    name: string,
+    type: string,
+    offset: number,
+    limit: number,
+  ): Observable<{items: Spell[]; count: number}> {
+    const query = entityToGetQuery[EntityType.Spell];
+    return this.needsUpdateObs.flatMap(() =>
+      this.graphQLService
+        .queryAuth({query, variables: {name, type, offset, limit}})
+        .map(res => ({
+          items: res.data.spellFavourites.spells,
+          count: res.data.spellFavourites.count,
         })),
     );
   }

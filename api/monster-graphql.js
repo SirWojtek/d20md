@@ -87,7 +87,7 @@ const monsterType = new GraphQLObjectType({
     isInFavourites: {
       type: GraphQLBoolean,
       resolve: (obj, args, context) => {
-        const userId = _.get(context, 'body.variables.userId');
+        const userId = _.get(context, 'body.variables.userId') || _.get(context, 'user.id');
         if (!userId) {
           return null;
         }

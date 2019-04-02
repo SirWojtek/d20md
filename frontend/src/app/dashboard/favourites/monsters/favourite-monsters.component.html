@@ -16,28 +16,26 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Type</th>
           <th>Hit Dices</th>
-          <th>Saves</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let monster of data.items">
+        <tr *ngFor="let monster of data.items" @slideOutLeft>
           <td class="name-cell" [routerLink]="[ '/', 'monsters', 'show', monster.id ]">{{ monster.name }}</td>
+          <td>
+            <img src="assets/img/{{ monster.type }}.svg" height=32 title="{{ monster.type | startCase}}" />
+          </td>
           <td>
             <div *ngFor="let hd of monster.HitDices">
               {{ hd | hitDice }}
             </div>
           </td>
-          <td>
-            <div>Reflex: {{ monster.Save.reflex }}</div>
-            <div>Fortitude: {{ monster.Save.fortitude }}</div>
-            <div>Will: {{ monster.Save.will }}</div>
-          </td>
           <td class="button-column">
             <button
               id="remove-from-favourites"
               title="Remove from Favourites"
-              class="btn btn-primary"
+              class="btn btn-sm btn-primary"
               (click)="onRemoveFromFavourites(monster.id)"
             >
               <i class="far fa-star" aria-hidden="true"></i>

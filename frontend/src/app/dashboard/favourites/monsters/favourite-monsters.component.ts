@@ -4,12 +4,14 @@ import {Subscription} from 'rxjs/Subscription';
 import {Monster} from '../../../shared/model/monster';
 import {FormBuilder} from '@angular/forms';
 import {FavouritesService} from '../../../shared/favourites.service';
+import {slideOutLeft} from '../../../shared/animations';
 
 const DEBOUNCE_TIME = 300;
 
 @Component({
   templateUrl: './favourite-monsters.component.html',
   styleUrls: ['../favourites-common.scss'],
+  animations: [slideOutLeft],
 })
 export class FavouriteMonstersComponent {
   nameControl = this.formBuilder.control('');

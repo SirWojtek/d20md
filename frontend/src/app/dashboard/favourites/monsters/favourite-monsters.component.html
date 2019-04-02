@@ -1,11 +1,23 @@
-<div class="form-group">
-  <input
-    type="text"
-    class="form-control input-sm dimmed"
-    id="name-control"
-    placeholder="Name..."
-    [formControl]="nameControl"
-  >
+<div class="quick-search-container">
+
+  <div class="form-group name-search">
+    <input
+      type="text"
+      class="form-control input-sm dimmed"
+      id="name-control"
+      placeholder="Name..."
+      [formControl]="nameControl"
+    >
+  </div>
+
+  <div class="form-group type-search">
+    <select class="form-control input-sm dimmed" [formControl]="typeControl">
+      <option value="" disabled selected>Type...</option>
+      <option value="">All</option>
+      <option *ngFor="let type of monsterTypes | async" [ngValue]="type">{{ type | startCase }}</option>
+    </select>
+  </div>
+
 </div>
 
 <div *ngIf="dataObs | async as data">

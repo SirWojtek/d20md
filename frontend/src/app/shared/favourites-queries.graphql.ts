@@ -8,15 +8,9 @@ export const getMonsterFavouritesQuery = gql`
         id
         name
         type
-        isInFavourites
         HitDices {
           hd_type
           hd_amount
-        }
-        Save {
-          will
-          reflex
-          fortitude
         }
       }
     }

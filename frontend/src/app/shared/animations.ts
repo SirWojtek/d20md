@@ -1,14 +1,5 @@
 import {trigger, transition, style, animate} from '@angular/animations';
 
-export const slideOutLeft = trigger('slideOutLeft', [
-  transition(':leave', [
-    animate(
-      '300ms ease-in',
-      style({opacity: 0, transform: 'translateX(-100%)'}),
-    ),
-  ]),
-]);
-
 export const slideInOutLeft = trigger('slideInOutLeft', [
   transition(':enter', [
     style({opacity: 0, transform: 'translateX(-100%)'}),

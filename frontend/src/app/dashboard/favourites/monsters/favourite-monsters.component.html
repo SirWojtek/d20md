@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let monster of data.items" @slideOutLeft>
+        <tr *ngFor="let monster of data.items">
           <td class="name-cell" [routerLink]="[ '/', 'monsters', 'show', monster.id ]">{{ monster.name }}</td>
           <td>
             <img src="assets/img/{{ monster.type }}.svg" height=32 title="{{ monster.type | startCase}}" />
@@ -45,7 +45,7 @@
       </tbody>
     </table>
 
-    <div class="pagination-container" *ngIf="data.items.length">
+    <div class="pagination-container" *ngIf="data.items.length > itemsPerPage">
       <pagination
         class="pagination-sm"
         [itemsPerPage]="itemsPerPage"

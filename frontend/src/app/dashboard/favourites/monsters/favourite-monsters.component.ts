@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+
 import {Monster} from '../../../shared/model/monster';
-import {FormBuilder} from '@angular/forms';
 import {FavouritesService} from '../../../shared/favourites.service';
-import {slideOutLeft} from '../../../shared/animations';
+import {EntityType} from '../../../shared/model/entity';
 
 const DEBOUNCE_TIME = 300;
 
 @Component({
   templateUrl: './favourite-monsters.component.html',
   styleUrls: ['../favourites-common.scss'],
-  animations: [slideOutLeft],
 })
 export class FavouriteMonstersComponent {
   nameControl = this.formBuilder.control('');
@@ -37,15 +37,23 @@ export class FavouriteMonstersComponent {
     );
 
     // NOTE: triggers for initial values
-    this.nameControl.setValue('');
-    this.paginationControl.setValue(1);
+    this.resetForm();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  onRemoveFromFavourites(id: number) {}
+  onRemoveFromFavourites(id: number) {
+    this.favouritesService
+      .removeFromFavourites(id, EntityType.Monster)
+      .subscribe(() => this.resetForm(), console.error);
+  }
+
+  private resetForm() {
+    this.nameControl.setValue('');
+    this.paginationControl.setValue(1);
+  }
 
   private query(name: string, page: number) {
     const offset = (page - 1) * this.itemsPerPage;

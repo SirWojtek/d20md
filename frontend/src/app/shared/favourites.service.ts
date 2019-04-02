@@ -56,7 +56,7 @@ export class FavouritesService {
     const query = entityToGetQuery[EntityType.Monster];
     return this.needsUpdateObs.flatMap(() =>
       this.graphQLService
-        .queryAuth({query, variables: {offset, limit}})
+        .queryAuth({query, variables: {name, offset, limit}})
         .map(res => ({
           items: res.data.monsterFavourites.monsters,
           count: res.data.monsterFavourites.count,

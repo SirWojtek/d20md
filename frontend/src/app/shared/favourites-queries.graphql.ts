@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const getMonsterFavouritesQuery = gql`
-  query getMonsterFavourites($offset: Int!, $limit: Int!) {
-    monsterFavourites(offset: $offset, limit: $limit) {
+  query getMonsterFavourites($name: String, $offset: Int!, $limit: Int!) {
+    monsterFavourites(name: $name, offset: $offset, limit: $limit) {
       count
       monsters {
         id

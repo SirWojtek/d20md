@@ -14,6 +14,7 @@ import {
   removeFeatFromFavouritesMutation,
   getFavouritesCountQuery,
 } from './favourites-queries.graphql';
+import {Monster} from './model/monster';
 
 const entityToAddToFavouriteMutation: {
   [type in keyof typeof EntityType]: string
@@ -37,34 +38,23 @@ const entityToGetQuery: {[type in keyof typeof EntityType]: string} = {
   [EntityType.Feat]: getFeatFavouritesQuery,
 };
 
-export interface FavouriteItem {
-  id: number;
-  name: string;
-}
-
 export type FavouritesCount = {[key in keyof typeof EntityType]: number};
 
 @Injectable()
 export class FavouritesService {
   constructor(private graphQLService: GraphQLService) {}
 
-  getFavourites(
+  getMonsterFavourites(
+    name: string,
     offset: number,
     limit: number,
-    type: EntityType,
-  ): Observable<{items: FavouriteItem[]; count: number}> {
-    const query = entityToGetQuery[type];
-    const lowerCaseType = type.toLowerCase();
+  ): Observable<{items: Monster[]; count: number}> {
+    const query = entityToGetQuery[EntityType.Monster];
     return this.graphQLService
       .queryAuth({query, variables: {offset, limit}})
       .map(res => ({
-        items: res.data[`${lowerCaseType}Favourites`][`${lowerCaseType}s`].map(
-          f => ({
-            id: f.id,
-            name: f.name,
-          }),
-        ),
-        count: res.data[`${lowerCaseType}Favourites`].count,
+        items: res.data.monsterFavourites.monsters,
+        count: res.data.monsterFavourites.count,
       }));
   }
 

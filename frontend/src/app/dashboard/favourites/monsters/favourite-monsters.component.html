@@ -1,1 +1,68 @@
-FAVOURITE MONSTERS
+<div class="form-group">
+  <input
+    type="text"
+    class="form-control input-sm dimmed"
+    id="name-control"
+    placeholder="Name..."
+    [formControl]="nameControl"
+  >
+</div>
+
+<div *ngIf="dataObs | async as data">
+
+  <div *ngIf="data.items?.length; else noMonsters">
+
+    <table class="table table-striped" id="owned-monsters-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hit Dices</th>
+          <th>Saves</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let monster of data.items">
+          <td class="name-cell" [routerLink]="[ '/', 'monsters', 'show', monster.id ]">{{ monster.name }}</td>
+          <td>
+            <div *ngFor="let hd of monster.HitDices">
+              {{ hd | hitDice }}
+            </div>
+          </td>
+          <td>
+            <div>Reflex: {{ monster.Save.reflex }}</div>
+            <div>Fortitude: {{ monster.Save.fortitude }}</div>
+            <div>Will: {{ monster.Save.will }}</div>
+          </td>
+          <td class="button-column">
+            <button
+              id="remove-from-favourites"
+              title="Remove from Favourites"
+              class="btn btn-primary"
+              (click)="onRemoveFromFavourites(monster.id)"
+            >
+              <i class="far fa-star" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="data.items.length">
+      <pagination
+        class="pagination-sm"
+        [itemsPerPage]="itemsPerPage"
+        [maxSize]="10"
+        [totalItems]="data.count"
+        [formControl]="paginationControl"
+        [boundaryLinks]="true"
+      ></pagination>
+    </div>
+  </div>
+
+  <ng-template #noMonsters>
+    <div class="no-items-placeholder">
+      <img src="assets/img/no-monsters.svg" width="128" height="128" />
+      <h3>There are no matching monsters</h3>
+    </div>
+  </ng-template>
+</div>

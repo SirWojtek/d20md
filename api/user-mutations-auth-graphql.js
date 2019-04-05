@@ -129,7 +129,7 @@ module.exports = {
           }
 
           return user.setMonsterFavourites(
-            user.MonsterFavourites.filter(f => f.id === args.id)
+            user.MonsterFavourites.filter(f => f.id !== Number(args.id))
           );
         });
       },
@@ -153,7 +153,7 @@ module.exports = {
           }
 
           return user.setSpellFavourites(
-            user.SpellFavourites.filter(f => f.id === args.id)
+            user.SpellFavourites.filter(f => f.id !== Number(args.id))
           );
         });
       },
@@ -177,7 +177,7 @@ module.exports = {
           }
 
           return user.setFeatFavourites(
-            user.FeatFavourites.filter(f => f.id === args.id)
+            user.FeatFavourites.filter(f => f.id !== Number(args.id))
           );
         });
       },

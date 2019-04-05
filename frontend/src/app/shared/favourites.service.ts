@@ -17,6 +17,7 @@ import {
 import {Monster} from './model/monster';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Spell} from './model/spell';
+import {Feat} from './model/feat';
 
 const entityToAddToFavouriteMutation: {
   [type in keyof typeof EntityType]: string
@@ -79,6 +80,23 @@ export class FavouritesService {
         .map(res => ({
           items: res.data.spellFavourites.spells,
           count: res.data.spellFavourites.count,
+        })),
+    );
+  }
+
+  getFeatFavourites(
+    name: string,
+    type: string,
+    offset: number,
+    limit: number,
+  ): Observable<{items: Feat[]; count: number}> {
+    const query = entityToGetQuery[EntityType.Feat];
+    return this.needsUpdateObs.flatMap(() =>
+      this.graphQLService
+        .queryAuth({query, variables: {name, type, offset, limit}})
+        .map(res => ({
+          items: res.data.featFavourites.feats,
+          count: res.data.featFavourites.count,
         })),
     );
   }

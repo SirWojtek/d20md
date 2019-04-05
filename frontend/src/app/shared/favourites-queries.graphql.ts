@@ -52,12 +52,23 @@ export const getSpellFavouritesQuery = gql`
 `;
 
 export const getFeatFavouritesQuery = gql`
-  query getFeatFavourites($offset: Int!, $limit: Int!) {
-    featFavourites(offset: $offset, limit: $limit) {
+  query getFeatFavourites(
+    $name: String
+    $type: String
+    $offset: Int!
+    $limit: Int!
+  ) {
+    featFavourites(
+      name: $name
+      feat_type: $type
+      offset: $offset
+      limit: $limit
+    ) {
       count
       feats {
         id
         name
+        feat_type
       }
     }
   }

@@ -1,2 +1,72 @@
+<div class="quick-search-container">
 
-FAVOURITE FAETS
+  <div class="form-group name-search">
+    <input
+      type="text"
+      class="form-control input-sm dimmed"
+      id="name-control"
+      placeholder="Name..."
+      [formControl]="nameControl"
+    >
+  </div>
+
+  <div class="form-group type-search">
+    <select class="form-control input-sm dimmed" [formControl]="typeControl">
+      <option value="" disabled selected>Type...</option>
+      <option value="">All</option>
+      <option *ngFor="let type of featTypes | async" [ngValue]="type">{{ type | startCase }}</option>
+    </select>
+  </div>
+
+</div>
+
+<div *ngIf="dataObs | async as data">
+
+  <div *ngIf="data.items?.length; else noFeats">
+
+    <table class="table table-striped" id="owned-feats-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feat of data.items">
+          <td class="name-cell" [routerLink]="[ '/', 'feats', 'show', feat.id ]">{{ feat.name }}</td>
+          <td>
+            <img src="assets/img/{{ feat.feat_type }}.svg" height=32 title="{{ feat.feat_type | startCase}}" />
+          </td>
+          <td class="button-column">
+            <button
+              id="remove-from-favourites"
+              title="Remove from Favourites"
+              class="btn btn-sm btn-primary"
+              (click)="onRemoveFromFavourites(feat.id)"
+            >
+              <i class="far fa-star" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="data.items.length > itemsPerPage">
+      <pagination
+        class="pagination-sm"
+        [itemsPerPage]="itemsPerPage"
+        [maxSize]="10"
+        [totalItems]="data.count"
+        [formControl]="paginationControl"
+        [boundaryLinks]="true"
+      ></pagination>
+    </div>
+  </div>
+
+  <ng-template #noFeats>
+    <div class="no-items-placeholder">
+      <img src="assets/img/no-favourites.svg" width="128" height="128" />
+      <h3>There are no matching favourite feats</h3>
+    </div>
+  </ng-template>
+</div>

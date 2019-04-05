@@ -22,8 +22,20 @@
 
   .miniatures-container {
     display: flex;
+    flex: 1 0 auto;
     flex-direction: column;
-    align-items: center;
+
+    d20md-find-miniature {
+      &:not(:first-child) {
+        ::ng-deep .miniature {
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+
+  .pagination-container {
+    align-self: center;
   }
 
   @media (max-width: $lg-md-breakpoint) {

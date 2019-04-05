@@ -12,7 +12,10 @@ export class FavouriteMarkComponent {
   isFavourite: boolean;
 
   @Input()
-  favouritesCount: number;
+  favouritesCount: number = null;
+
+  @Input()
+  mini = false;
 
   @Output()
   onClick = new EventEmitter<void>();

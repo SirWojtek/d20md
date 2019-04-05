@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
-import { chromaColor } from '../../../shared/chroma-color';
+import {chromaColor} from '../../../shared/chroma-color';
 
 @Component({
   selector: 'd20md-cr-element',
@@ -14,22 +14,25 @@ import { chromaColor } from '../../../shared/chroma-color';
   </div>
   `,
   styles: [
-    `.cr-circle {
-      width: 30px;
-      height: 30px;
-      padding-top: 3px;
-      padding-left: 5px;
-      font-size: 14px;
-      font-weight: bold;
-      border-radius: 25px;
-      border: 2px solid;
-      margin: auto;
-    }`
-  ]
+    `
+      .cr-circle {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 25px;
+        border: 2px solid;
+        margin: auto;
+      }
+    `,
+  ],
 })
-
 export class CrElementComponent {
-  @Input() cr: number;
+  @Input()
+  cr: number;
 
   crColor = chromaColor([0, 10, 20, 40, 60]);
 }

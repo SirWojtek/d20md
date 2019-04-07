@@ -1,40 +1,41 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import * as _ from 'lodash';
 
-import { Spell } from '../../../shared/model/spell';
-import { FindSpellService } from '../../../spells/find/find-spell.service';
+import {Spell} from '../../../shared/model/spell';
+import {FindSpellService} from '../../../spells/find/find-spell.service';
 
 @Component({
-  selector : 'd20md-spell-editor',
+  selector: 'd20md-spell-editor',
   templateUrl: './spell-editor.component.html',
-  styleUrls: [ './spell-editor.component.scss' ]
+  styleUrls: ['./spell-editor.component.scss'],
 })
-
 export class SpellEditorComponent {
   private debouncePeriod = 300;
 
-  @Input() spells: Spell[];
-  @Output() spellsChange = new EventEmitter<Spell[]>();
+  @Input()
+  spells: Spell[];
+  @Output()
+  spellsChange = new EventEmitter<Spell[]>();
 
   foundSpells: Spell[] = [];
 
-  levelRange = [ 0, 9 ];
+  levelRange = [0, 9];
   searchFields = {
     name: '',
     class_name: '',
-    level: { min: 0, max: 9 },
+    level: {min: 0, max: 9},
   };
 
   onSearch = _.debounce(() => this.search(), this.debouncePeriod);
 
-  constructor(
-    private findSpellService: FindSpellService,
-  ) {
+  constructor(private findSpellService: FindSpellService) {
     this.search();
   }
 
   onLevelChange() {
-    if (this.levelRange.length !== 2) { throw Error('Invalid length of level array'); }
+    if (this.levelRange.length !== 2) {
+      throw Error('Invalid length of level array');
+    }
 
     this.searchFields.level.min = this.levelRange[0];
     this.searchFields.level.max = this.levelRange[1];
@@ -44,7 +45,9 @@ export class SpellEditorComponent {
 
   onDelete(spell: Spell) {
     const index = this.spells.indexOf(spell);
-    if (index === -1) { throw new Error('Cannot find spell to remove'); }
+    if (index === -1) {
+      throw new Error('Cannot find spell to remove');
+    }
     this.spells.splice(index, 1);
     this.spellsChange.emit(this.spells);
   }
@@ -59,7 +62,14 @@ export class SpellEditorComponent {
   }
 
   private search() {
-    this.findSpellService.findSpells(this.searchFields, 0, 10)
-    .subscribe(res => this.foundSpells = res.filtered);
+    this.findSpellService
+      .findSpells({
+        fields: this.searchFields,
+        offset: 0,
+        limit: 10,
+        asc: [],
+        desc: ['name'],
+      })
+      .subscribe(res => (this.foundSpells = res.filtered));
   }
 }

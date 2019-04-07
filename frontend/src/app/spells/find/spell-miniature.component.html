@@ -4,8 +4,8 @@
     <d20md-favourites-mark
       [mini]="true"
       [isFavourite]="spell.isInFavourites"
-      (onClick)="onFavouriteClick()"
-      (click)="$event.stopPropagation"
+      (onClick)="onFavouritesClick()"
+      (click)="$event.stopPropagation()"
     ></d20md-favourites-mark>
   </div>
   <div class="panel-body miniature-grid">

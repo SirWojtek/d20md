@@ -40,6 +40,7 @@ export const findSpellsQuery = gql`
     $offset: Int!
     $asc: [String]
     $desc: [String]
+    $userId: Int
   ) {
     spells(
       name: $name
@@ -52,6 +53,7 @@ export const findSpellsQuery = gql`
       offset: $offset
       asc: $asc
       desc: $desc
+      userId: $userId
     ) {
       count
       spells {
@@ -61,6 +63,7 @@ export const findSpellsQuery = gql`
         spell_type
         spell_range
         range_info
+        isInFavourites
         SpellLevels {
           class_name
           level

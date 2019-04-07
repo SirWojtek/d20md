@@ -179,6 +179,7 @@ export const findMonstersQuery = gql`
     $offset: Int!
     $asc: [String]
     $desc: [String]
+    $userId: Int
   ) {
     monsters(
       name: $name
@@ -199,6 +200,7 @@ export const findMonstersQuery = gql`
       offset: $offset
       asc: $asc
       desc: $desc
+      userId: $userId
     ) {
       count
       monsters {
@@ -210,6 +212,7 @@ export const findMonstersQuery = gql`
         armor_sum
         attack_max
         hp
+        isInFavourites
         HitDices {
           hd_type
           hd_amount

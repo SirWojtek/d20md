@@ -29,7 +29,12 @@
     </div>
   </div>
     <div class="right-container">
-      <d20md-favourites-mark [mini]="true" [isFavourite]="monster.isFavourite"></d20md-favourites-mark>
+      <d20md-favourites-mark
+        [mini]="true"
+        [isFavourite]="monster.isInFavourites"
+        (onClick)="onFavouritesClick()"
+        (click)="$event.stopPropagation()"
+      ></d20md-favourites-mark>
       <d20md-environment-element [environmentTags]="monster.EnvironmentTags"></d20md-environment-element>
       <d20md-cr-element [cr]="monster.challenge_rating"></d20md-cr-element>
     </div>

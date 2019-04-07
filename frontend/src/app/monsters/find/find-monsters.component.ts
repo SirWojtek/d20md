@@ -82,14 +82,14 @@ export class FindMonstersComponent {
     const offset = (this.page.current - 1) * this.page.size;
     const limit = this.page.size;
     this.findService
-      .findMonsters(
-        this.searchFields,
-        this.tagFields,
+      .findMonsters({
+        fields: this.searchFields,
+        environment_tags: this.tagFields.environment_tags,
         offset,
         limit,
-        this.sortMap['asc'],
-        this.sortMap['desc'],
-      )
+        asc: this.sortMap.asc || [],
+        desc: this.sortMap.desc || [],
+      })
       .subscribe(result => {
         this.results = result.rows;
         this.page.total = result.count;

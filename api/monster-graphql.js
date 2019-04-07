@@ -158,6 +158,7 @@ module.exports = {
         limit: { type: new GraphQLNonNull(GraphQLInt) },
         asc: { type: new GraphQLList(GraphQLString) },
         desc: { type: new GraphQLList(GraphQLString) },
+        userId: { type: GraphQLInt, description: 'Logged user id used for tracking' },
       },
       resolve: resolver(models.Monster, {
         list: true,

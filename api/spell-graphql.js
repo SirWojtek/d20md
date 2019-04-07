@@ -40,7 +40,7 @@ const spellType = new GraphQLObjectType({
     isInFavourites: {
       type: GraphQLBoolean,
       resolve: (obj, args, context) => {
-        const userId = _.get(context, 'body.variables.userId');
+        const userId = _.get(context, 'body.variables.userId') || _.get(context, 'user.id');
         if (!userId) {
           return null;
         }
@@ -100,6 +100,7 @@ module.exports = {
         limit: { type: new GraphQLNonNull(GraphQLInt) },
         asc: { type: new GraphQLList(GraphQLString) },
         desc: { type: new GraphQLList(GraphQLString) },
+        userId: { type: GraphQLInt, description: 'Logged user id used for tracking' },
       },
       resolve: resolver(models.Spell, {
         list: true,

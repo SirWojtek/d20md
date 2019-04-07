@@ -7,6 +7,7 @@ import {fromJson} from '../../shared/model/conversions';
 import {GraphQLService} from '../../shared/graphql.service';
 
 import {findMonstersQuery} from '../monster-queries.graphql';
+import {UserService} from '../../shared/user/user.service';
 
 export interface IFindMonsterParams {
   fields: any;
@@ -20,7 +21,10 @@ export interface IFindMonsterParams {
 
 @Injectable()
 export class FindMonsterService {
-  constructor(private graphQLService: GraphQLService) {}
+  constructor(
+    private graphQLService: GraphQLService,
+    private userService: UserService,
+  ) {}
 
   public findMonsters(
     params: IFindMonsterParams,
@@ -39,14 +43,16 @@ export class FindMonsterService {
       }
     }
 
-    return this.graphQLService
-      .query({
-        query: findMonstersQuery,
-        variables,
-      })
-      .map(res => ({
-        count: res.data.monsters.count,
-        rows: fromJson(res.data.monsters.monsters, Monster),
-      }));
+    return this.userService.getId().flatMap(userId =>
+      this.graphQLService
+        .query({
+          query: findMonstersQuery,
+          variables: {...variables, userId},
+        })
+        .map(res => ({
+          count: res.data.monsters.count,
+          rows: fromJson(res.data.monsters.monsters, Monster),
+        })),
+    );
   }
 }

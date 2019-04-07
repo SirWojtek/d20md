@@ -16,3 +16,10 @@
     color: #ffffff;
   }
 }
+
+i {
+  transition: transform 0.15s;
+  &:hover {
+    transform: scale(1.5);
+  }
+}

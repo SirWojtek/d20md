@@ -27,24 +27,22 @@
 </div>
 
 <ng-template #miniVersion>
-  <button
+  <i
     *ngIf="isFavourite else addToFavourites"
     id="remove-from-favourites"
+    class="fas fa-star"
+    aria-hidden="true"
     title="Remove from Favourites"
-    class="btn btn-xs btn-info"
     (click)="onClick.emit()"
-  >
-    <i class="fas fa-star" aria-hidden="true"></i>
-  </button>
+  ></i>
 
   <ng-template #addToFavourites>
-    <button
+    <i
       id="add-to-favourites"
+      class="far fa-star"
+      aria-hidden="true"
       title="Add to Favourites"
-      class="btn btn-xs btn-info"
       (click)="onClick.emit()"
-    >
-      <i class="far fa-star" aria-hidden="true"></i>
-    </button>
+    ></i>
   </ng-template>
 </ng-template>

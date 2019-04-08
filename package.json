@@ -47,6 +47,17 @@
     "gulp": "^4.0.0",
     "nodemon": "^1.12.1"
   },
+  "lint-staged": {
+    "*.ts": [
+      "ng lint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Gettor/d20Site.git"

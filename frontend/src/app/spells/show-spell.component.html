@@ -8,6 +8,7 @@
 
     <div *ngIf="canModify" class="button-container">
       <d20md-favourites-mark
+        *ngIf="spell.isInFavourites != null"
         [isFavourite]="spell.isInFavourites"
         [favouritesCount]="spell.favouritesCount"
         (onClick)="onFavouritesClick(spell)"

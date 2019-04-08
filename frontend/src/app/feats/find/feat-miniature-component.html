@@ -5,12 +5,15 @@
       <h3 class="panel-title">
         <div [innerHTML]="highlight(feat.name)"></div>
       </h3>
-      <d20md-favourites-mark
-        [mini]="true"
-        [isFavourite]="feat.isInFavourites"
-        (onClick)="onFavouritesClick()"
-        (click)="$event.stopPropagation()"
-      ></d20md-favourites-mark>
+      <div>
+        <d20md-favourites-mark
+          *ngIf="feat.isInFavourites != null"
+          [mini]="true"
+          [isFavourite]="feat.isInFavourites"
+          (onClick)="onFavouritesClick()"
+          (click)="$event.stopPropagation()"
+        ></d20md-favourites-mark>
+      </div>
     </div>
   </div>
   <div class="panel-body">

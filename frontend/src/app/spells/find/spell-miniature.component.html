@@ -2,6 +2,7 @@
   <div class="panel-heading heading-container">
     <h3 class="panel-title">{{ spell.name }}</h3>
     <d20md-favourites-mark
+      *ngIf="spell.isInFavourites != null"
       [mini]="true"
       [isFavourite]="spell.isInFavourites"
       (onClick)="onFavouritesClick()"

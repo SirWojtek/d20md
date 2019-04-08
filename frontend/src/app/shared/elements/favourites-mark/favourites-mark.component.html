@@ -8,7 +8,7 @@
     >
       <i class="fas fa-star" aria-hidden="true"></i>
     </button>
-    <span *ngIf="favouritesCount != null" @slideInOutTop title="Total" class="badge">{{ favouritesCount }}</span>
+    <span *ngIf="favouritesCount != null" @slideInOutTop title="Total Likes" class="badge">{{ favouritesCount }}</span>
   </div>
 
   <ng-template #addToFavourites>
@@ -21,7 +21,7 @@
       >
         <i class="far fa-star" aria-hidden="true"></i>
       </button>
-      <span *ngIf="favouritesCount != null" @slideInOutBottom title="Total" class="badge">{{ favouritesCount }}</span>
+      <span *ngIf="favouritesCount != null" @slideInOutBottom title="Total Likes" class="badge">{{ favouritesCount }}</span>
     </div>
   </ng-template>
 </div>

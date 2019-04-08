@@ -3,6 +3,7 @@
 
   <div *ngIf="canModify || isLoggedIn" class="buttons-panel-item">
     <d20md-favourites-mark
+      *ngIf="monster.isInFavourites != null"
       [isFavourite]="monster.isInFavourites"
       [favouritesCount]="monster.favouritesCount"
       (onClick)="onFavouritesClick()"

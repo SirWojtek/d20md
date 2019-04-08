@@ -30,6 +30,7 @@
   </div>
     <div class="right-container">
       <d20md-favourites-mark
+        *ngIf="monster.isInFavourites != null"
         [mini]="true"
         [isFavourite]="monster.isInFavourites"
         (onClick)="onFavouritesClick()"

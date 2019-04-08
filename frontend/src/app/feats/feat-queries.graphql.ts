@@ -34,6 +34,7 @@ export const findFeatsQuery = gql`
     $feat_type: String
     $limit: Int!
     $offset: Int!
+    $userId: Int
   ) {
     feats(
       name: $name
@@ -41,6 +42,7 @@ export const findFeatsQuery = gql`
       feat_type: $feat_type
       limit: $limit
       offset: $offset
+      userId: $userId
     ) {
       count
       feats {
@@ -50,6 +52,7 @@ export const findFeatsQuery = gql`
         benefit
         special
         normal
+        isInFavourites
       }
     }
   }

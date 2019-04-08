@@ -57,7 +57,7 @@ export class FindFeatsComponent {
     const offset = (this.page.current - 1) * this.page.size;
     const limit = this.page.size;
     this.findFeatService
-      .findFeats(this.searchFields, offset, limit)
+      .findFeats({fields: this.searchFields, offset, limit})
       .subscribe(result => {
         this.feats = result.filtered;
         this.page.total = result.total;

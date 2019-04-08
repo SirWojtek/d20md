@@ -60,7 +60,6 @@
     "gulp": "^4.0.0",
     "gulp-awspublish": "^3.3.1",
     "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
-    "husky": "^1.0.0-rc.15",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
@@ -74,16 +73,5 @@
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "2.6"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "ng lint --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
-}
+

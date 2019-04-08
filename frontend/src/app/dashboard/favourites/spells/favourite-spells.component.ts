@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Spell} from '../../../shared/model/spell';
 import {Subscription} from 'rxjs/Subscription';
@@ -13,7 +13,7 @@ const DEBOUNCE_TIME = 300;
   templateUrl: './favourite-spells.component.html',
   styleUrls: ['../favourites-common.scss'],
 })
-export class FavouriteSpellsComponent {
+export class FavouriteSpellsComponent implements OnDestroy {
   nameControl = this.formBuilder.control('');
   typeControl = this.formBuilder.control('');
   paginationControl = this.formBuilder.control(1);

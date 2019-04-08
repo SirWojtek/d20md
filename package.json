@@ -11,6 +11,7 @@
     "start": "concurrently --kill-others \"cd frontend && ng serve\" \"yarn start:backend\"",
     "deploy_backend": "gulp migrate ; gulp seed",
     "lint": "cd frontend && yarn lint",
+    "lint:fix": "cd frontend && yarn lint --fix",
     "build": "cd frontend && yarn build",
     "build:aot": "cd frontend && yarn build:aot"
   },
@@ -51,7 +52,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "ng lint --fix",
+      "tslint --fix",
       "git add"
     ]
   },

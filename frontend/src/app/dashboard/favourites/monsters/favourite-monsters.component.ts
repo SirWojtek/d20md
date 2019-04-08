@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
@@ -14,7 +14,7 @@ const DEBOUNCE_TIME = 300;
   templateUrl: './favourite-monsters.component.html',
   styleUrls: ['../favourites-common.scss'],
 })
-export class FavouriteMonstersComponent {
+export class FavouriteMonstersComponent implements OnDestroy {
   nameControl = this.formBuilder.control('');
   typeControl = this.formBuilder.control('');
   paginationControl = this.formBuilder.control(1);

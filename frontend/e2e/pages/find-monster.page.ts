@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, ElementFinder} from 'protractor';
 
 export interface ISearchCriterias {
   name?: string;
@@ -12,6 +12,7 @@ export interface IMonster {
   type: string;
   cr: number;
   ac: number;
+  favourite: boolean;
   click: () => Promise<void>;
 }
 
@@ -50,6 +51,8 @@ export class FindMonsterPage {
   private typeSelector = 'd20md-type-element img';
   private crSelector = 'd20md-armor-element span';
   private acSelector = 'd20md-cr-element span';
+  private favouriteSelector = 'd20md-favourites-mark i';
+  private favouriteActiveClass = 'fas';
 
   async navigateTo() {
     await browser.get(this.pageUrl);
@@ -88,9 +91,21 @@ export class FindMonsterPage {
       type: el.$(this.typeSelector).getAttribute('title'),
       cr: el.$(this.crSelector).getText(),
       ac: el.$(this.acSelector).getText(),
+      favourite: this.getFavourite(el),
       click: el.$(this.nameSelector).click,
     }));
 
     return result as IMonster[];
+  }
+
+  private async getFavourite(el: ElementFinder): Promise<boolean> {
+    const favouriteItem = el.$(this.favouriteSelector);
+
+    if (!(await favouriteItem.isPresent())) {
+      return Promise.resolve(null);
+    }
+    return favouriteItem
+      .getAttribute('class')
+      .then(classes => classes.includes(this.favouriteActiveClass));
   }
 }

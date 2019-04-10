@@ -23,10 +23,7 @@ interface ISpellSearchParams {
 
 @Injectable()
 export class FindSpellService {
-  constructor(
-    private userService: UserService,
-    private graphQLService: GraphQLService,
-  ) {}
+  constructor(private graphQLService: GraphQLService) {}
 
   public findSpells(
     params: ISpellSearchParams,
@@ -43,16 +40,14 @@ export class FindSpellService {
       }
     });
 
-    return this.userService.getId().flatMap(userId =>
-      this.graphQLService
-        .query({
-          query: findSpellsQuery,
-          variables: {...variables, userId},
-        })
-        .map(res => ({
-          total: res.data.spells.count,
-          filtered: fromJson(res.data.spells.spells, Spell),
-        })),
-    );
+    return this.graphQLService
+      .query({
+        query: findSpellsQuery,
+        variables,
+      })
+      .map(res => ({
+        total: res.data.spells.count,
+        filtered: fromJson(res.data.spells.spells, Spell),
+      }));
   }
 }

@@ -21,10 +21,7 @@ export interface IFindMonsterParams {
 
 @Injectable()
 export class FindMonsterService {
-  constructor(
-    private graphQLService: GraphQLService,
-    private userService: UserService,
-  ) {}
+  constructor(private graphQLService: GraphQLService) {}
 
   public findMonsters(
     params: IFindMonsterParams,
@@ -43,16 +40,14 @@ export class FindMonsterService {
       }
     }
 
-    return this.userService.getId().flatMap(userId =>
-      this.graphQLService
-        .query({
-          query: findMonstersQuery,
-          variables: {...variables, userId},
-        })
-        .map(res => ({
-          count: res.data.monsters.count,
-          rows: fromJson(res.data.monsters.monsters, Monster),
-        })),
-    );
+    return this.graphQLService
+      .query({
+        query: findMonstersQuery,
+        variables,
+      })
+      .map(res => ({
+        count: res.data.monsters.count,
+        rows: fromJson(res.data.monsters.monsters, Monster),
+      }));
   }
 }

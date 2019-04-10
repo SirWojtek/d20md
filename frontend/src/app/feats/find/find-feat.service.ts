@@ -22,10 +22,7 @@ interface IFeatSearchParams {
 
 @Injectable()
 export class FindFeatService {
-  constructor(
-    private userService: UserService,
-    private graphQLService: GraphQLService,
-  ) {}
+  constructor(private graphQLService: GraphQLService) {}
 
   public findFeats(
     params: IFeatSearchParams,
@@ -35,22 +32,19 @@ export class FindFeatService {
       return Observable.of({total: 0, filtered: []});
     }
 
-    return this.userService.getId().flatMap(userId =>
-      this.graphQLService
-        .query({
-          query: findFeatsQuery,
-          variables: {
-            ...fields,
-            feat_type: fields.feat_type || undefined,
-            offset: params.offset,
-            limit: params.limit,
-            userId,
-          },
-        })
-        .map(res => ({
-          total: res.data['feats']['count'],
-          filtered: fromJson(res.data['feats']['feats'], Feat),
-        })),
-    );
+    return this.graphQLService
+      .query({
+        query: findFeatsQuery,
+        variables: {
+          ...fields,
+          feat_type: fields.feat_type || undefined,
+          offset: params.offset,
+          limit: params.limit,
+        },
+      })
+      .map(res => ({
+        total: res.data['feats']['count'],
+        filtered: fromJson(res.data['feats']['feats'], Feat),
+      }));
   }
 }

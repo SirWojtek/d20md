@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const models = require("./db/models");
 const path = require("path");
 const cors = require("cors");
+const jwtDecode = require('jwt-decode');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { formatError } = require('graphql');
@@ -13,6 +14,19 @@ const env = require('./environment/environment');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(cors({ origin: env.host }))
+app.use((req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) {
+    next();
+    return;
+  }
+  const payload = jwtDecode(token.split(' ')[1]);
+  models.User.findOne({ where: { email: payload.email }})
+    .then(user => {
+      req.user = user;
+      next();
+    });
+});
 
 const passport = require('./backend/passport');
 

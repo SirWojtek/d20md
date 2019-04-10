@@ -1,6 +1,7 @@
 import {FramePage} from '../pages/frame.page';
 import {LoginPage} from '../pages/login.page';
 import {userCredentials} from '../config/user-credentials';
+import {browser} from 'protractor';
 
 export class LoginHelper {
   constructor(
@@ -14,6 +15,7 @@ export class LoginHelper {
     if (!isLoggedIn) {
       await this.framePage.clickLoginButton();
       await this.loginPage.login(this.user);
+      await browser.waitForAngular();
     }
   }
 
@@ -21,6 +23,7 @@ export class LoginHelper {
     const isLoggedIn = await this.framePage.isLoggedIn();
     if (isLoggedIn) {
       await this.framePage.logout();
+      await browser.waitForAngular();
     }
   }
 }

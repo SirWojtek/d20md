@@ -1,18 +1,18 @@
 <ul class="nav nav-tabs nav-justified" *ngIf="favouritesEntitiesCountObs | async as favouritesEntitiesCount">
   <li role="presentation" routerLinkActive="active">
-    <a [routerLink]="['monsters']" id="owned-monsters">
+    <a [routerLink]="['monsters']" id="favourite-monsters">
       <h4>Monsters</h4>
       <span class="badge">{{ favouritesEntitiesCount[entityType.Monster] }}</span>
     </a>
   </li>
   <li role="presentation" routerLinkActive="active">
-    <a [routerLink]="['spells']" id="owned-spells">
+    <a [routerLink]="['spells']" id="favourite-spells">
       <h4>Spells</h4>
       <span class="badge">{{ favouritesEntitiesCount[entityType.Spell] }}</span>
     </a>
   </li>
   <li role="presentation" routerLinkActive="active">
-    <a [routerLink]="['feats']" id="owned-feats">
+    <a [routerLink]="['feats']" id="favourite-feats">
       <h4>Feats</h4>
       <span class="badge">{{ favouritesEntitiesCount[entityType.Feat] }}</span>
     </a>

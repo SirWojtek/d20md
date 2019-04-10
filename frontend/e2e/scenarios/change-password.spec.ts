@@ -6,12 +6,14 @@ import {ICredentials, LoginPage} from '../pages/login.page';
 
 import {userCredentials} from '../config/user-credentials';
 import {ChangePasswordPage} from '../pages/change-password.page';
+import {LoginHelper} from '../helpers/login-helper';
 
 describe('change password', () => {
   let framePage: FramePage;
   let indexPage: IndexPage;
   let loginPage: LoginPage;
   let changePasswordPage: ChangePasswordPage;
+  let loginHelper: LoginHelper;
 
   let user: ICredentials;
 
@@ -26,6 +28,7 @@ describe('change password', () => {
     indexPage = new IndexPage();
     loginPage = new LoginPage();
     changePasswordPage = new ChangePasswordPage();
+    loginHelper = new LoginHelper(framePage, loginPage);
 
     user = userCredentials;
   });
@@ -35,10 +38,7 @@ describe('change password', () => {
   });
 
   afterAll(async () => {
-    const isLoggedIn = await framePage.isLoggedIn();
-    if (isLoggedIn) {
-      await framePage.logout();
-    }
+    await loginHelper.logout();
   });
 
   it('should change password of logged user', async () => {

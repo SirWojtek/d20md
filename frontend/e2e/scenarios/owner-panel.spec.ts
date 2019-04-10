@@ -4,10 +4,10 @@ import {AddMonsterPage} from '../pages/add-monster.page';
 import {OwnerPanelPage} from '../pages/owner-panel.page';
 import {FramePage} from '../pages/frame.page';
 import {ICredentials, LoginPage} from '../pages/login.page';
-import {userCredentials} from '../config/user-credentials';
 import {IndexPage} from '../pages/index.page';
 import {AddSpellPage} from '../pages/add-spell.page';
 import {AddFeatPage} from '../pages/add-feat.page';
+import {LoginHelper} from '../helpers/login-helper';
 
 describe('owner panel', () => {
   let indexPage: IndexPage;
@@ -17,8 +17,7 @@ describe('owner panel', () => {
   let addMonsterPage: AddMonsterPage;
   let addSpellPage: AddSpellPage;
   let addFeatPage: AddFeatPage;
-
-  let user: ICredentials;
+  let loginHelper: LoginHelper;
 
   let monsterName: string;
   let spellName: string;
@@ -38,28 +37,20 @@ describe('owner panel', () => {
     addMonsterPage = new AddMonsterPage();
     addSpellPage = new AddSpellPage();
     addFeatPage = new AddFeatPage();
-
-    user = userCredentials;
+    loginHelper = new LoginHelper(framePage, loginPage);
   });
 
   beforeEach(async () => {
     await indexPage.navigateTo();
 
-    const isLoggedIn = await framePage.isLoggedIn();
-    if (!isLoggedIn) {
-      await framePage.clickLoginButton();
-      await loginPage.login(user);
-    }
+    await loginHelper.login();
 
     await framePage.navigateToOwnerPanel();
     await ownerPanelPage.assertIsOnThePage();
   });
 
   afterAll(async () => {
-    const isLoggedIn = await framePage.isLoggedIn();
-    if (isLoggedIn) {
-      await framePage.logout();
-    }
+    await loginHelper.logout();
   });
 
   it('should show newly added monster in owner panel and delete it', async () => {

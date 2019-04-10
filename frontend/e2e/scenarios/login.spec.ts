@@ -4,21 +4,19 @@ import {FramePage} from '../pages/frame.page';
 import {IndexPage} from '../pages/index.page';
 import {ICredentials, LoginPage} from '../pages/login.page';
 
-import {userCredentials} from '../config/user-credentials';
+import {LoginHelper} from '../helpers/login-helper';
 
 describe('login', () => {
   let framePage: FramePage;
   let indexPage: IndexPage;
   let loginPage: LoginPage;
-
-  let user: ICredentials;
+  let loginHelper: LoginHelper;
 
   beforeEach(() => {
     framePage = new FramePage();
     indexPage = new IndexPage();
     loginPage = new LoginPage();
-
-    user = userCredentials;
+    loginHelper = new LoginHelper(framePage, loginPage);
   });
 
   beforeEach(async () => {
@@ -26,10 +24,7 @@ describe('login', () => {
   });
 
   afterAll(async () => {
-    const isLoggedIn = await framePage.isLoggedIn();
-    if (isLoggedIn) {
-      await framePage.logout();
-    }
+    loginHelper.logout();
   });
 
   it('should be not logged in', async () => {
@@ -52,8 +47,7 @@ describe('login', () => {
   });
 
   it('should log in', async () => {
-    await framePage.clickLoginButton();
-    await loginPage.login(user);
+    await loginHelper.login();
 
     const [
       isLoggedIn,

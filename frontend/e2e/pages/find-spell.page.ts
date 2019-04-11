@@ -65,6 +65,16 @@ export class FindSpellPage {
     await browser.get(this.pageUrl);
   }
 
+  async navigateToShowPage(name: string): Promise<void> {
+    await this.setSearchCriteria({name});
+
+    const spells = await this.getResults();
+    expect(spells.length).toBeGreaterThan(0);
+    expect(spells[0].name).toEqual(name);
+
+    await spells[0].click();
+  }
+
   async clearSearchCriteria() {
     await this.form.nameInput.clear();
     await this.form.type.options.any.click();

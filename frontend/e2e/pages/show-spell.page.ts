@@ -4,9 +4,15 @@ import {frameElements} from './elements/spell/frame.elements';
 import {descriptionElements} from './elements/spell/description.elements';
 import {detailsElements} from './elements/spell/details.elements';
 import {ILevel} from '../interfaces/spell/ILevel';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export class ShowSpellPage {
   private pagePrefixUrl = '/spells/show';
+
+  private favouriteElements = new FavouriteElements();
 
   async getSpellInfo(): Promise<ISpellInfo> {
     await this.assertShowSpellPage();
@@ -33,6 +39,10 @@ export class ShowSpellPage {
       levels,
       description,
     };
+  }
+
+  async getFavouritesInfo(): Promise<IFavouritesInfo> {
+    return this.favouriteElements.getFavouriteItems(frameElements.base);
   }
 
   private async getName(): Promise<string> {

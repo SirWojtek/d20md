@@ -5,9 +5,15 @@ import {normalElements} from './elements/feat/normal.elements';
 import {specialElements} from './elements/feat/special.elements';
 import {benefitElements} from './elements/feat/benefit.elements';
 import {otherElements} from './elements/feat/other.elements';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export class ShowFeatPage {
   private pagePrefixUrl = '/feats/show';
+
+  private favouriteElements = new FavouriteElements();
 
   async getFeatInfo(): Promise<IFeatInfo> {
     await this.assertShowFeatPage();
@@ -36,6 +42,10 @@ export class ShowFeatPage {
       normal,
       special,
     };
+  }
+
+  async getFavouritesInfo(): Promise<IFavouritesInfo> {
+    return this.favouriteElements.getFavouriteItems(frameElements.base);
   }
 
   private async getIfPresent(

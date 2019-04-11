@@ -40,6 +40,16 @@ export class FindFeatPage {
     await browser.get(this.pageUrl);
   }
 
+  async navigateToShowPage(name: string): Promise<void> {
+    await this.setSearchCriteria({phrase: name});
+
+    const feats = await this.getResults();
+    expect(feats.length).toBeGreaterThan(0);
+    expect(feats[0].name).toEqual(name);
+
+    await feats[0].click();
+  }
+
   async clearSearchCriteria() {
     await this.form.phraseInput.clear();
     await this.form.type.options.any.click();

@@ -6,8 +6,8 @@ import {ShowMonsterPage} from '../pages/show-monster.page';
 import {IMonsterInfo} from '../interfaces/monster/IMonsterInfo';
 import {FindMonsterPage} from '../pages/find-monster.page';
 import {IFavouritesInfo} from '../pages/elements/favourites/favourites.elements';
-
-const testMonsterName = 'Wolf';
+import {FindSpellPage} from '../pages/find-spell.page';
+import {ShowSpellPage} from '../pages/show-spell.page';
 
 describe('favourites show', () => {
   let framePage: FramePage;
@@ -24,9 +24,13 @@ describe('favourites show', () => {
     let findMonsterPage: FindMonsterPage;
     let showMonsterPage: ShowMonsterPage;
 
+    let testMonsterName;
+
     beforeEach(() => {
       findMonsterPage = new FindMonsterPage();
       showMonsterPage = new ShowMonsterPage();
+
+      testMonsterName = 'Wolf';
     });
 
     beforeEach(async () => {
@@ -86,6 +90,77 @@ describe('favourites show', () => {
         testMonsterName,
       );
       expect(isMonsterInFavourites).toBeFalsy();
+    });
+  });
+
+  fdescribe('spell', () => {
+    let findSpellPage: FindSpellPage;
+    let showSpellPage: ShowSpellPage;
+
+    let testSpellName;
+
+    beforeEach(() => {
+      findSpellPage = new FindSpellPage();
+      showSpellPage = new ShowSpellPage();
+
+      testSpellName = 'Magic Missile';
+    });
+
+    beforeEach(async () => {
+      await findSpellPage.navigateTo();
+    });
+
+    async function assertFavouriteOnShowPage(
+      added: boolean,
+    ): Promise<IFavouritesInfo> {
+      const favourite = await showSpellPage.getFavouritesInfo();
+      expect(favourite.added).toEqual(added);
+      return favourite;
+    }
+
+    it('should not show favourite marks when not logged in', async () => {
+      await loginHelper.logout();
+      await framePage.navigateToFindSpellPage();
+      await findSpellPage.navigateToShowPage(testSpellName);
+
+      const favourite = await showSpellPage.getFavouritesInfo();
+      expect(favourite.added).toBeNull();
+    });
+
+    it('should show favourite marks when logged in', async () => {
+      await loginHelper.login();
+      await framePage.navigateToFindSpellPage();
+      await findSpellPage.navigateToShowPage(testSpellName);
+
+      await assertFavouriteOnShowPage(false);
+    });
+
+    it('should add and remove favourite', async () => {
+      await loginHelper.login();
+      await framePage.navigateToFindSpellPage();
+      await findSpellPage.navigateToShowPage(testSpellName);
+
+      let favourite = await assertFavouriteOnShowPage(false);
+      await favourite.click();
+      await assertFavouriteOnShowPage(true);
+
+      await framePage.navigateToFavourites();
+      await favouritesPage.assertIsOnThePage();
+
+      let isSpellInFavourites = await favouritesPage.isSpellPresent(
+        testSpellName,
+      );
+      expect(isSpellInFavourites).toBeTruthy();
+
+      await framePage.navigateToFindSpellPage();
+      await findSpellPage.navigateToShowPage(testSpellName);
+      favourite = await assertFavouriteOnShowPage(true);
+      await favourite.click();
+      favourite = await assertFavouriteOnShowPage(false);
+
+      await framePage.navigateToFavourites();
+      isSpellInFavourites = await favouritesPage.isSpellPresent(testSpellName);
+      expect(isSpellInFavourites).toBeFalsy();
     });
   });
 });

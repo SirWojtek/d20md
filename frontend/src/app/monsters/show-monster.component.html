@@ -1,7 +1,7 @@
 <div *ngIf="monster" class="show-monster-wrapper" align="center">
   <h2 class="name-panel-item">{{ monster.name }}</h2>
 
-  <div *ngIf="canModify || isLoggedIn" class="buttons-panel-item">
+  <div class="buttons-panel-item">
     <d20md-favourites-mark
       *ngIf="monster.isInFavourites != null"
       [isFavourite]="monster.isInFavourites"
@@ -9,9 +9,14 @@
       (onClick)="onFavouritesClick()"
     ></d20md-favourites-mark>
 
-      <button id="delete-monster" class="btn btn-danger" (click)="onDeleteMonster()">
-        <d20md-icon iconName="fa-trash"></d20md-icon>
-      </button>
+    <button
+      *ngIf="canModify"
+      id="delete-monster"
+      class="btn btn-danger"
+      (click)="onDeleteMonster()"
+    >
+      <d20md-icon iconName="fa-trash"></d20md-icon>
+    </button>
   </div>
 
   <div class="general-panel-item">

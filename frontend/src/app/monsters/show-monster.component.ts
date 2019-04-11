@@ -18,7 +18,6 @@ import {EntityType} from '../shared/model/entity';
 export class ShowMonsterComponent implements OnInit, OnDestroy {
   monster: Monster;
   canModify: boolean;
-  isLoggedIn: boolean;
 
   private routeSub: Subscription;
 

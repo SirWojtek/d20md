@@ -5,9 +5,15 @@ import {
   ElementArrayFinder,
   ElementFinder,
 } from 'protractor';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export class FavouritesPage {
   private pageUrl = '/dashboard/favourites';
+
+  private favouriteElements = new FavouriteElements();
 
   private tabs = {
     monsters: element(by.css('ul li #favourite-monsters')),
@@ -28,6 +34,7 @@ export class FavouritesPage {
   };
 
   private nameSelector = 'td:nth-child(1)';
+  private buttonSelector = 'td:last-child button';
 
   async assertIsOnThePage() {
     const currentUrl = await browser.getCurrentUrl();
@@ -56,6 +63,31 @@ export class FavouritesPage {
     await this.nameSearch.feats.sendKeys(name);
     const names = await this.getNames(this.favouriteTables.feats);
     return names.includes(name);
+  }
+
+  async removeMonsterFromFavourites(name: string): Promise<void> {
+    await this.tabs.monsters.click();
+    await this.nameSearch.monsters.clear();
+    await this.nameSearch.monsters.sendKeys(name);
+
+    const row = await this.favouriteTables.monsters.first();
+    await row.$(this.buttonSelector).click();
+  }
+
+  async removeSpellFromFavourites(name: string): Promise<void> {
+    await this.tabs.spells.click();
+    await this.nameSearch.spells.clear();
+    await this.nameSearch.spells.sendKeys(name);
+
+    await this.favouriteTables.spells.first().click();
+  }
+
+  async removeFeatFromFavourites(name: string): Promise<void> {
+    await this.tabs.feats.click();
+    await this.nameSearch.feats.clear();
+    await this.nameSearch.feats.sendKeys(name);
+
+    await this.favouriteTables.feats.first().click();
   }
 
   private async getNames(table: ElementArrayFinder): Promise<string[]> {

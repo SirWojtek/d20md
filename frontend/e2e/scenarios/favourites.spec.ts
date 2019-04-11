@@ -6,6 +6,7 @@ import {FavouritesPage} from '../pages/favourites.page';
 import {IMonsterInfo} from '../interfaces/monster/IMonsterInfo';
 import {IFindMonsterParams} from '../../src/app/monsters/find/find-monster.service';
 import {FindSpellPage, IFoundSpell} from '../pages/find-spell.page';
+import {FindFeatPage, IFoundFeat} from '../pages/find-feat.page';
 
 describe('favourites', () => {
   let framePage: FramePage;
@@ -108,7 +109,7 @@ describe('favourites', () => {
 
     it('should show favourite marks when logged in', async () => {
       await loginHelper.login();
-      await framePage.navigateToFindMonsterPage();
+      await framePage.navigateToFindSpellPage();
 
       const spells = await findSpellPage.getResults();
 
@@ -125,7 +126,7 @@ describe('favourites', () => {
       return spell;
     }
 
-    fit('should add and remove favourite', async () => {
+    it('should add and remove favourite', async () => {
       await loginHelper.login();
       await framePage.navigateToFindSpellPage();
 
@@ -147,6 +148,70 @@ describe('favourites', () => {
       await framePage.navigateToFavourites();
       isSpellInFavourites = await favouritesPage.isSpellPresent(spell.name);
       expect(isSpellInFavourites).toBeFalsy();
+    });
+  });
+
+  describe('find feat', () => {
+    let findFeatPage: FindFeatPage;
+
+    beforeEach(() => {
+      findFeatPage = new FindFeatPage();
+    });
+
+    beforeEach(async () => {
+      await findFeatPage.navigateTo();
+      await findFeatPage.clearSearchCriteria();
+    });
+
+    it('should not show favourite marks when not logged in', async () => {
+      await loginHelper.logout();
+
+      const feats = await findFeatPage.getResults();
+
+      feats.forEach(m => expect(m.favourite.added).toBeNull());
+    });
+
+    it('should show favourite marks when logged in', async () => {
+      await loginHelper.login();
+      await framePage.navigateToFindFeatPage();
+
+      const feats = await findFeatPage.getResults();
+
+      feats.forEach(m => expect(m.favourite).not.toBeNull());
+    });
+
+    async function assertFavouriteOnFindPage(
+      added: boolean,
+    ): Promise<IFoundFeat> {
+      const feats = await findFeatPage.getResults();
+      expect(feats.length).toBeGreaterThan(0);
+      const feat = feats[0];
+      expect(feat.favourite.added).toEqual(added);
+      return feat;
+    }
+
+    it('should add and remove favourite', async () => {
+      await loginHelper.login();
+      await framePage.navigateToFindFeatPage();
+
+      let feat = await assertFavouriteOnFindPage(false);
+      await feat.favourite.click();
+      await assertFavouriteOnFindPage(true);
+
+      await framePage.navigateToFavourites();
+      await favouritesPage.assertIsOnThePage();
+
+      let isFeatInFavourites = await favouritesPage.isFeatPresent(feat.name);
+      expect(isFeatInFavourites).toBeTruthy();
+
+      await framePage.navigateToFindFeatPage();
+      feat = await assertFavouriteOnFindPage(true);
+      await feat.favourite.click();
+      feat = await assertFavouriteOnFindPage(false);
+
+      await framePage.navigateToFavourites();
+      isFeatInFavourites = await favouritesPage.isFeatPresent(feat.name);
+      expect(isFeatInFavourites).toBeFalsy();
     });
   });
 });

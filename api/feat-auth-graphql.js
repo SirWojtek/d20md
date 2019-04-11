@@ -31,9 +31,9 @@ module.exports = {
             ...findOptions,
             distinct: true,
             order: common.generateOrderList(['name'], []),
-            where: common.buildFindQuery({ ...args, UserId: userId }, {
+            where: common.buildFindQuery(args, {
               like: ['name'],
-              exact: ['feat_type', 'UserId'],
+              exact: ['feat_type'],
             }),
             include: [
               {

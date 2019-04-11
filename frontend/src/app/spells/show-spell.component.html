@@ -1,4 +1,4 @@
-<div *ngIf="spellObs | async as spell" class="panel panel-default" align="center">
+<div *ngIf="spellObs | async as spell" class="panel panel-default" id="show-spell-frame" align="center">
   <div class="panel-heading heading-container">
     <div></div>
 
@@ -6,7 +6,7 @@
       <h2>{{ spell.name }}</h2>
     </div>
 
-    <div *ngIf="canModify" class="button-container">
+    <div class="button-container">
       <d20md-favourites-mark
         *ngIf="spell.isInFavourites != null"
         [isFavourite]="spell.isInFavourites"
@@ -14,7 +14,11 @@
         (onClick)="onFavouritesClick(spell)"
       ></d20md-favourites-mark>
 
-      <button class="btn btn-danger" (click)="onDeleteSpell()">
+      <button
+        *ngIf="canModify"
+        class="btn btn-danger"
+        (click)="onDeleteSpell()"
+      >
         <d20md-icon iconName="fa-trash"></d20md-icon>
      </button>
     </div>

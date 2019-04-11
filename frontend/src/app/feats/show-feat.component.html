@@ -1,4 +1,4 @@
-<div *ngIf="featObs | async as feat" class="panel panel-default" align="center">
+<div *ngIf="featObs | async as feat" class="panel panel-default" id="show-feat-frame" align="center">
 
   <div class="panel-heading heading-container">
     <div></div>
@@ -7,7 +7,7 @@
       <h2>{{ feat.name }}</h2>
     </div>
 
-    <div *ngIf="canModify" class="button-container">
+    <div class="button-container">
       <d20md-favourites-mark
         *ngIf="feat.isInFavourites != null"
         [isFavourite]="feat.isInFavourites"
@@ -15,7 +15,11 @@
         (onClick)="onFavouritesClick(feat)"
       ></d20md-favourites-mark>
 
-      <button class="btn btn-danger" (click)="onDeleteFeat()">
+      <button
+        *ngIf="canModify"
+        class="btn btn-danger"
+        (click)="onDeleteFeat()"
+      >
         <d20md-icon iconName="fa-trash"></d20md-icon>
      </button>
     </div>

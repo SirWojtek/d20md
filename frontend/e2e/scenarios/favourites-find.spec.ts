@@ -8,7 +8,7 @@ import {IFindMonsterParams} from '../../src/app/monsters/find/find-monster.servi
 import {FindSpellPage, IFoundSpell} from '../pages/find-spell.page';
 import {FindFeatPage, IFoundFeat} from '../pages/find-feat.page';
 
-describe('favourites', () => {
+describe('favourites find', () => {
   let framePage: FramePage;
   let favouritesPage: FavouritesPage;
   let loginHelper: LoginHelper;
@@ -19,7 +19,7 @@ describe('favourites', () => {
     loginHelper = new LoginHelper(framePage, new LoginPage());
   });
 
-  describe('find monster', () => {
+  describe('monster', () => {
     let findMonsterPage: FindMonsterPage;
 
     beforeEach(() => {
@@ -33,6 +33,7 @@ describe('favourites', () => {
 
     it('should not show favourite marks when not logged in', async () => {
       await loginHelper.logout();
+      await framePage.navigateToFindMonsterPage();
 
       const monsters = await findMonsterPage.getResults();
 
@@ -87,7 +88,7 @@ describe('favourites', () => {
     });
   });
 
-  describe('find spell', () => {
+  describe('spell', () => {
     let findSpellPage: FindSpellPage;
 
     beforeEach(() => {
@@ -101,6 +102,7 @@ describe('favourites', () => {
 
     it('should not show favourite marks when not logged in', async () => {
       await loginHelper.logout();
+      await framePage.navigateToFindSpellPage();
 
       const spells = await findSpellPage.getResults();
 
@@ -151,7 +153,7 @@ describe('favourites', () => {
     });
   });
 
-  describe('find feat', () => {
+  describe('feat', () => {
     let findFeatPage: FindFeatPage;
 
     beforeEach(() => {
@@ -165,6 +167,7 @@ describe('favourites', () => {
 
     it('should not show favourite marks when not logged in', async () => {
       await loginHelper.logout();
+      await framePage.navigateToFindFeatPage();
 
       const feats = await findFeatPage.getResults();
 

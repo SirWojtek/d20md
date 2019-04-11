@@ -62,6 +62,16 @@ export class FindMonsterPage {
     await browser.get(this.pageUrl);
   }
 
+  async navigateToShowPage(name: string): Promise<void> {
+    await this.setSearchCriteria({name});
+
+    const monsters = await this.getResults();
+    expect(monsters.length).toBeGreaterThan(0);
+    expect(monsters[0].name).toEqual(name);
+
+    await monsters[0].click();
+  }
+
   async setSearchCriteria(criterias: ISearchCriterias) {
     if (criterias.name) {
       await this.form.nameInput.sendKeys(criterias.name);

@@ -79,7 +79,8 @@ export class FavouritesPage {
     await this.nameSearch.spells.clear();
     await this.nameSearch.spells.sendKeys(name);
 
-    await this.favouriteTables.spells.first().click();
+    const row = await this.favouriteTables.spells.first();
+    await row.$(this.buttonSelector).click();
   }
 
   async removeFeatFromFavourites(name: string): Promise<void> {
@@ -87,7 +88,8 @@ export class FavouritesPage {
     await this.nameSearch.feats.clear();
     await this.nameSearch.feats.sendKeys(name);
 
-    await this.favouriteTables.feats.first().click();
+    const row = await this.favouriteTables.feats.first();
+    await row.$(this.buttonSelector).click();
   }
 
   private async getNames(table: ElementArrayFinder): Promise<string[]> {

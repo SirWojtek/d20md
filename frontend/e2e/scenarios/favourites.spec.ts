@@ -5,6 +5,7 @@ import {LoginPage} from '../pages/login.page';
 import {FavouritesPage} from '../pages/favourites.page';
 import {IMonsterInfo} from '../interfaces/monster/IMonsterInfo';
 import {IFindMonsterParams} from '../../src/app/monsters/find/find-monster.service';
+import {FindSpellPage, IFoundSpell} from '../pages/find-spell.page';
 
 describe('favourites', () => {
   let framePage: FramePage;
@@ -82,6 +83,70 @@ describe('favourites', () => {
         monster.name,
       );
       expect(isMonsterInFavourites).toBeFalsy();
+    });
+  });
+
+  describe('find spell', () => {
+    let findSpellPage: FindSpellPage;
+
+    beforeEach(() => {
+      findSpellPage = new FindSpellPage();
+    });
+
+    beforeEach(async () => {
+      await findSpellPage.navigateTo();
+      await findSpellPage.clearSearchCriteria();
+    });
+
+    it('should not show favourite marks when not logged in', async () => {
+      await loginHelper.logout();
+
+      const spells = await findSpellPage.getResults();
+
+      spells.forEach(m => expect(m.favourite.added).toBeNull());
+    });
+
+    it('should show favourite marks when logged in', async () => {
+      await loginHelper.login();
+      await framePage.navigateToFindMonsterPage();
+
+      const spells = await findSpellPage.getResults();
+
+      spells.forEach(m => expect(m.favourite).not.toBeNull());
+    });
+
+    async function assertFavouriteOnFindPage(
+      added: boolean,
+    ): Promise<IFoundSpell> {
+      const spells = await findSpellPage.getResults();
+      expect(spells.length).toBeGreaterThan(0);
+      const spell = spells[0];
+      expect(spell.favourite.added).toEqual(added);
+      return spell;
+    }
+
+    fit('should add and remove favourite', async () => {
+      await loginHelper.login();
+      await framePage.navigateToFindSpellPage();
+
+      let spell = await assertFavouriteOnFindPage(false);
+      await spell.favourite.click();
+      await assertFavouriteOnFindPage(true);
+
+      await framePage.navigateToFavourites();
+      await favouritesPage.assertIsOnThePage();
+
+      let isSpellInFavourites = await favouritesPage.isSpellPresent(spell.name);
+      expect(isSpellInFavourites).toBeTruthy();
+
+      await framePage.navigateToFindSpellPage();
+      spell = await assertFavouriteOnFindPage(true);
+      await spell.favourite.click();
+      spell = await assertFavouriteOnFindPage(false);
+
+      await framePage.navigateToFavourites();
+      isSpellInFavourites = await favouritesPage.isSpellPresent(spell.name);
+      expect(isSpellInFavourites).toBeFalsy();
     });
   });
 });

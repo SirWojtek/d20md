@@ -1,4 +1,8 @@
 import {browser, element, by, ElementFinder, promise} from 'protractor';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export interface ISearchCriterias {
   name?: string;
@@ -13,10 +17,7 @@ export interface IMonster {
   cr: number;
   ac: number;
   click: () => Promise<void>;
-  favourite: {
-    added: boolean;
-    click: () => Promise<void>;
-  };
+  favourite: IFavouritesInfo;
 }
 
 export class FindMonsterPage {
@@ -54,8 +55,8 @@ export class FindMonsterPage {
   private typeSelector = 'd20md-type-element img';
   private crSelector = 'd20md-armor-element span';
   private acSelector = 'd20md-cr-element span';
-  private favouriteSelector = 'd20md-favourites-mark i';
-  private favouriteActiveClass = 'fas';
+
+  private favouriteElements = new FavouriteElements();
 
   async navigateTo() {
     await browser.get(this.pageUrl);
@@ -95,32 +96,9 @@ export class FindMonsterPage {
       cr: el.$(this.crSelector).getText(),
       ac: el.$(this.acSelector).getText(),
       click: el.$(this.nameSelector).click,
-      favourite: this.getFavouriteItems(el),
+      favourite: this.favouriteElements.getFavouriteItems(el),
     }));
 
     return result as IMonster[];
-  }
-
-  private async getFavouriteItems(
-    el: ElementFinder,
-  ): Promise<{
-    added: boolean;
-    click: () => promise.Promise<void>;
-  }> {
-    const favouriteItem = el.$(this.favouriteSelector);
-
-    if (!(await favouriteItem.isPresent())) {
-      return Promise.resolve({
-        added: null,
-        click: () => {
-          throw new Error('Favourite mark not clickable');
-        },
-      });
-    }
-
-    return favouriteItem.getAttribute('class').then(classes => ({
-      added: classes.includes(this.favouriteActiveClass),
-      click: favouriteItem.click,
-    }));
   }
 }

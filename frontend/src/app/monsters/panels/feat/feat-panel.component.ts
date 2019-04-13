@@ -49,7 +49,7 @@ export class FeatPanelComponent {
 
   onFeatChange(newFeats: Feat[]) {
     this.featsObs = this.monstersService
-      .updateMonster({id: this.monsterId, Feats: newFeats.map(toJson)})
+      .updateMonster({id: this.monsterId, Feats: newFeats.map(toJson)}, 'feats')
       .map(monster => monster.Feats);
   }
 }

@@ -7,10 +7,12 @@ const {
   GraphQLList
 } = require('graphql');
 const _ = require('lodash');
+const models = require('../db/models');
+
 const { monsterType } = require('./monster-graphql');
 const { spellType } = require('./spell-graphql');
 const { featType } = require('./feat-graphql');
-const models = require('../db/models');
+const { enumCache } = require('./enum-cache');
 
 const viewLogType = new GraphQLObjectType({
   name: 'ViewLogType',
@@ -22,27 +24,27 @@ const viewLogType = new GraphQLObjectType({
 const monsterLogType = new GraphQLObjectType({
   name: 'MonsterLogType',
   fields: {
-    ...attributeFields(models.Monster),
+    ...attributeFields(models.Monster, { cache: enumCache }),
     MonsterViewLog: { type: viewLogType },
   }
 });
 const spellLogType = new GraphQLObjectType({
   name: 'SpellLogType',
   fields: {
-    ...attributeFields(models.Spell),
+    ...attributeFields(models.Spell, { cache: enumCache }),
     SpellViewLog: { type: viewLogType },
   }
 });
 const featLogType = new GraphQLObjectType({
   name: 'FeatLogType',
   fields: {
-    ...attributeFields(models.Feat),
+    ...attributeFields(models.Feat, { cache: enumCache }),
     FeatViewLog: { type: viewLogType },
   }
 });
 
-const userType = new GraphQLObjectType({
-  name: 'User',
+const userHistoryType = new GraphQLObjectType({
+  name: 'UserHistory',
   fields: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     MonsterViewLogs: {
@@ -61,10 +63,10 @@ const userType = new GraphQLObjectType({
 });
 
 module.exports = {
-  userType,
+  userHistoryType,
   userQueries: {
     userHistory: {
-      type: userType,
+      type: userHistoryType,
       resolve: resolver(models.User, {
         before: (findOptions, args, context) => {
           const userId = _.get(context, 'user.id');
@@ -115,7 +117,7 @@ module.exports = {
           return user;
         }
       }),
-    }
+    },
   },
 };
 

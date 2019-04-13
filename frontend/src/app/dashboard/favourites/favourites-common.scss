@@ -1,0 +1,66 @@
+@import '../../../variables';
+
+.quick-search-container {
+  display: flex;
+  justify-content: space-between;
+
+  .name-search {
+    flex-grow: 1;
+    max-width: 500px;
+  }
+
+  .type-search {
+    margin-left: 16px;
+    flex-grow: 1;
+    max-width: 300px;
+  }
+
+  @media (max-width: $sm-xs-breakpoint) {
+    flex-direction: column;
+
+    .name-search {
+      max-width: inherit;
+    }
+
+    .type-search {
+      max-width: inherit;
+      margin-left: 0px;
+    }
+  }
+}
+
+table.table {
+  tbody {
+    td {
+      vertical-align: middle;
+      &.name-cell {
+        max-width: 128px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      &.button-column {
+        width: 50px;
+      }
+    }
+  }
+}
+
+div.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+div.no-items-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    margin: 32px 0px;
+  }
+}

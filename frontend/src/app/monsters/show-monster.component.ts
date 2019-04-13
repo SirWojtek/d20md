@@ -4,9 +4,12 @@ import {Title} from '@angular/platform-browser';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/concatAll';
+
 import {Monster} from '../shared/model/monster';
 import {UserService} from '../shared/user/user.service';
 import {MonstersService} from './monsters.service';
+import {FavouritesService} from '../shared/favourites.service';
+import {EntityType} from '../shared/model/entity';
 
 @Component({
   templateUrl: './show-monster.component.html',
@@ -15,7 +18,6 @@ import {MonstersService} from './monsters.service';
 export class ShowMonsterComponent implements OnInit, OnDestroy {
   monster: Monster;
   canModify: boolean;
-  isLoggedIn: boolean;
 
   private routeSub: Subscription;
 
@@ -25,6 +27,7 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
     private titleService: Title,
     private monstersService: MonstersService,
     private userService: UserService,
+    private favouritesService: FavouritesService,
   ) {}
 
   ngOnInit() {
@@ -45,18 +48,39 @@ export class ShowMonsterComponent implements OnInit, OnDestroy {
     this.routeSub.unsubscribe();
   }
 
+  onFavouritesClick() {
+    if (this.monster.isInFavourites) {
+      this.favouritesService
+        .removeFromFavourites(this.monster.id, EntityType.Monster)
+        .subscribe(() => {
+          this.monster.isInFavourites = false;
+          this.monster.favouritesCount -= 1;
+        });
+    } else {
+      this.favouritesService
+        .addToFavourites(this.monster.id, EntityType.Monster)
+        .subscribe(() => {
+          this.monster.isInFavourites = true;
+          this.monster.favouritesCount += 1;
+        });
+    }
+  }
+
   onDescriptionSave() {
     this.monstersService
-      .updateMonster({
-        id: this.monster.id,
-        description: this.monster.description,
-      })
+      .updateMonster(
+        {
+          id: this.monster.id,
+          description: this.monster.description,
+        },
+        'description',
+      )
       .subscribe(updated => (this.monster.description = updated.description));
   }
 
   onFeatsSave() {
     this.monstersService
-      .updateMonster({id: this.monster.id, Feats: this.monster.Feats})
+      .updateMonster({id: this.monster.id, Feats: this.monster.Feats}, 'feats')
       .subscribe(updated => (this.monster.Feats = updated.Feats));
   }
 

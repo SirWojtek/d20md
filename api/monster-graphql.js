@@ -4,19 +4,22 @@ const {
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean,
 } = require('graphql');
+const _ = require('lodash');
 const models = require('../db/models');
 const common = require('../backend/common');
 const { simpleUserType } = require('./simple-user-graphql');
 const { featType } = require('./feat-graphql');
 const { spellType } = require('./spell-graphql');
 const monsterTypes = require('./monster-types-graphql');
+const { enumCache } = require('./enum-cache');
 
 const monsterType = new GraphQLObjectType({
   name: 'Monster',
   fields: {
-    ...attributeFields(models.Monster),
+    ...attributeFields(models.Monster, { cache: enumCache }),
     Image: {
       type: monsterTypes.imageType,
       resolve: resolver(models.Monster.associations.Image),
@@ -81,10 +84,30 @@ const monsterType = new GraphQLObjectType({
       type: simpleUserType,
       resolve: resolver(models.Monster.associations.User),
     },
+    isInFavourites: {
+      type: GraphQLBoolean,
+      resolve: (obj, args, context) => {
+        const userId = _.get(context, 'user.id');
+        if (!userId) {
+          return null;
+        }
+
+        return models.Monster.associations.MonsterFavourites.throughModel.findOne({
+          where: { MonsterId: obj.id, UserId: userId }
+        }).then(f => f ? true : false);
+      }
+    },
+    favouritesCount: {
+      type: GraphQLInt,
+      resolve: (obj, args, context) =>
+        models.Monster.associations.MonsterFavourites.throughModel.count({
+            where: { MonsterId: obj.id }
+        }),
+    },
   }
 });
 
-const monsterWithCount = new GraphQLObjectType({
+const monstersWithCount = new GraphQLObjectType({
   name: 'MonsterWithCount',
   fields: {
     monsters: { type: new GraphQLList(monsterType) },
@@ -94,6 +117,7 @@ const monsterWithCount = new GraphQLObjectType({
 
 module.exports = {
   monsterType,
+  monstersWithCount,
   monsterQueries: {
     monster: {
       type: monsterType,
@@ -104,7 +128,7 @@ module.exports = {
       resolve: resolver(models.Monster, {
         after: (model, args) => {
           if (!model) {
-            return;
+            return model;
           }
           // NOTE: done async
           common.addToMonsterLog(model, args.userId);
@@ -113,7 +137,7 @@ module.exports = {
       }),
     },
     monsters: {
-      type: monsterWithCount,
+      type: monstersWithCount,
       args: {
         name: { type: GraphQLString, },
         size: { type: GraphQLString, },

@@ -5,12 +5,14 @@ const {
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean,
 } = require('graphql');
 const models = require('../db/models');
 const common = require('../backend/common');
 const { simpleUserType } = require('./simple-user-graphql');
 const { simpleMonster } = require('./simple-monster-graphql');
+const { enumCache } = require('./enum-cache');
 
 const levelFields = [ 'class_name', 'level' ];
 
@@ -22,7 +24,7 @@ const spellLevelType = new GraphQLObjectType({
 const spellType = new GraphQLObjectType({
   name: 'Spell',
   fields: {
-    ...attributeFields(models.Spell),
+    ...attributeFields(models.Spell, { cache: enumCache }),
     SpellLevels: {
       type: new GraphQLList(spellLevelType),
       resolve: resolver(models.Spell.associations.SpellLevels)
@@ -34,11 +36,31 @@ const spellType = new GraphQLObjectType({
     User: {
       type: simpleUserType,
       resolve: resolver(models.Spell.associations.User)
-    }
+    },
+    isInFavourites: {
+      type: GraphQLBoolean,
+      resolve: (obj, args, context) => {
+        const userId = _.get(context, 'user.id');
+        if (!userId) {
+          return null;
+        }
+
+        return models.Spell.associations.SpellFavourites.throughModel.findOne({
+          where: { SpellId: obj.id, UserId: userId }
+        }).then(f => f ? true : false);
+      }
+    },
+    favouritesCount: {
+      type: GraphQLInt,
+      resolve: (obj, args, context) =>
+        models.Spell.associations.SpellFavourites.throughModel.count({
+            where: { SpellId: obj.id }
+        }),
+    },
   }
 });
 
-const spellWithCount = new GraphQLObjectType({
+const spellsWithCount = new GraphQLObjectType({
   name: 'SpellWithCount',
   fields: {
     spells: { type: new GraphQLList(spellType) },
@@ -48,6 +70,7 @@ const spellWithCount = new GraphQLObjectType({
 
 module.exports = {
   spellType,
+  spellsWithCount,
   spellQueries: {
     spell: {
       type: spellType,
@@ -57,6 +80,9 @@ module.exports = {
       },
       resolve: resolver(models.Spell, {
         after: (model, args) => {
+          if (!model) {
+            return model;
+          }
           // NOTE: done async
           common.addToSpellLog(model, args.userId);
           return common.reportView(model);
@@ -64,7 +90,7 @@ module.exports = {
       })
     },
     spells: {
-      type: spellWithCount,
+      type: spellsWithCount,
       args: {
         name: { type: GraphQLString, },
         spell_type: { type: GraphQLString, },

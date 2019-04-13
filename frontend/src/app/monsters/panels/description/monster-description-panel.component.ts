@@ -2,7 +2,6 @@ import {Component, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute} from '@angular/router';
 
-
 import {MonstersService} from '../../monsters.service';
 import {UserService} from '../../../shared/user/user.service';
 
@@ -57,7 +56,7 @@ export class MonsterDescriptionPanelComponent implements OnDestroy {
   onDescriptionChange(description: string) {
     this.subscription.add(
       this.monstersService
-        .updateMonster({id: this.monsterId, description})
+        .updateMonster({id: this.monsterId, description}, 'description')
         .map(monster => monster.description)
         .subscribe(desc => (this.description = desc)),
     );

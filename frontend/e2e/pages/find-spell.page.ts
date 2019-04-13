@@ -1,4 +1,8 @@
 import {browser, element, by, ElementFinder} from 'protractor';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export interface ISearchCriterias {
   name?: string;
@@ -18,6 +22,7 @@ export interface IFoundSpell {
   range: string;
   classes: IFoundSpellClass[];
   click: () => Promise<void>;
+  favourite: IFavouritesInfo;
 }
 
 export class FindSpellPage {
@@ -54,8 +59,20 @@ export class FindSpellPage {
     levelSelector: 'span.level',
   };
 
+  private favouriteElements = new FavouriteElements();
+
   async navigateTo() {
     await browser.get(this.pageUrl);
+  }
+
+  async navigateToShowPage(name: string): Promise<void> {
+    await this.setSearchCriteria({name});
+
+    const spells = await this.getResults();
+    expect(spells.length).toBeGreaterThan(0);
+    expect(spells[0].name).toEqual(name);
+
+    await spells[0].click();
   }
 
   async clearSearchCriteria() {
@@ -95,6 +112,7 @@ export class FindSpellPage {
       range: el.$(this.rangeSelector).getAttribute('title'),
       class: this.getClass(el),
       click: el.click,
+      favourite: this.favouriteElements.getFavouriteItems(el),
     }));
 
     return result as IFoundSpell[];

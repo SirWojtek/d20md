@@ -50,7 +50,7 @@ export class ArmorPanelComponent {
 
   onArmorChange(newVal: Armor) {
     this.armorObs = this.monstersService
-      .updateMonster({id: this.monsterId, Armor: toJson(newVal)})
+      .updateMonster({id: this.monsterId, Armor: toJson(newVal)}, 'defences')
       .map(monster => monster.Armor);
   }
 }

@@ -113,7 +113,10 @@ export class SpecialPanelComponent {
 
   private specialsChanged() {
     this.monstersService
-      .updateMonster({id: this.monsterId, Specials: this.specials.map(toJson)})
+      .updateMonster(
+        {id: this.monsterId, Specials: this.specials.map(toJson)},
+        'special',
+      )
       .subscribe(updated => (this.specials = updated.Specials));
   }
 }

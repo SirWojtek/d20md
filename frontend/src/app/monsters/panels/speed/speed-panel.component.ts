@@ -48,7 +48,7 @@ export class SpeedPanelComponent {
 
   onSpeedChange(newVal: Speed) {
     this.speedObs = this.monstersService
-      .updateMonster({id: this.monsterId, Speed: toJson(newVal)})
+      .updateMonster({id: this.monsterId, Speed: toJson(newVal)}, 'movement')
       .map(monster => monster.Speed);
   }
 }

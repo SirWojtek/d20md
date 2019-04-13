@@ -39,7 +39,7 @@ export class GeneralPanelComponent implements OnInit {
 
   onChange(monster: Monster) {
     this.monstersService
-      .updateMonster(toJson(monster))
+      .updateMonster(toJson(monster), 'basic')
       .subscribe(updated => (this.monster = updated));
   }
 }

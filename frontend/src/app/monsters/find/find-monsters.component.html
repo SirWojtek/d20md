@@ -24,7 +24,7 @@
     <div @slideInOutRight>
       <d20md-find-miniature *ngFor="let monster of results" [monster]="monster"></d20md-find-miniature>
     </div>
-    <div *ngIf="results.length">
+    <div *ngIf="results.length" class="pagination-container">
       <pagination [totalItems]="page.total" [(ngModel)]="page.current" (ngModelChange)="onQueryChange()"
         [itemsPerPage]="page.size" [maxSize]="10" class="pagination-sm" [boundaryLinks]="true"
       ></pagination>

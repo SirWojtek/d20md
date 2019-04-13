@@ -62,6 +62,10 @@ module.exports = function(sequelize, DataTypes) {
     User.belongsToMany(models.Monster, { as: 'MonsterViewLogs', through: 'MonsterViewLog' });
     User.belongsToMany(models.Spell, { as: 'SpellViewLogs', through: 'SpellViewLog' });
     User.belongsToMany(models.Feat, { as: 'FeatViewLogs', through: 'FeatViewLog' });
+
+    User.belongsToMany(models.Monster, { as: 'MonsterFavourites', through: 'MonsterFavourite' });
+    User.belongsToMany(models.Spell, { as: 'SpellFavourites', through: 'SpellFavourite' });
+    User.belongsToMany(models.Feat, { as: 'FeatFavourites', through: 'FeatFavourite' });
   };
 
   User.prototype.verifyPassword = function(password) {

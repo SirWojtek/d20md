@@ -16,9 +16,15 @@ import {skillsElements} from './elements/monster/skills.elements';
 import {featElements} from './elements/monster/feat.elements';
 import {specialElements} from './elements/monster/special.elements';
 import {accordionSelectors} from './elements/monster/accordion.selectors';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export class ShowMonsterPage {
   private pagePrefixUrl = '/monsters/show/';
+
+  private favouriteElements = new FavouriteElements();
 
   async getMonsterInfo(): Promise<IMonsterInfo> {
     await this.assertShowMonsterPage();
@@ -61,6 +67,10 @@ export class ShowMonsterPage {
       feats,
       specials,
     };
+  }
+
+  async getFavouritesInfo(): Promise<IFavouritesInfo> {
+    return this.favouriteElements.getFavouriteItems(frameElements.base);
   }
 
   async deleteMonster(): Promise<void> {

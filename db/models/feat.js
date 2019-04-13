@@ -55,6 +55,7 @@ module.exports = function(sequelize, DataTypes) {
     Feat.belongsToMany(Feat, {as: 'Prerequisite', through: 'FeatPrerequisiteInstances'});
     Feat.belongsToMany(models.Monster, {through: 'MonsterFeatInstances'});
     Feat.belongsToMany(models.User, { as: 'FeatViewLogs', through: 'FeatViewLog' });
+    Feat.belongsToMany(models.User, { as: 'FeatFavourites', through: 'FeatFavourite' });
 
     Feat.hasMany(models.FeatTextPrerequisite, {onDelete: 'cascade', hooks: true});
 

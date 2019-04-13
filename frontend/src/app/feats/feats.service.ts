@@ -9,8 +9,8 @@ import {fromJson} from '../shared/model/conversions';
 import {Feat} from '../shared/model/feat';
 import {GraphQLService} from '../shared/graphql.service';
 
-import {getQueryMap} from './feat-queries.graphql';
 import {UserService} from '../shared/user/user.service';
+import {getFeatQuery} from './feat-queries.graphql';
 
 @Injectable()
 export class FeatsService {
@@ -25,12 +25,11 @@ export class FeatsService {
     this.actionUrl = apiEndpoint + '/feat';
   }
 
-  public getFeat(id: number, queryType: string): Observable<Feat> {
-    const query = getQueryMap[queryType] || getQueryMap['basic'];
+  public getFeat(id: number): Observable<Feat> {
     return this.userService.getId().flatMap(userId =>
       this.graphQLService
         .query({
-          query,
+          query: getFeatQuery,
           variables: {id, userId},
         })
         .map(response => fromJson(response.data['feat'], Feat)),
@@ -44,8 +43,8 @@ export class FeatsService {
           headers: jsonHeader,
         })
         // FIXME: remove after move to GraphQL mutations
-        .flatMap(() => this.graphQLService.resetStore(), response => response)
-        .map(res => fromJson(res, Feat))
+        .flatMap(() => this.graphQLService.resetStore())
+        .flatMap(() => this.getFeat(feat.id))
     );
   }
 

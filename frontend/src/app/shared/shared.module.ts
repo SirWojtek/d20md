@@ -8,6 +8,7 @@ import {UserService} from './user/user.service';
 import {EnumService} from './enum.service';
 import {UploadService} from './upload.service';
 import {AuthGuard} from './user/auth-guard';
+import {FavouritesService} from './favourites.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,13 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [GraphQLService, UserService, EnumService, UploadService],
+      providers: [
+        GraphQLService,
+        UserService,
+        FavouritesService,
+        EnumService,
+        UploadService,
+      ],
     };
   }
 }

@@ -108,13 +108,13 @@ export class FindSpellsComponent {
     const offset = (this.page.current - 1) * this.page.size;
     const limit = this.page.size;
     this.findSpellService
-      .findSpells(
-        this.searchFields,
+      .findSpells({
+        fields: this.searchFields,
         offset,
         limit,
-        this.sortMap.asc,
-        this.sortMap.desc,
-      )
+        asc: this.sortMap.asc || [],
+        desc: this.sortMap.desc || [],
+      })
       .subscribe(result => {
         this.spells = result.filtered;
         this.page.total = result.total;

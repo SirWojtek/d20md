@@ -1,10 +1,19 @@
 <div class="panel panel-default panel-miniature" routerLink="/feats/show/{{ feat.id }}">
   <div class="panel-heading">
     <div class="flex-container">
+      <img src="assets/img/{{ feat.feat_type }}.svg" title="{{ feat.feat_type }}" height="64">
       <h3 class="panel-title">
         <div [innerHTML]="highlight(feat.name)"></div>
       </h3>
-      <img src="assets/img/{{ feat.feat_type }}.svg" title="{{ feat.feat_type }}" height="64">
+      <div>
+        <d20md-favourites-mark
+          *ngIf="feat.isInFavourites != null"
+          [mini]="true"
+          [isFavourite]="feat.isInFavourites"
+          (onClick)="onFavouritesClick()"
+          (click)="$event.stopPropagation()"
+        ></d20md-favourites-mark>
+      </div>
     </div>
   </div>
   <div class="panel-body">

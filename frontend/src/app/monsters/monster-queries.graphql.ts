@@ -28,6 +28,8 @@ export const getQueryMap = {
         hp
         initiative
         type
+        isInFavourites
+        favouritesCount
         Save {
           fortitude
           will
@@ -208,6 +210,7 @@ export const findMonstersQuery = gql`
         armor_sum
         attack_max
         hp
+        isInFavourites
         HitDices {
           hd_type
           hd_amount

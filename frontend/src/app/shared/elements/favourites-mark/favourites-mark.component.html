@@ -1,0 +1,48 @@
+<div *ngIf="!mini else miniVersion">
+  <div *ngIf="isFavourite else addToFavourites" class="mark-container">
+    <button
+      id="remove-from-favourites"
+      title="Remove from Favourites"
+      class="btn btn-info"
+      (click)="onClick.emit()"
+    >
+      <i class="fas fa-star" aria-hidden="true"></i>
+    </button>
+    <span *ngIf="favouritesCount != null" @slideInOutTop title="Total Likes" class="badge">{{ favouritesCount }}</span>
+  </div>
+
+  <ng-template #addToFavourites>
+    <div class="mark-container">
+      <button
+        id="add-to-favourites"
+        title="Add to Favourites"
+        class="btn btn-info"
+        (click)="onClick.emit()"
+      >
+        <i class="far fa-star" aria-hidden="true"></i>
+      </button>
+      <span *ngIf="favouritesCount != null" @slideInOutBottom title="Total Likes" class="badge">{{ favouritesCount }}</span>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #miniVersion>
+  <i
+    *ngIf="isFavourite else addToFavourites"
+    id="remove-from-favourites"
+    class="fas fa-star"
+    aria-hidden="true"
+    title="Remove from Favourites"
+    (click)="onClick.emit()"
+  ></i>
+
+  <ng-template #addToFavourites>
+    <i
+      id="add-to-favourites"
+      class="far fa-star"
+      aria-hidden="true"
+      title="Add to Favourites"
+      (click)="onClick.emit()"
+    ></i>
+  </ng-template>
+</ng-template>

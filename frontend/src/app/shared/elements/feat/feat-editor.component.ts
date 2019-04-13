@@ -68,7 +68,7 @@ export class FeatEditorComponent {
 
   private search() {
     this.findFeatService
-      .findFeats(this.searchFields, 0, 10)
+      .findFeats({fields: this.searchFields, offset: 0, limit: 10})
       .subscribe(res => (this.foundFeats = res.filtered));
   }
 }

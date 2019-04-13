@@ -2,12 +2,12 @@ import {v4 as uuid} from 'uuid';
 
 import {IndexPage} from '../pages/index.page';
 import {FramePage} from '../pages/frame.page';
-import {LoginPage, ICredentials} from '../pages/login.page';
+import {LoginPage} from '../pages/login.page';
 import {AddMonsterPage} from '../pages/add-monster.page';
-import {userCredentials} from '../config/user-credentials';
 import {ShowMonsterPage} from '../pages/show-monster.page';
 import {defaultMonster} from '../test-data/default-monster';
 import {IMonsterInfo} from '../interfaces/monster/IMonsterInfo';
+import {LoginHelper} from '../helpers/login-helper';
 
 describe('add monster', () => {
   let indexPage: IndexPage;
@@ -15,8 +15,7 @@ describe('add monster', () => {
   let loginPage: LoginPage;
   let addMonsterPage: AddMonsterPage;
   let showMonsterPage: ShowMonsterPage;
-
-  let user: ICredentials;
+  let loginHelper: LoginHelper;
 
   let monsterName: string;
 
@@ -30,25 +29,16 @@ describe('add monster', () => {
     loginPage = new LoginPage();
     addMonsterPage = new AddMonsterPage();
     showMonsterPage = new ShowMonsterPage();
-
-    user = userCredentials;
+    loginHelper = new LoginHelper(framePage, loginPage);
   });
 
   beforeEach(async () => {
     await indexPage.navigateTo();
-
-    const isLoggedIn = await framePage.isLoggedIn();
-    if (!isLoggedIn) {
-      await framePage.clickLoginButton();
-      await loginPage.login(user);
-    }
+    await loginHelper.login();
   });
 
   afterAll(async () => {
-    const isLoggedIn = await framePage.isLoggedIn();
-    if (isLoggedIn) {
-      await framePage.logout();
-    }
+    await loginHelper.logout();
   });
 
   it('should create monster', async () => {

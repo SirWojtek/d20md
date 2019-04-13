@@ -1,6 +1,27 @@
-<div *ngIf="spellObs | async as spell" class="panel panel-default" align="center">
-  <div class="panel-heading">
-    <h2>{{ spell.name }}</h2>
+<div *ngIf="spellObs | async as spell" class="panel panel-default" id="show-spell-frame" align="center">
+  <div class="panel-heading heading-container">
+    <div></div>
+
+    <div>
+      <h2>{{ spell.name }}</h2>
+    </div>
+
+    <div class="button-container">
+      <d20md-favourites-mark
+        *ngIf="spell.isInFavourites != null"
+        [isFavourite]="spell.isInFavourites"
+        [favouritesCount]="spell.favouritesCount"
+        (onClick)="onFavouritesClick(spell)"
+      ></d20md-favourites-mark>
+
+      <button
+        *ngIf="canModify"
+        class="btn btn-danger"
+        (click)="onDeleteSpell()"
+      >
+        <d20md-icon iconName="fa-trash"></d20md-icon>
+     </button>
+    </div>
   </div>
 
   <div class="panel-body tab-container">
@@ -11,15 +32,15 @@
           [spellResistable]="spell.permits_sr"
           [save]="spell.save_type"
           [canModify]="canModify"
-          (spellResistableChange)="onSpellResistableChange($event)"
-          (saveChange)="onSaveChange($event)"
+          (spellResistableChange)="onSpellResistableChange(spell.id, $event)"
+          (saveChange)="onSaveChange(spell.id, $event)"
         ></d20md-saves-panel>
       </div>
       <div class="col-md-4">
         <d20md-levels-panel #levelsPannel
           [spellLevels]="spell.SpellLevels"
           [canModify]="canModify"
-          (spellLevelsChange)="onSpellLevelsChange($event)"
+          (spellLevelsChange)="onSpellLevelsChange(spell.id, $event)"
         ></d20md-levels-panel>
       </div>
       <div class="col-md-4">
@@ -27,8 +48,8 @@
           [spellType]="spell.spell_type"
           [spellRange]="spell.spell_range"
           [canModify]="canModify"
-          (spellTypeChange)="onSpellTypeChange($event)"
-          (spellRangeChange)="onSpellRangeChange($event)"
+          (spellTypeChange)="onSpellTypeChange(spell.id, $event)"
+          (spellRangeChange)="onSpellRangeChange(spell.id, $event)"
         ></d20md-details-panel>
       </div>
     </div>
@@ -37,7 +58,7 @@
       <div class="col-md-12">
         <d20md-description-panel
           [description]="spell.description"
-          (descriptionChange)="onDescriptionChange($event)"
+          (descriptionChange)="onDescriptionChange(spell.id, $event)"
           [canModify]="canModify"
         ></d20md-description-panel>
       </div>
@@ -51,11 +72,6 @@
 
   </div>
 
-  <div *ngIf="canModify" class="panel-footer">
-    <button class="btn btn-default" (click)="onDeleteSpell()">
-      <d20md-icon [iconName]="'fa-trash'" [text]="'Delete'"></d20md-icon>
-   </button>
-  </div>
 
 </div>
 

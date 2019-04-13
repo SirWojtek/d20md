@@ -125,6 +125,7 @@ module.exports = function(sequelize, DataTypes) {
   Spell.associate = function(models) {
     Spell.belongsToMany(models.Monster, {through: 'MonsterSpellInstances'});
     Spell.belongsToMany(models.User, { as: 'SpellViewLogs', through: 'SpellViewLog' });
+    Spell.belongsToMany(models.User, { as: 'SpellFavourites', through: 'SpellFavourite' });
     Spell.belongsTo(models.User);
 
     Spell.hasMany(models.SpellLevel, {onDelete: 'cascade', hooks: true});

@@ -14,6 +14,9 @@ import {OwnerPanelComponent} from './owner-panel/owner-panel.component';
 import {PaginationModule, BsDropdownModule} from 'ngx-bootstrap';
 import {ConfirmDeleteModalComponent} from './owner-panel/confirm-delete-modal/confirm-delete-modal.component';
 import {EntitiesPanelComponent} from './entities-panel/entities-panel.component';
+import {FavouriteMonstersComponent} from './favourites/monsters/favourite-monsters.component';
+import {FavouriteSpellsComponent} from './favourites/spells/favourite-spells.component';
+import {FavouriteFeatsComponent} from './favourites/feats/favourite-feats.component';
 
 const dashboardRoutes: Routes = [
   {
@@ -29,6 +32,25 @@ const dashboardRoutes: Routes = [
       {
         path: 'favourites',
         component: FavouritesComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'monsters',
+            pathMatch: 'full',
+          },
+          {
+            path: 'monsters',
+            component: FavouriteMonstersComponent,
+          },
+          {
+            path: 'spells',
+            component: FavouriteSpellsComponent,
+          },
+          {
+            path: 'feats',
+            component: FavouriteFeatsComponent,
+          },
+        ],
       },
       {
         path: 'owner-panel',
@@ -75,6 +97,9 @@ const dashboardRoutes: Routes = [
     OwnerPanelComponent,
     ConfirmDeleteModalComponent,
     EntitiesPanelComponent,
+    FavouriteMonstersComponent,
+    FavouriteFeatsComponent,
+    FavouriteSpellsComponent,
   ],
   providers: [DashboardService],
   exports: [DashboardComponent],

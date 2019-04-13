@@ -1,6 +1,7 @@
 import {element, by} from 'protractor';
 
 export const frameElements = {
+  base: element(by.css('.show-monster-wrapper')),
   name: element(by.css('.show-monster-wrapper h2.name-panel-item')),
   deleteButton: element(by.css('button#delete-monster')),
   saves: {

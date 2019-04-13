@@ -1,4 +1,8 @@
 import {browser, element, by} from 'protractor';
+import {
+  FavouriteElements,
+  IFavouritesInfo,
+} from './elements/favourites/favourites.elements';
 
 export interface ISearchCriterias {
   name?: string;
@@ -13,6 +17,7 @@ export interface IMonster {
   cr: number;
   ac: number;
   click: () => Promise<void>;
+  favourite: IFavouritesInfo;
 }
 
 export class FindMonsterPage {
@@ -51,8 +56,20 @@ export class FindMonsterPage {
   private crSelector = 'd20md-armor-element span';
   private acSelector = 'd20md-cr-element span';
 
+  private favouriteElements = new FavouriteElements();
+
   async navigateTo() {
     await browser.get(this.pageUrl);
+  }
+
+  async navigateToShowPage(name: string): Promise<void> {
+    await this.setSearchCriteria({name});
+
+    const monsters = await this.getResults();
+    expect(monsters.length).toBeGreaterThan(0);
+    expect(monsters[0].name).toEqual(name);
+
+    await monsters[0].click();
   }
 
   async setSearchCriteria(criterias: ISearchCriterias) {
@@ -89,6 +106,7 @@ export class FindMonsterPage {
       cr: el.$(this.crSelector).getText(),
       ac: el.$(this.acSelector).getText(),
       click: el.$(this.nameSelector).click,
+      favourite: this.favouriteElements.getFavouriteItems(el),
     }));
 
     return result as IMonster[];

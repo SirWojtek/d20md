@@ -35,6 +35,7 @@ export class FramePage {
     },
     dashbaord: {
       ownerPanel: element(by.css('d20md-navbar #owner-panel')),
+      favourites: element(by.css('d20md-navbar #favourites')),
     },
     settings: {
       changePassword: element(by.css('d20md-navbar #change-password')),
@@ -125,9 +126,29 @@ export class FramePage {
     await this.dropdownElements.add.feat.click();
   }
 
+  async navigateToFindMonsterPage(): Promise<void> {
+    await this.navbarElements.findButton.click();
+    await this.dropdownElements.find.monster.click();
+  }
+
+  async navigateToFindSpellPage(): Promise<void> {
+    await this.navbarElements.findButton.click();
+    await this.dropdownElements.find.spell.click();
+  }
+
+  async navigateToFindFeatPage(): Promise<void> {
+    await this.navbarElements.findButton.click();
+    await this.dropdownElements.find.feat.click();
+  }
+
   async navigateToOwnerPanel(): Promise<void> {
     await this.navbarElements.dashboardButton.click();
     await this.dropdownElements.dashbaord.ownerPanel.click();
+  }
+
+  async navigateToFavourites(): Promise<void> {
+    await this.navbarElements.dashboardButton.click();
+    await this.dropdownElements.dashbaord.favourites.click();
   }
 
   async navigateToChangePasswordPage(): Promise<void> {

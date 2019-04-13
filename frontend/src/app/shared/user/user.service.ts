@@ -89,6 +89,7 @@ export class UserService {
         {email: email, password: password},
         {headers: jsonHeader},
       )
+      .flatMap(() => this.graphQLService.resetStore(), json => json)
       .do((json: any) => {
         localStorage.setItem('id_token', json.token);
         this.currentLogin.next(
@@ -98,9 +99,10 @@ export class UserService {
       });
   }
 
-  logout(): void {
+  logout(): Observable<void> {
     localStorage.removeItem('id_token');
     this.currentLogin.next(new DecodedToken(null));
+    return Observable.fromPromise(this.graphQLService.resetStore());
   }
 
   createAccount(

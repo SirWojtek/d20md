@@ -1,31 +1,31 @@
 import gql from 'graphql-tag';
 
-export const getQueryMap = {
-  basic: gql`
-    query basic($id: Int!, $userId: Int) {
-      feat(id: $id, userId: $userId) {
+export const getFeatQuery = gql`
+  query basic($id: Int!, $userId: Int) {
+    feat(id: $id, userId: $userId) {
+      id
+      name
+      feat_type
+      benefit
+      normal
+      special
+      isInFavourites
+      favouritesCount
+      Prerequisite {
         id
         name
-        feat_type
         benefit
-        normal
-        special
-        Prerequisite {
-          id
-          name
-          benefit
-        }
-        Monsters {
-          id
-          name
-        }
-        User {
-          id
-        }
+      }
+      Monsters {
+        id
+        name
+      }
+      User {
+        id
       }
     }
-  `,
-};
+  }
+`;
 
 export const findFeatsQuery = gql`
   query findFeats(
@@ -50,6 +50,7 @@ export const findFeatsQuery = gql`
         benefit
         special
         normal
+        isInFavourites
       }
     }
   }

@@ -19,7 +19,7 @@ const publisher = awspublish.create({
 const cfSettings = {
   distribution: 'E1Q7ID7FD5U27D',
   wait: true,
-  originPath: '/',
+  originPath: '/*',
   indexRootPath: true,
   credentials: new aws.SharedIniFileCredentials({ profile: "d20md" })
 }

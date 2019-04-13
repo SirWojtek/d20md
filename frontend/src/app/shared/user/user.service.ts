@@ -99,9 +99,10 @@ export class UserService {
       });
   }
 
-  logout(): void {
+  logout(): Observable<void> {
     localStorage.removeItem('id_token');
     this.currentLogin.next(new DecodedToken(null));
+    return Observable.fromPromise(this.graphQLService.resetStore());
   }
 
   createAccount(

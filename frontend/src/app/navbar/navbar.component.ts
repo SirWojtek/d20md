@@ -128,7 +128,6 @@ export class NavbarComponent {
 
   onLogout(dropdown) {
     dropdown.hide();
-    this.userService.logout();
-    this.router.navigate(['/']);
+    this.userService.logout().subscribe(() => this.router.navigate(['/']));
   }
 }

@@ -21,10 +21,7 @@ describe('login', () => {
 
   beforeEach(async () => {
     await indexPage.navigateTo();
-  });
-
-  afterAll(async () => {
-    loginHelper.logout();
+    await loginHelper.logout();
   });
 
   it('should be not logged in', async () => {

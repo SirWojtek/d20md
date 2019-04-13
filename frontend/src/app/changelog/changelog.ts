@@ -6,6 +6,14 @@ export interface IChange {
 
 export const changelog: IChange[] = [
   {
+    title: 'Favourites',
+    date: new Date('2019-04-13'),
+    content: `
+    You can mark monsters, spells and feats to be able to access them
+    quickly later from your dashboard (available for logged in users).
+    `,
+  },
+  {
     title: 'Updated links after moving to Github',
     date: new Date('2019-03-18'),
     content: `

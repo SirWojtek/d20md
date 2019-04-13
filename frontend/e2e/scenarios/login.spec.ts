@@ -2,7 +2,7 @@ import {promise} from 'protractor';
 
 import {FramePage} from '../pages/frame.page';
 import {IndexPage} from '../pages/index.page';
-import {ICredentials, LoginPage} from '../pages/login.page';
+import {LoginPage} from '../pages/login.page';
 
 import {LoginHelper} from '../helpers/login-helper';
 

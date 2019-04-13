@@ -6,7 +6,6 @@ import {Feat} from '../../shared/model/feat';
 import {GraphQLService} from '../../shared/graphql.service';
 
 import {findFeatsQuery} from '../feat-queries.graphql';
-import {UserService} from '../../shared/user/user.service';
 
 interface ISearchFields {
   name?: string;

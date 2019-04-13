@@ -3,7 +3,7 @@ import {v4 as uuid} from 'uuid';
 import {AddMonsterPage} from '../pages/add-monster.page';
 import {OwnerPanelPage} from '../pages/owner-panel.page';
 import {FramePage} from '../pages/frame.page';
-import {ICredentials, LoginPage} from '../pages/login.page';
+import {LoginPage} from '../pages/login.page';
 import {IndexPage} from '../pages/index.page';
 import {AddSpellPage} from '../pages/add-spell.page';
 import {AddFeatPage} from '../pages/add-feat.page';

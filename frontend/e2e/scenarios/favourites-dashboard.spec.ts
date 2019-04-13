@@ -2,7 +2,7 @@ import {LoginHelper} from '../helpers/login-helper';
 import {LoginPage} from '../pages/login.page';
 import {FavouritesPage} from '../pages/favourites.page';
 import {FramePage} from '../pages/frame.page';
-import {FindMonsterPage, IMonster} from '../pages/find-monster.page';
+import {FindMonsterPage} from '../pages/find-monster.page';
 import {FindSpellPage} from '../pages/find-spell.page';
 import {FindFeatPage} from '../pages/find-feat.page';
 

@@ -7,7 +7,6 @@ import {fromJson} from '../../shared/model/conversions';
 import {GraphQLService} from '../../shared/graphql.service';
 
 import {findMonstersQuery} from '../monster-queries.graphql';
-import {UserService} from '../../shared/user/user.service';
 
 export interface IFindMonsterParams {
   fields: any;

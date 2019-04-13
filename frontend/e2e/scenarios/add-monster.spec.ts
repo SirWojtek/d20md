@@ -2,7 +2,7 @@ import {v4 as uuid} from 'uuid';
 
 import {IndexPage} from '../pages/index.page';
 import {FramePage} from '../pages/frame.page';
-import {LoginPage, ICredentials} from '../pages/login.page';
+import {LoginPage} from '../pages/login.page';
 import {AddMonsterPage} from '../pages/add-monster.page';
 import {ShowMonsterPage} from '../pages/show-monster.page';
 import {defaultMonster} from '../test-data/default-monster';

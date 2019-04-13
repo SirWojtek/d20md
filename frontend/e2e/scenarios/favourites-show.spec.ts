@@ -3,7 +3,6 @@ import {FavouritesPage} from '../pages/favourites.page';
 import {LoginHelper} from '../helpers/login-helper';
 import {LoginPage} from '../pages/login.page';
 import {ShowMonsterPage} from '../pages/show-monster.page';
-import {IMonsterInfo} from '../interfaces/monster/IMonsterInfo';
 import {FindMonsterPage} from '../pages/find-monster.page';
 import {IFavouritesInfo} from '../pages/elements/favourites/favourites.elements';
 import {FindSpellPage} from '../pages/find-spell.page';

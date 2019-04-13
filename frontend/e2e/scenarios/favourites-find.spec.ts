@@ -3,8 +3,6 @@ import {FindMonsterPage, IMonster} from '../pages/find-monster.page';
 import {LoginHelper} from '../helpers/login-helper';
 import {LoginPage} from '../pages/login.page';
 import {FavouritesPage} from '../pages/favourites.page';
-import {IMonsterInfo} from '../interfaces/monster/IMonsterInfo';
-import {IFindMonsterParams} from '../../src/app/monsters/find/find-monster.service';
 import {FindSpellPage, IFoundSpell} from '../pages/find-spell.page';
 import {FindFeatPage, IFoundFeat} from '../pages/find-feat.page';
 

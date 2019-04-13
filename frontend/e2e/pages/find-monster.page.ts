@@ -1,4 +1,4 @@
-import {browser, element, by, ElementFinder, promise} from 'protractor';
+import {browser, element, by} from 'protractor';
 import {
   FavouriteElements,
   IFavouritesInfo,

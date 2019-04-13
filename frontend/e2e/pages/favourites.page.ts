@@ -1,19 +1,7 @@
-import {
-  browser,
-  element,
-  by,
-  ElementArrayFinder,
-  ElementFinder,
-} from 'protractor';
-import {
-  FavouriteElements,
-  IFavouritesInfo,
-} from './elements/favourites/favourites.elements';
+import {browser, element, by, ElementArrayFinder} from 'protractor';
 
 export class FavouritesPage {
   private pageUrl = '/dashboard/favourites';
-
-  private favouriteElements = new FavouriteElements();
 
   private tabs = {
     monsters: element(by.css('ul li #favourite-monsters')),

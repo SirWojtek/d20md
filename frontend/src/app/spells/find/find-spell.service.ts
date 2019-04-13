@@ -7,7 +7,6 @@ import {fromJson} from '../../shared/model/conversions';
 import {GraphQLService} from '../../shared/graphql.service';
 
 import {findSpellsQuery} from '../spell-queries.graphql';
-import {UserService} from '../../shared/user/user.service';
 
 interface ISearchFields {
   [field: string]: string | {min: number; max: number};

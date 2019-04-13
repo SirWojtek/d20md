@@ -128,7 +128,7 @@ module.exports = {
       resolve: resolver(models.Monster, {
         after: (model, args) => {
           if (!model) {
-            return;
+            return model;
           }
           // NOTE: done async
           common.addToMonsterLog(model, args.userId);

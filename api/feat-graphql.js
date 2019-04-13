@@ -81,6 +81,9 @@ module.exports = {
       resolve: resolver(models.Feat, {
         after: (model, args) => {
           // NOTE: done async
+          if (!model) {
+            return model;
+          }
           common.addToFeatLog(model, args.userId);
           return common.reportView(model);
         }

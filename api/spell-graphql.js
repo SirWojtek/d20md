@@ -80,6 +80,9 @@ module.exports = {
       },
       resolve: resolver(models.Spell, {
         after: (model, args) => {
+          if (!model) {
+            return model;
+          }
           // NOTE: done async
           common.addToSpellLog(model, args.userId);
           return common.reportView(model);

@@ -1,7 +1,7 @@
 
 module.exports = {
-  host: 'http://localhost:4200',
-  port: 3000,
-  uploadImagesToS3: false,
-  graphQLEditor: true
+  host: 'https://d20md.com',
+  port: 8000,
+  uploadImagesToS3: true,
+  graphQLEditor: false
 }

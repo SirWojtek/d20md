@@ -37,8 +37,8 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: DEFAULT_INSTANCE.description,
       validate: {
         len: {
-          args: [0, 20],
-          msg: 'Hit dice description cannot be longer than 20 characters',
+          args: [0, 100],
+          msg: 'Hit dice description cannot be longer than 100 characters',
         },
       },
     }

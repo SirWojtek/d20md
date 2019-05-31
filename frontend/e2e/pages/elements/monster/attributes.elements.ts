@@ -58,5 +58,6 @@ export const attributesElements = {
     intelligenceSlider: element(by.css('d20md-modal-base input#intelligence')),
     wisdomSlider: element(by.css('d20md-modal-base input#wisdom')),
     charismaSlider: element(by.css('d20md-modal-base input#charisma')),
+    saveButton: element(by.css('d20md-modal-base button#save-attributes')),
   },
 };

@@ -117,6 +117,8 @@ export class ShowMonsterPage {
         attr.charisma.value,
       );
     }
+
+    await attributesElements.editModal.saveButton.click();
   }
 
   private async getName(): Promise<string> {
@@ -407,8 +409,11 @@ export class ShowMonsterPage {
   }
 
   private async setAttributesSlider(slider: ElementFinder, val: number) {
-    const size = await slider.getSize();
-    const x = (size.width / 20) * val;
+    // NOTE: padding: 18px
+    const width = (await slider.getSize()).width - 18;
+    const offset = (width / 50) * val;
+    const x = Math.floor(offset - width / 2);
+
     await browser
       .actions()
       .dragAndDrop(slider, {x, y: 0})

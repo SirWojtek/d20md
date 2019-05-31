@@ -9,7 +9,7 @@ import {defaultMonster} from '../test-data/default-monster';
 import {LoginHelper} from '../helpers/login-helper';
 import {IAttributes} from '../interfaces/monster/IAttributes';
 
-describe('edit monster', () => {
+fdescribe('edit monster', () => {
   let indexPage: IndexPage;
   let framePage: FramePage;
   let loginPage: LoginPage;
@@ -73,6 +73,28 @@ describe('edit monster', () => {
       attributes: {
         ...defaultMonster.attributes,
         ...newAttributes,
+      },
+      saves: {
+        ...defaultMonster.saves,
+        will: {
+          total: 6,
+          base: 3,
+        },
+      },
+      skills: {
+        ...defaultMonster.skills,
+        listen: {
+          modifier: 0,
+          total: 3,
+        },
+        spot: {
+          modifier: 0,
+          total: 3,
+        },
+        survival: {
+          modifier: 0,
+          total: 3,
+        },
       },
     });
   });

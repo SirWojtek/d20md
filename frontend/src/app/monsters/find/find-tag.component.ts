@@ -1,9 +1,12 @@
-import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import {Component, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import * as _ from 'lodash';
 
-import { Utils } from '../../shared/utils';
-import { ModalBaseComponent, ModalButton } from '../../shared/elements/modal-base/modal-base.component';
-import { environmentTagColors } from './environment-tag-colors';
+import {Utils} from '../../shared/utils';
+import {
+  ModalBaseComponent,
+  ModalButton,
+} from '../../shared/elements/modal-base/modal-base.component';
+import {environmentTagColors} from './environment-tag-colors';
 
 @Component({
   selector: 'd20md-find-tag',
@@ -21,17 +24,19 @@ import { environmentTagColors } from './environment-tag-colors';
       </div>
     </div>
   </d20md-modal-base>
-  `
+  `,
 })
-
 export class FindTagComponent {
   modalButtons: ModalButton[] = [
-    new ModalButton('OK', 'btn-primary', () => this.close()),
+    new ModalButton('tag-ok', 'OK', 'btn-primary', () => this.close()),
   ];
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
 
-  @Input() tags: string[] = [];
-  @Output() tagsChange = new EventEmitter<string[]>();
+  @Input()
+  tags: string[] = [];
+  @Output()
+  tagsChange = new EventEmitter<string[]>();
 
   chunkedTags: any[][];
   utils = Utils;
@@ -42,9 +47,11 @@ export class FindTagComponent {
     this.allTags = _.reduce(
       environmentTagColors,
       (res, value, key) => {
-        res.push({ key: key, value: false });
+        res.push({key: key, value: false});
         return res;
-      }, []);
+      },
+      [],
+    );
     this.chunkTags();
   }
 
@@ -59,9 +66,7 @@ export class FindTagComponent {
   }
 
   close() {
-    this.tags = this.allTags
-      .filter(tag => tag.value)
-      .map(tag => tag.key);
+    this.tags = this.allTags.filter(tag => tag.value).map(tag => tag.key);
 
     this.tagsChange.emit(this.tags);
     return true;

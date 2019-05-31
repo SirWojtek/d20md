@@ -1,10 +1,13 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
-import { ModalBaseComponent, ModalButton } from '../modal-base/modal-base.component';
-import { TrumbowygWrapperComponent } from '../trumbowyg-wrapper/trumbowyg-wrapper.component';
+import {Component, Output, EventEmitter, ViewChild} from '@angular/core';
+import {
+  ModalBaseComponent,
+  ModalButton,
+} from '../modal-base/modal-base.component';
+import {TrumbowygWrapperComponent} from '../trumbowyg-wrapper/trumbowyg-wrapper.component';
 
 @Component({
-  selector : 'd20md-description-form',
-  template : `
+  selector: 'd20md-description-form',
+  template: `
   <d20md-modal-base
     [buttons]="modalButtons"
     [headerText]="'Edit description'"
@@ -14,19 +17,23 @@ import { TrumbowygWrapperComponent } from '../trumbowyg-wrapper/trumbowyg-wrappe
   </d20md-modal-base>
   `,
 })
-
 export class DescriptionFormComponent {
-  @Output() descriptionChange = new EventEmitter<string>();
+  @Output()
+  descriptionChange = new EventEmitter<string>();
 
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
-  @ViewChild(TrumbowygWrapperComponent) trumbowyg: TrumbowygWrapperComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
+  @ViewChild(TrumbowygWrapperComponent)
+  trumbowyg: TrumbowygWrapperComponent;
 
   description: string;
   editorOutput: string;
 
   public modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave()),
+    new ModalButton('cancel-description', 'Cancel', 'btn-warning'),
+    new ModalButton('save-description', 'Save', 'btn-primary', () =>
+      this.onSave(),
+    ),
   ];
 
   public show(description: string) {

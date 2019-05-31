@@ -1,12 +1,13 @@
-import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ModalDirective } from 'ngx-bootstrap';
+import {Component, ViewChild, Input, Output, EventEmitter} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {ModalDirective} from 'ngx-bootstrap';
 
 export class ModalButton {
   constructor(
+    public id: string,
     public text: string,
     public btnClass: any,
-    public onClick: () => boolean|Observable<boolean> = () => true
+    public onClick: () => boolean | Observable<boolean> = () => true,
   ) {}
 }
 
@@ -27,22 +28,27 @@ export class ModalButton {
           <ng-content></ng-content>
         </div>
         <div *ngIf="buttons.length" class="modal-footer">
-          <button *ngFor="let button of buttons" type="button" class="btn"
+          <button *ngFor="let button of buttons" type="button" class="btn" [id]="button.id"
             [ngClass]="button.btnClass" (click)="onClick(button)">{{ button.text }}</button>
         </div>
       </div>
     </div>
   </div>
-  `
+  `,
 })
-
 export class ModalBaseComponent {
-  @ViewChild('autoShownModal') public autoShownModal: ModalDirective;
-  @Input() headerText: string;
-  @Input() config = { show: true };
-  @Input() modalSizeClass = 'modal-md';
-  @Input() buttons: ModalButton[] = [];
-  @Output() onClose = new EventEmitter();
+  @ViewChild('autoShownModal')
+  public autoShownModal: ModalDirective;
+  @Input()
+  headerText: string;
+  @Input()
+  config = {show: true};
+  @Input()
+  modalSizeClass = 'modal-md';
+  @Input()
+  buttons: ModalButton[] = [];
+  @Output()
+  onClose = new EventEmitter();
 
   public isModalShown = false;
 
@@ -70,7 +76,7 @@ export class ModalBaseComponent {
 
   private processButtonClick(button: ModalButton) {
     const result = button.onClick();
-    const hide = (status) => status && this.hideModal();
+    const hide = status => status && this.hideModal();
 
     if (result instanceof Observable) {
       result.subscribe(hide);

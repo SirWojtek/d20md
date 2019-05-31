@@ -26,8 +26,8 @@ export class FeatFormComponent {
   modal: ModalBaseComponent;
 
   public modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave()),
+    new ModalButton('cancel-feat', 'Cancel', 'btn-warning'),
+    new ModalButton('save-feat', 'Save', 'btn-primary', () => this.onSave()),
   ];
 
   public show(value: Feat[]) {

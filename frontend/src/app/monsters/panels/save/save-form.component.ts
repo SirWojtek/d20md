@@ -1,24 +1,30 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 
-import { Save } from '../../../shared/model/save';
-import { ModalBaseComponent, ModalButton } from '../../../shared/elements/modal-base/modal-base.component';
+import {Save} from '../../../shared/model/save';
+import {
+  ModalBaseComponent,
+  ModalButton,
+} from '../../../shared/elements/modal-base/modal-base.component';
 
 @Component({
   selector: 'd20md-save-form',
-  templateUrl: './save-form.component.html'
+  templateUrl: './save-form.component.html',
 })
-
 export class SaveFormComponent {
-  @Output() saveChange = new EventEmitter<Save>();
+  @Output()
+  saveChange = new EventEmitter<Save>();
 
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
 
   save: Save;
 
   modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave(this.save)),
+    new ModalButton('cancel-saves', 'Cancel', 'btn-warning'),
+    new ModalButton('save-saves', 'Save', 'btn-primary', () =>
+      this.onSave(this.save),
+    ),
   ];
 
   show(save: Save) {

@@ -77,8 +77,10 @@ export class EditorTableComponent {
   utils = Utils;
 
   public modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onValuesSave()),
+    new ModalButton('cancel-editor-table', 'Cancel', 'btn-warning'),
+    new ModalButton('save-editor-table', 'Save', 'btn-primary', () =>
+      this.onValuesSave(),
+    ),
   ];
 
   public show(values: any[]) {

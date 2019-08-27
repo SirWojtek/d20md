@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"d20md"},"name":"d20md","namespace":"d20md"},"spec":{"ports":[{"port":3000}],"selector":{"app":"d20md"}}}
+  creationTimestamp: "2019-08-24T16:48:18Z"
+  labels:
+    app: d20md
+  name: d20md
+  namespace: d20md
+  resourceVersion: "3077773"
+  selfLink: /api/v1/namespaces/d20md/services/d20md
+  uid: 7311dd0e-01dc-4af0-b813-7dfd91ab7bfd
+spec:
+  clusterIP: 10.152.183.3
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: d20md
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

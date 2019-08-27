@@ -9,4 +9,6 @@ WORKDIR /root/d20md
 
 RUN yarn install
 
-CMD NODE_ENV=production node ./server.js
+ENV NODE_ENV=production
+
+CMD yarn deploy_backend && node ./server.js

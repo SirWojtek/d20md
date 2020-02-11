@@ -1,21 +1,23 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import {MonstersService} from '../../monsters.service';
-import {chromaColor} from '../../../shared/chroma-color';
-import {Monster} from '../../../shared/model/monster';
-import {Image} from '../../../shared/model/image';
-import {toJson} from '../../../shared/model/conversions';
+import { MonstersService } from '../../monsters.service';
+import { chromaColor } from '../../../shared/chroma-color';
+import { Monster } from '../../../shared/model/monster';
+import { Image } from '../../../shared/model/image';
+import { toJson } from '../../../shared/model/conversions';
 
 @Component({
   selector: 'd20md-general-panel',
   templateUrl: './general-panel.component.html',
-  styleUrls: ['./general-panel.component.scss'],
+  styleUrls: ['./general-panel.component.scss']
 })
 export class GeneralPanelComponent implements OnInit {
   @Input()
   monsterId: number;
   @Input()
   canModify: boolean;
+  @Input()
+  showName = false;
 
   monster: Monster;
 

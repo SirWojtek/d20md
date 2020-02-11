@@ -1,8 +1,18 @@
 .print-button-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 16px;
 
   button {
     min-width: 200px;
+  }
+}
+
+.general-info-row {
+  display: flex;
+  justify-content: space-between;
+
+  d20md-general-panel {
+    margin-right: 16px;
   }
 }

@@ -19,6 +19,10 @@
 
         <table>
           <tbody>
+            <tr *ngIf="showName">
+              <td><h4>Name</h4></td>
+              <td><span>{{ monster.name }}</span></td>
+            </tr>
             <tr>
               <td><h4>Type</h4></td>
               <td class="right-align">

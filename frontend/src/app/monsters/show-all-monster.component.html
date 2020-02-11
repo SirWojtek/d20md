@@ -1,26 +1,26 @@
-<div *ngIf="monsterOb | async as monster">
+<div *ngIf="monsterOb | async as monster" align="center">
   <div class="print-button-container">
     <button class="btn btn-primary">Print</button>
   </div>
-  <h2>{{ monster.name }}</h2>
 
-  <div>
-    <d20md-general-panel
-      [monsterId]="monster.id"
-      [canModify]="false"
-    ></d20md-general-panel>
+  <div class="row">
+    <div class="col-md-6">
+      <d20md-general-panel
+        [monsterId]="monster.id"
+        [showName]="true"
+        [canModify]="false"
+      ></d20md-general-panel>
+    </div>
+    <div class="col-md-6">
+      <d20md-hit-dices-panel
+         [monsterId]="monster.id"
+         [canModify]="false"
+      ></d20md-hit-dices-panel>
+    </div>
   </div>
-  <div>
-    <d20md-save-panel
-       [monsterId]="monster.id"
-       [canModify]="false"
-    ></d20md-save-panel>
-  </div>
-  <div>
-    <d20md-hit-dices-panel
-       [monsterId]="monster.id"
-       [canModify]="false"
-    ></d20md-hit-dices-panel>
-  </div>
+  <d20md-save-panel
+     [monsterId]="monster.id"
+     [canModify]="false"
+  ></d20md-save-panel>
 
 </div>

@@ -1,63 +1,40 @@
-import {Component, ViewChild} from '@angular/core';
-import {clone} from 'lodash';
+import { Component, ViewChild } from '@angular/core';
+import { clone } from 'lodash';
 
-import {SpecialAbility} from '../../../shared/model/special-ability';
-import {toJson} from '../../../shared/model/conversions';
-import {Utils} from '../../../shared/utils';
+import { SpecialAbility } from '../../../shared/model/special-ability';
+import { toJson } from '../../../shared/model/conversions';
 
-import {SpecialFormComponent} from './special-form.component';
-import {MonstersService} from '../../monsters.service';
-import {ActivatedRoute} from '@angular/router';
-import {UserService} from '../../../shared/user/user.service';
-import {Observable} from 'rxjs/Observable';
+import { SpecialFormComponent } from './special-form.component';
+import { MonstersService } from '../../monsters.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../shared/user/user.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'd20md-special-panel',
   templateUrl: './special-panel.component.html',
-  styleUrls: ['./special-panel.component.scss'],
+  styleUrls: ['./special-panel.component.scss']
 })
 export class SpecialPanelComponent {
-  set specials(newVal: SpecialAbility[]) {
-    if (newVal === this._specials) {
-      return;
-    }
-    this._specials = newVal;
-
-    this.page.total = this.specials.length;
-    this.onPageChange();
-  }
-  get specials() {
-    return this._specials;
-  }
-
   canModifyObs: Observable<boolean>;
 
   @ViewChild(SpecialFormComponent)
   specialForm: SpecialFormComponent;
 
-  page = {
-    current: 1,
-    total: 0,
-    size: 5,
-  };
-  specialPage: SpecialAbility[] = [];
-
   editedSpecial: number = null;
 
-  utils = Utils;
-
-  private _specials: SpecialAbility[] = [];
+  specials: SpecialAbility[] = [];
 
   private monsterId: number;
 
   constructor(
     private route: ActivatedRoute,
     private monstersService: MonstersService,
-    private userService: UserService,
+    private userService: UserService
   ) {
     const monsterObs = this.route.parent.params
       .flatMap(params =>
-        this.monstersService.getMonster(+params['id'], 'special'),
+        this.monstersService.getMonster(+params['id'], 'special')
       )
       .do(monster => (this.monsterId = monster.id))
       .publishReplay(1)
@@ -104,18 +81,11 @@ export class SpecialPanelComponent {
     this.specialsChanged();
   }
 
-  onPageChange() {
-    const offset = (this.page.current - 1) * this.page.size;
-    const limit = this.page.size;
-
-    this.specialPage = this.specials.slice(offset, offset + limit);
-  }
-
   private specialsChanged() {
     this.monstersService
       .updateMonster(
-        {id: this.monsterId, Specials: this.specials.map(toJson)},
-        'special',
+        { id: this.monsterId, Specials: this.specials.map(toJson) },
+        'special'
       )
       .subscribe(updated => (this.specials = updated.Specials));
   }

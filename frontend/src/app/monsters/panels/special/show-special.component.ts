@@ -1,6 +1,6 @@
 import { Input, Component } from '@angular/core';
-import { Utils } from 'ngx-bootstrap';
 import { SpecialAbility } from '../../../shared/model/special-ability';
+import { Utils } from '../../../shared/utils';
 
 @Component({
   selector: 'd20md-show-special',

@@ -103,21 +103,18 @@
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Special Abilities</b></div>
         <div class="panel-body">
-          <d20md-show-special [specials]="monster.Special"></d20md-show-special>
+          <d20md-show-special [specials]="monster.Specials"></d20md-show-special>
         </div>
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div *ngIf="monster.description" class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Description</b></div>
         <div class="panel-body">
           <div *ngIf="monster.description; else noDescription"
             class="description-container" [innerHTML]="monster.description"
           ></div>
-          <ng-template #noDescription>
-            <h4>No Description provided</h4>
-          </ng-template>
         </div>
       </div>
     </div>

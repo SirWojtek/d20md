@@ -52,7 +52,10 @@
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Attacks</b></div>
         <div class="panel-body">
-          <d20md-show-attacks [attackGroups]="monster.AttackGroups"></d20md-show-attacks>
+          <d20md-show-attacks
+            [attackGroups]="monster.AttackGroups"
+            [viewOnly]="true"
+          ></d20md-show-attacks>
         </div>
       </div>
     </div>
@@ -63,7 +66,10 @@
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Movement</b></div>
         <div class="panel-body">
-          <d20md-show-speed [speed]="monster.Speed"></d20md-show-speed>
+          <d20md-show-speed
+            [speed]="monster.Speed"
+            [viewOnly]="true"
+          ></d20md-show-speed>
         </div>
       </div>
     </div>
@@ -72,7 +78,10 @@
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Skills</b></div>
         <div class="panel-body">
-          <d20md-show-skill [skill]="monster.Skill"></d20md-show-skill>
+          <d20md-show-skill
+            [skill]="monster.Skill"
+            [viewOnly]="true"
+          ></d20md-show-skill>
         </div>
       </div>
     </div>

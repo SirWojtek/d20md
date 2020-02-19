@@ -20,14 +20,14 @@
           </td>
           <td class="value-col">
             {{ attack.total.attack_bonus }}
-            <d20md-tooltip-button [tooltipText]="getAttackBonusInfo(attack)"></d20md-tooltip-button>
+            <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getAttackBonusInfo(attack)"></d20md-tooltip-button>
           </td>
           <td>
             <ng-template ngFor let-dmg [ngForOf]="attack.Damages">
               <d20md-chips [backgroundColor]="attackTypeToColor[dmg.damage_type]">
                 {{ dmg.toString() }}
               </d20md-chips>
-              <d20md-tooltip-button [tooltipText]="getDamageInfo(dmg)"></d20md-tooltip-button>
+              <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getDamageInfo(dmg)"></d20md-tooltip-button>
               <br>
             </ng-template>
           </td>
@@ -42,7 +42,7 @@
     </ng-template>
   </tbody>
 </table>
-<accordion>
+<accordion *ngIf="!viewOnly">
   <accordion-group heading="Legend">
     <d20md-chips *ngFor="let damageType of attackTypeToColor | keys"
       [backgroundColor]="attackTypeToColor[damageType]"

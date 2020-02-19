@@ -3,21 +3,21 @@
     <div class="col-md-4 col-sm-6">
       <span class="show-text" [style.color]="speedColors(speed.fly)">
         {{ speed.fly }} ft.
-        <d20md-tooltip-button [tooltipText]="getSquareText(speed.fly)"></d20md-tooltip-button>
+        <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getSquareText(speed.fly)"></d20md-tooltip-button>
       </span>
       <img src="assets/img/fly.svg" title="Fly speed" height="100">
     </div>
     <div class="col-md-4 col-sm-6">
       <span class="show-text" [style.color]="speedColors(speed.swim)">
         {{ speed.swim }} ft.
-        <d20md-tooltip-button [tooltipText]="getSquareText(speed.swim)"></d20md-tooltip-button>
+        <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getSquareText(speed.swim)"></d20md-tooltip-button>
       </span>
       <img src="assets/img/swim.svg" title="Swim speed" height="100">
     </div>
     <div class="col-md-offset-0 col-md-4 col-sm-offset-3 col-sm-6">
       <span class="show-text" [style.color]="speedColors(speed.climb)">
         {{ speed.climb }} ft.
-        <d20md-tooltip-button [tooltipText]="getSquareText(speed.climb)"></d20md-tooltip-button>
+        <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getSquareText(speed.climb)"></d20md-tooltip-button>
       </span>
       <img src="assets/img/climb.svg" title="Climb speed" height="100">
     </div>
@@ -26,14 +26,14 @@
     <div class="col-md-offset-2 col-md-4 col-sm-6">
       <span class="show-text" [style.color]="speedColors(speed.land)">
         {{ speed.land }} ft.
-        <d20md-tooltip-button [tooltipText]="getSquareText(speed.land)"></d20md-tooltip-button>
+        <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getSquareText(speed.land)"></d20md-tooltip-button>
       </span>
       <img src="assets/img/land.svg" title="Land speed" height="100">
     </div>
     <div class="col-md-4 col-sm-6">
       <span class="show-text" [style.color]="speedColors(speed.burrow)">
         {{ speed.burrow }} ft.
-        <d20md-tooltip-button [tooltipText]="getSquareText(speed.burrow)"></d20md-tooltip-button>
+        <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getSquareText(speed.burrow)"></d20md-tooltip-button>
       </span>
       <img src="assets/img/burrow.svg" title="Burrow speed" height="100">
     </div>

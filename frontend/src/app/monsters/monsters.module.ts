@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Title, BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccordionModule } from 'ngx-bootstrap';
+
 import { monstersRouting } from './monsters.routing';
 import { MonstersPanelsModule } from './panels/monsters-panels.module';
 import { ShowMonsterComponent } from './show-monster.component';
@@ -17,7 +19,8 @@ import { ShowAllMonsterComponent } from './show-all-monster.component';
     SharedModule,
     monstersRouting,
     MonstersPanelsModule,
-    MonsterFindModule
+    MonsterFindModule,
+    AccordionModule
   ],
   declarations: [
     ShowMonsterComponent,

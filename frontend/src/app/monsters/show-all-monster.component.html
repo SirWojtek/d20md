@@ -87,37 +87,8 @@
     </div>
   </div>
 
-  <div class="row">
+  <div *ngIf="monster.description"  class="row">
     <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Spells</b></div>
-        <div class="panel-body">
-          <d20md-show-spells [spells]="monster.Spells"></d20md-show-spells>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Feats</b></div>
-        <div class="panel-body">
-          <d20md-show-feats [feats]="monster.Feats"></d20md-show-feats>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Special Abilities</b></div>
-        <div class="panel-body">
-          <d20md-show-special [specials]="monster.Specials"></d20md-show-special>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="monster.description" class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading"><b>Description</b></div>
         <div class="panel-body">
@@ -128,5 +99,63 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><b>Spells</b></div>
+        <div class="panel-body">
+          <accordion>
+            <accordion-group
+              *ngFor="let spell of monster.Spells"
+              [heading]="spell.name"
+              [isOpen]="true"
+            >
+              <div [innerHtml]="spell.description"></div>
+            </accordion-group>
+          </accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><b>Feats</b></div>
+        <div class="panel-body">
+        <accordion>
+            <accordion-group
+              *ngFor="let feat of monster.Feats"
+              [heading]="feat.name"
+              [isOpen]="true"
+            >
+              <div [innerHtml]="feat.benefit"></div>
+            </accordion-group>
+          </accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><b>Special Abilities</b></div>
+        <div class="panel-body">
+          <accordion>
+            <accordion-group
+              *ngFor="let special of monster.Specials"
+              [heading]="special.name"
+              [isOpen]="true"
+            >
+              <div [innerHtml]="special.description"></div>
+            </accordion-group>
+          </accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </div>

@@ -1,12 +1,12 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import * as _ from 'lodash';
-import {HitDice} from '../../../shared/model/hit-dice';
-import {chromaColor} from '../../../shared/chroma-color';
+import { HitDice } from '../../../shared/model/hit-dice';
+import { chromaColor } from '../../../shared/chroma-color';
 
 @Component({
   selector: 'd20md-show-hit-dices',
   templateUrl: './show-hit-dices.component.html',
-  styleUrls: ['./show-hit-dices.component.scss'],
+  styleUrls: ['./show-hit-dices.component.scss']
 })
 export class ShowHitDicesComponent implements OnChanges {
   @Input()
@@ -15,6 +15,8 @@ export class ShowHitDicesComponent implements OnChanges {
   hp: number;
   @Input()
   conModifier: number;
+  @Input()
+  viewOnly = false;
 
   chopedHitDices = [];
 
@@ -41,7 +43,7 @@ export class ShowHitDicesComponent implements OnChanges {
     const hpWithoutCon = HitDice.getSuggestedHpWithoutCon(this.hitDices);
     const hpConBonus = HitDice.getSuggestedHpConBonus(
       this.hitDices,
-      this.conModifier,
+      this.conModifier
     );
     const total = hpWithoutCon + hpConBonus;
 

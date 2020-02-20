@@ -17,7 +17,7 @@ export class GeneralPanelComponent implements OnInit {
   @Input()
   canModify: boolean;
   @Input()
-  showName = false;
+  viewOnly = false;
 
   monster: Monster;
 

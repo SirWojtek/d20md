@@ -14,7 +14,7 @@
       <div class="col-md-6">
         <d20md-general-panel
           [monsterId]="monster.id"
-          [showName]="true"
+          [viewOnly]="true"
           [canModify]="false"
         ></d20md-general-panel>
       </div>
@@ -22,6 +22,7 @@
         <d20md-hit-dices-panel
            [monsterId]="monster.id"
            [canModify]="false"
+           [viewOnly]="true"
         ></d20md-hit-dices-panel>
       </div>
     </div>

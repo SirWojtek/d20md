@@ -5349,6 +5349,13 @@ ngx-infinite-scroll@^0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-0.8.2.tgz#9cc615c01fbb6307599453c9d9cfb5c1db4fd3e8"
 
+ngx-print@^1.2.0-beta.3:
+  version "1.2.0-beta.3"
+  resolved "https://registry.yarnpkg.com/ngx-print/-/ngx-print-1.2.0-beta.3.tgz#429b0fc19e4aa06056d007323ab22eadf087fd6a"
+  integrity sha512-woox8eUCsPnIZgKm36J4dE1gbt5P35nkqmmUqYcWegsfsP/jotAoxDy8W8Tb/LC8KqBoyOxACllG/ndKBBsUvA==
+  dependencies:
+    tslib "^1.9.3"
+
 no-case@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -7928,6 +7935,11 @@ tslib@^1.8.0:
 tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+
+tslib@^1.9.3:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
+  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
 
 tslint@~5.9.1:
   version "5.9.1"

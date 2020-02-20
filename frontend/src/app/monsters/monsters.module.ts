@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Title, BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccordionModule } from 'ngx-bootstrap';
+import { NgxPrintModule } from 'ngx-print';
 
 import { monstersRouting } from './monsters.routing';
 import { MonstersPanelsModule } from './panels/monsters-panels.module';
@@ -20,7 +21,8 @@ import { ShowAllMonsterComponent } from './show-all-monster.component';
     monstersRouting,
     MonstersPanelsModule,
     MonsterFindModule,
-    AccordionModule
+    AccordionModule,
+    NgxPrintModule
   ],
   declarations: [
     ShowMonsterComponent,

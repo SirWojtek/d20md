@@ -1,161 +1,169 @@
 <div *ngIf="monsterOb | async as monster" align="center">
   <div class="print-button-container">
-    <button class="btn btn-primary">Print</button>
+    <button
+      class="btn btn-primary"
+      [useExistingCss]="true"
+      printSectionId="print-section"
+      ngxPrint
+    >Print</button>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <d20md-general-panel
-        [monsterId]="monster.id"
-        [showName]="true"
-        [canModify]="false"
-      ></d20md-general-panel>
-    </div>
-    <div class="col-md-6">
-      <d20md-hit-dices-panel
-         [monsterId]="monster.id"
-         [canModify]="false"
-      ></d20md-hit-dices-panel>
-    </div>
-  </div>
+  <div id="print-section">
 
-
-  <div class="row">
-    <div class="col-md-6">
-      <d20md-save-panel
-         [monsterId]="monster.id"
-         [canModify]="false"
-      ></d20md-save-panel>
-    </div>
-
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Attributes</b></div>
-        <div class="panel-body">
-          <d20md-show-attribute [attribute]="monster.Attribute"></d20md-show-attribute>
-        </div>
+    <div class="row">
+      <div class="col-md-6">
+        <d20md-general-panel
+          [monsterId]="monster.id"
+          [showName]="true"
+          [canModify]="false"
+        ></d20md-general-panel>
       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Defences</b></div>
-        <div class="panel-body">
-          <d20md-show-armor [armor]="monster.Armor"></d20md-show-armor>
-        </div>
+      <div class="col-md-6">
+        <d20md-hit-dices-panel
+           [monsterId]="monster.id"
+           [canModify]="false"
+        ></d20md-hit-dices-panel>
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Attacks</b></div>
-        <div class="panel-body">
-          <d20md-show-attacks
-            [attackGroups]="monster.AttackGroups"
-            [viewOnly]="true"
-          ></d20md-show-attacks>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Movement</b></div>
-        <div class="panel-body">
-          <d20md-show-speed
-            [speed]="monster.Speed"
-            [viewOnly]="true"
-          ></d20md-show-speed>
+    <div class="row">
+      <div class="col-md-6">
+        <d20md-save-panel
+           [monsterId]="monster.id"
+           [canModify]="false"
+        ></d20md-save-panel>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Attributes</b></div>
+          <div class="panel-body">
+            <d20md-show-attribute [attribute]="monster.Attribute"></d20md-show-attribute>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Skills</b></div>
-        <div class="panel-body">
-          <d20md-show-skill
-            [skill]="monster.Skill"
-            [viewOnly]="true"
-          ></d20md-show-skill>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Defences</b></div>
+          <div class="panel-body">
+            <d20md-show-armor [armor]="monster.Armor"></d20md-show-armor>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Attacks</b></div>
+          <div class="panel-body">
+            <d20md-show-attacks
+              [attackGroups]="monster.AttackGroups"
+              [viewOnly]="true"
+            ></d20md-show-attacks>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div *ngIf="monster.description"  class="row">
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Description</b></div>
-        <div class="panel-body">
-          <div *ngIf="monster.description; else noDescription"
-            class="description-container" [innerHTML]="monster.description"
-          ></div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Movement</b></div>
+          <div class="panel-body">
+            <d20md-show-speed
+              [speed]="monster.Speed"
+              [viewOnly]="true"
+            ></d20md-show-speed>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Skills</b></div>
+          <div class="panel-body">
+            <d20md-show-skill
+              [skill]="monster.Skill"
+              [viewOnly]="true"
+            ></d20md-show-skill>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Spells</b></div>
-        <div class="panel-body">
+    <div *ngIf="monster.description"  class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Description</b></div>
+          <div class="panel-body">
+            <div *ngIf="monster.description; else noDescription"
+              class="description-container" [innerHTML]="monster.description"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Spells</b></div>
+          <div class="panel-body">
+            <accordion>
+              <accordion-group
+                *ngFor="let spell of monster.Spells"
+                [heading]="spell.name"
+                [isOpen]="true"
+              >
+                <div [innerHtml]="spell.description"></div>
+              </accordion-group>
+            </accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Feats</b></div>
+          <div class="panel-body">
           <accordion>
-            <accordion-group
-              *ngFor="let spell of monster.Spells"
-              [heading]="spell.name"
-              [isOpen]="true"
-            >
-              <div [innerHtml]="spell.description"></div>
-            </accordion-group>
-          </accordion>
+              <accordion-group
+                *ngFor="let feat of monster.Feats"
+                [heading]="feat.name"
+                [isOpen]="true"
+              >
+                <div [innerHtml]="feat.benefit"></div>
+              </accordion-group>
+            </accordion>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Feats</b></div>
-        <div class="panel-body">
-        <accordion>
-            <accordion-group
-              *ngFor="let feat of monster.Feats"
-              [heading]="feat.name"
-              [isOpen]="true"
-            >
-              <div [innerHtml]="feat.benefit"></div>
-            </accordion-group>
-          </accordion>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Special Abilities</b></div>
+          <div class="panel-body">
+            <accordion>
+              <accordion-group
+                *ngFor="let special of monster.Specials"
+                [heading]="special.name"
+                [isOpen]="true"
+              >
+                <div [innerHtml]="special.description"></div>
+              </accordion-group>
+            </accordion>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><b>Special Abilities</b></div>
-        <div class="panel-body">
-          <accordion>
-            <accordion-group
-              *ngFor="let special of monster.Specials"
-              [heading]="special.name"
-              [isOpen]="true"
-            >
-              <div [innerHtml]="special.description"></div>
-            </accordion-group>
-          </accordion>
-        </div>
-      </div>
-    </div>
   </div>
-
 
 </div>

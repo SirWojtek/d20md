@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { MonstersService } from '../../monsters.service';
 import { chromaColor } from '../../../shared/chroma-color';
@@ -18,6 +18,10 @@ export class GeneralPanelComponent implements OnInit {
   canModify: boolean;
   @Input()
   viewOnly = false;
+  @Input()
+  dismissable = false;
+  @Output()
+  closed = new EventEmitter<void>();
 
   monster: Monster;
 

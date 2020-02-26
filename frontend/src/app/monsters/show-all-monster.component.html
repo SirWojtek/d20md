@@ -1,5 +1,10 @@
 <div *ngIf="monsterOb | async as monster" align="center">
-  <div class="print-button-container">
+  <div class="print-button-container well well-sm">
+    <button
+      class="btn btn-default"
+      style="margin-right: 16px"
+      (click)="onResetView()"
+    >Reset View</button>
     <button
       class="btn btn-primary"
       [useExistingCss]="true"
@@ -11,34 +16,58 @@
   <div id="print-section">
 
     <div class="row">
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.general"
+      >
         <d20md-general-panel
           [monsterId]="monster.id"
           [viewOnly]="true"
           [canModify]="false"
+          [dismissable]="true"
+          (closed)="panelHiddenState.general = true"
         ></d20md-general-panel>
       </div>
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.hitDices"
+      >
         <d20md-hit-dices-panel
-           [monsterId]="monster.id"
-           [canModify]="false"
-           [viewOnly]="true"
+          [monsterId]="monster.id"
+          [canModify]="false"
+          [viewOnly]="true"
+          [dismissable]="true"
+          (closed)="panelHiddenState.hitDices = true"
         ></d20md-hit-dices-panel>
       </div>
     </div>
 
-
     <div class="row">
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.save"
+      >
         <d20md-save-panel
-           [monsterId]="monster.id"
-           [canModify]="false"
+          [monsterId]="monster.id"
+          [canModify]="false"
+          [dismissable]="true"
+          (closed)="panelHiddenState.save = true"
         ></d20md-save-panel>
       </div>
 
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.attribute"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Attributes</b></div>
+          <div class="panel-heading">
+            <b>Attributes</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.attribute = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <d20md-show-attribute [attribute]="monster.Attribute"></d20md-show-attribute>
           </div>
@@ -47,18 +76,38 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.armor"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Defences</b></div>
+          <div class="panel-heading">
+            <b>Defences</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.armor = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <d20md-show-armor [armor]="monster.Armor"></d20md-show-armor>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.attacks"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Attacks</b></div>
+          <div class="panel-heading">
+            <b>Attacks</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.attacks = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <d20md-show-attacks
               [attackGroups]="monster.AttackGroups"
@@ -70,9 +119,20 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.speed"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Movement</b></div>
+          <div class="panel-heading">
+            <b>Movement</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.speed = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <d20md-show-speed
               [speed]="monster.Speed"
@@ -82,9 +142,19 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div
+        class="col-md-6"
+        *ngIf="!panelHiddenState.skill"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Skills</b></div>
+          <div class="panel-heading">
+            <b>Skills</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.skill = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <d20md-show-skill
               [skill]="monster.Skill"
@@ -96,9 +166,19 @@
     </div>
 
     <div *ngIf="monster.description"  class="row">
-      <div class="col-md-6">
+      <div
+        class="col-md-12"
+        *ngIf="!panelHiddenState.description"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Description</b></div>
+          <div class="panel-heading">
+            <b>Description</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.description = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <div *ngIf="monster.description; else noDescription"
               class="description-container" [innerHTML]="monster.description"
@@ -109,9 +189,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div
+        class="col-md-12"
+        *ngIf="!panelHiddenState.spells"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Spells</b></div>
+          <div class="panel-heading">
+            <b>Spells</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.spells = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <accordion>
               <accordion-group
@@ -128,9 +218,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div
+        class="col-md-12"
+        *ngIf="!panelHiddenState.feats"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Feats</b></div>
+          <div class="panel-heading">
+            <b>Feats</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.feats = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
           <accordion>
               <accordion-group
@@ -147,9 +247,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div
+        class="col-md-12"
+        *ngIf="!panelHiddenState.specialAbilities"
+      >
         <div class="panel panel-primary">
-          <div class="panel-heading"><b>Special Abilities</b></div>
+          <div class="panel-heading">
+            <b>Special Abilities</b>
+            <d20md-x-button
+              btnClass="pull-right"
+              (clicked)="panelHiddenState.specialAbilities = true"
+            >
+            </d20md-x-button>
+          </div>
           <div class="panel-body">
             <accordion>
               <accordion-group

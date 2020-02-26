@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { HitDice } from '../../../shared/model/hit-dice';
 import { TableProperties } from '../../../shared/elements/editor-table/editor-table.component';
@@ -19,6 +19,10 @@ export class HitDicesPanelComponent implements OnInit {
   canModify: boolean;
   @Input()
   viewOnly = false;
+  @Input()
+  dismissable = false;
+  @Output()
+  closed = new EventEmitter<void>();
 
   monsterObs: Observable<Monster>;
 

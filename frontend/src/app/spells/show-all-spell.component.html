@@ -17,25 +17,38 @@
 
     <div class="row">
       <div class="col-md-4">
-        <d20md-saves-panel #savesPanel
-          [spellResistable]="spell.permits_sr"
-          [save]="spell.save_type"
-          [canModify]="false"
-          (saveChange)="onSaveChange(spell.id, $event)"
-        ></d20md-saves-panel>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Saves</b></div>
+          <div class="panel-body">
+            <d20md-show-saves
+              [save]="spell.save_type"
+              [spellResistable]="spell.permits_sr"
+            ></d20md-show-saves>
+          </div>
+        </div>
       </div>
+
       <div class="col-md-4">
-        <d20md-levels-panel #levelsPannel
-          [spellLevels]="spell.SpellLevels"
-          [canModify]="false"
-        ></d20md-levels-panel>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Spell levels</b></div>
+          <div class="panel-body">
+            <d20md-show-levels
+              [spellLevels]="spell.SpellLevels"
+            ></d20md-show-levels>
+          </div>
+        </div>
       </div>
+
       <div class="col-md-4">
-        <d20md-details-panel #detailsPanel
-          [spellType]="spell.spell_type"
-          [spellRange]="spell.spell_range"
-          [canModify]="false"
-        ></d20md-details-panel>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Details</b></div>
+          <div class="panel-body">
+            <d20md-show-details
+              [spellType]="spell.spell_type"
+              [spellRange]="spell.spell_range"
+            ></d20md-show-details>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -59,6 +59,12 @@ export class BreadcrumbsComponent {
       }
     },
     {
+      matchingUrl: /feats\/show-all\/\d+$/,
+      resolveFunc: urlPart => {
+        return this.featsService.getFeat(+urlPart).map(m => m.name);
+      }
+    },
+    {
       matchingUrl: /activate\//,
       resolveFunc: () => Observable.of('')
     },

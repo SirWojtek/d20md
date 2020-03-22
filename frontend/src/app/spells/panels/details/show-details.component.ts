@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
       [spellType]="spellType"
       [showImage]="showImage"
     ></d20md-spell-type-element>
+    <hr />
     <d20md-spell-range-element
       [spellRange]="spellRange"
       [showBar]="showImage"

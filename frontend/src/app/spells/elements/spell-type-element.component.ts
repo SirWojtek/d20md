@@ -3,20 +3,28 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'd20md-spell-type-element',
   template: `
-    <img
-      *ngIf="showImage; else spellTypeText"
-      [src]="'assets/img/' + spellType + '.svg'"
-    />
+    <div *ngIf="showImage; else spellTypeText">
+      <img [src]="'assets/img/' + spellType + '.svg'" />
+      <span style="font-size: 15px">{{ spellType | startCase }}</span>
+    </div>
     <ng-template #spellTypeText>
-      <span>Spell type: </span>
+      <div class="text-container">
+        <span>Spell type</span>
+        <span
+          ><b>{{ spellType | startCase }}</b></span
+        >
+      </div>
     </ng-template>
-    <span style="font-size: 15px">{{ spellType | startCase }}</span>
   `,
   styles: [
     `
       img {
         width: 64px;
         height: 64px;
+      }
+      .text-container {
+        display: flex;
+        justify-content: space-around;
       }
     `
   ]

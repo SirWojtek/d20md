@@ -36,44 +36,15 @@ const barPercents: { [range: string]: string } = {
       </ng-template>
     </div>
     <ng-template #rangeText>
-      <div>
-        <span>Spell range: {{ spellRange | startCase }}</span>
+      <div class="text-container">
+        <span>Spell range</span>
+        <span
+          ><b>{{ spellRange | startCase }}</b></span
+        >
       </div>
     </ng-template>
   `,
-  styles: [
-    `
-      .bar-border {
-        height: 50%;
-        border: 2px solid #676767;
-        border-radius: 4px;
-      }
-    `,
-    `
-      .bar {
-        height: 100%;
-        background: linear-gradient(to right, #1e6aff, #c025ff);
-      }
-    `,
-    `
-      .legend {
-        height: 50%;
-        display: flex;
-        justify-content: space-between;
-      }
-    `,
-    `
-      .custom-range {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 40px;
-        border: 2px dashed #676767;
-        border-radius: 4px;
-        font-weight: bold;
-      }
-    `
-  ]
+  styleUrls: ['./spell-range-element.component.less']
 })
 export class SpellRangeElementComponent {
   @Input() spellRange: string;

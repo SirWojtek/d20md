@@ -15,22 +15,43 @@
 
   <div class="panel-body">
 
-   <d20md-feat-type-panel #featTypePanel
-     [featType]="feat.feat_type"
-     [canModify]="false"
-   ></d20md-feat-type-panel>
 
-   <d20md-prerequisite-panel
-     *ngIf="feat.Prerequisite?.length"
-     [prerequisites]="feat.Prerequisite"
-     [canModify]="false"
-   ></d20md-prerequisite-panel>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <b>Feat type</b>
+      </div>
+      <div class="panel-body">
+        <h3>{{ feat.feat_type | startCase }}</h3>
+      </div>
+    </div>
+
+     <div
+       class="panel panel-primary"
+       *ngIf="feat.Prerequisite?.length"
+     >
+       <div class="panel-heading">
+         <b>Prerequisites</b>
+       </div>
+       <div class="panel-body">
+       <accordion>
+           <accordion-group
+             *ngFor="let prereq of feat.Prerequisite"
+             [heading]="prereq.name"
+             [isOpen]="true"
+           >
+             <div [innerHtml]="prereq.benefit"></div>
+           </accordion-group>
+         </accordion>
+       </div>
+     </div>
 
      <div
         class="panel panel-primary"
         *ngIf="feat.benefit"
       >
-        <div class="panel-heading">Benefit</div>
+        <div class="panel-heading">
+          <b>Benefit</b>
+        </div>
         <div class="panel-body">
            <div>
              <d20md-description-panel
@@ -45,7 +66,9 @@
         class="panel panel-primary"
         *ngIf="feat.normal"
       >
-        <div class="panel-heading">Normal</div>
+        <div class="panel-heading">
+          <b>Normal</b>
+        </div>
         <div class="panel-body">
            <div>
              <d20md-description-panel
@@ -60,7 +83,9 @@
         class="panel panel-primary"
         *ngIf="feat.special"
       >
-        <div class="panel-heading">Special</div>
+        <div class="panel-heading">
+          <b>Special</b>
+        </div>
         <div class="panel-body">
            <div>
              <d20md-description-panel

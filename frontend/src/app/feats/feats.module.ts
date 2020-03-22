@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { TabsModule } from 'ngx-bootstrap';
+import { TabsModule, AccordionModule } from 'ngx-bootstrap';
 import { NgxPrintModule } from 'ngx-print';
 import { FeatsPanelsModule } from './panels/feats-panels.module';
 import { featsRouting } from './feats.routing';
@@ -15,6 +15,7 @@ import { ShowAllFeatComponent } from './show-all-feat.component';
   imports: [
     BrowserModule,
     TabsModule,
+    AccordionModule,
     NgxPrintModule,
     SharedModule,
     FeatsPanelsModule,

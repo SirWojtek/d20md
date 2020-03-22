@@ -1,1 +1,75 @@
-aa
+<div class="print-button-container well well-sm">
+   <button
+     class="btn btn-primary"
+     [useExistingCss]="true"
+     printSectionId="show-feat-frame"
+     ngxPrint
+   >Print</button>
+</div>
+
+<div *ngIf="featObs | async as feat" class="panel panel-default" id="show-feat-frame" align="center">
+
+  <div class="panel-heading">
+      <h2>{{ feat.name }}</h2>
+  </div>
+
+  <div class="panel-body">
+
+   <d20md-feat-type-panel #featTypePanel
+     [featType]="feat.feat_type"
+     [canModify]="false"
+   ></d20md-feat-type-panel>
+
+   <d20md-prerequisite-panel
+     *ngIf="feat.Prerequisite?.length"
+     [prerequisites]="feat.Prerequisite"
+     [canModify]="false"
+   ></d20md-prerequisite-panel>
+
+     <div
+        class="panel panel-primary"
+        *ngIf="feat.benefit"
+      >
+        <div class="panel-heading">Benefit</div>
+        <div class="panel-body">
+           <div>
+             <d20md-description-panel
+               [description]="feat.benefit"
+               [canModify]="false"
+             ></d20md-description-panel>
+           </div>
+        </div>
+     </div>
+
+     <div
+        class="panel panel-primary"
+        *ngIf="feat.normal"
+      >
+        <div class="panel-heading">Normal</div>
+        <div class="panel-body">
+           <div>
+             <d20md-description-panel
+               [description]="feat.normal"
+               [canModify]="false"
+             ></d20md-description-panel>
+           </div>
+        </div>
+     </div>
+
+     <div
+        class="panel panel-primary"
+        *ngIf="feat.special"
+      >
+        <div class="panel-heading">Special</div>
+        <div class="panel-body">
+           <div>
+             <d20md-description-panel
+               [description]="feat.special"
+               [canModify]="false"
+             ></d20md-description-panel>
+           </div>
+        </div>
+     </div>
+
+  </div>
+ </div>

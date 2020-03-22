@@ -8,24 +8,18 @@ import { AddFeatComponent } from './add-feat.component';
 import { FeatsService } from './feats.service';
 import { SharedModule } from '../shared/shared.module';
 import { FindFeatsModule } from './find/find-feats.module';
+import { ShowAllFeatComponent } from './show-all-feat.component';
 
 @NgModule({
-  imports : [
+  imports: [
     BrowserModule,
     TabsModule,
     SharedModule,
     FeatsPanelsModule,
     FindFeatsModule,
-    featsRouting,
+    featsRouting
   ],
-  declarations : [
-    ShowFeatComponent,
-    AddFeatComponent,
-  ],
-  providers : [
-    Title,
-    FeatsService
-  ]
+  declarations: [ShowFeatComponent, ShowAllFeatComponent, AddFeatComponent],
+  providers: [Title, FeatsService]
 })
-
-export class FeatsModule { }
+export class FeatsModule {}

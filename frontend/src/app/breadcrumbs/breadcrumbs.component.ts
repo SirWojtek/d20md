@@ -47,6 +47,12 @@ export class BreadcrumbsComponent {
       }
     },
     {
+      matchingUrl: /spells\/show-all\/\d+$/,
+      resolveFunc: urlPart => {
+        return this.spellsService.getSpell(+urlPart).map(m => m.name);
+      }
+    },
+    {
       matchingUrl: /feats\/show\/\d+$/,
       resolveFunc: urlPart => {
         return this.featsService.getFeat(+urlPart).map(m => m.name);

@@ -1,10 +1,19 @@
 <div *ngIf="monsterObs | async as monster" class="panel panel-primary">
-  <div class="panel-heading"><b>Hit Dices</b></div>
+  <div class="panel-heading">
+    <b>Hit Dices</b>
+    <d20md-x-button
+      btnClass="pull-right"
+      *ngIf="dismissable"
+      (clicked)="closed.emit()"
+    >
+    </d20md-x-button>
+  </div>
   <div class="panel-body">
     <d20md-show-hit-dices
         [hitDices]="monster.HitDices"
         [hp]="monster.hp"
         [conModifier]="monster.Attribute.mod.constitution"
+        [viewOnly]="viewOnly"
     ></d20md-show-hit-dices>
   </div>
   <div *ngIf="canModify" class="panel-footer">

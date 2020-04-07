@@ -1,17 +1,25 @@
 <div *ngFor="let diceGroup of chopedHitDices" class="row">
   <div *ngFor="let dice of diceGroup" class="{{ diceGroup.length > 1 ? 'col-xs-6' : 'col-xs-12' }}">
-    <d20md-tooltip-button *ngIf="dice.description" [tooltipText]="dice.description"></d20md-tooltip-button>
-    <img src="{{ 'assets/img/dice-' + dice.hd_type + '.svg'}}" height="64" [attr.title]="'k' + dice.hd_type">
+    <d20md-tooltip-button *ngIf="!viewOnly && dice.description" [tooltipText]="dice.description"></d20md-tooltip-button>
+    <img
+      *ngIf="!viewOnly"
+      src="{{ 'assets/img/dice-' + dice.hd_type + '.svg'}}"
+      height="64"
+      [attr.title]="'k' + dice.hd_type"
+    >
     <span class="show-text" [style.color]="getDiceColor(dice)">{{ dice | hitDice }}</span>
   </div>
 </div>
 <hr>
 <div class="row">
   <div class="col-xs-6">
-    <img src="assets/img/hp.svg" height="64" title="HP">
+    <h4 *ngIf="viewOnly; else hpImage">HP</h4>
+    <ng-template #hpImage>
+      <img src="assets/img/hp.svg" height="64" title="HP">
+    </ng-template>
   </div>
   <div class="col-xs-6" id="hp-col">
-    <d20md-tooltip-button [tooltipText]="getHpTooltipText()"></d20md-tooltip-button>
+    <d20md-tooltip-button *ngIf="!viewOnly" [tooltipText]="getHpTooltipText()"></d20md-tooltip-button>
     <span class="show-text" [style.color]="getHpColor()">{{ hp }}</span>
   </div>
 </div>

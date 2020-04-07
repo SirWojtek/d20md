@@ -1,19 +1,19 @@
-import {Injectable, Inject} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 
-import {jsonHeader} from '../shared/json-header';
-import {fromJson, toJson} from '../shared/model/conversions';
-import {Monster} from '../shared/model/monster';
-import {Image} from '../shared/model/image';
-import {UploadService} from '../shared/upload.service';
-import {GraphQLService} from '../shared/graphql.service';
+import { jsonHeader } from '../shared/json-header';
+import { fromJson, toJson } from '../shared/model/conversions';
+import { Monster } from '../shared/model/monster';
+import { Image } from '../shared/model/image';
+import { UploadService } from '../shared/upload.service';
+import { GraphQLService } from '../shared/graphql.service';
 
-import {getQueryMap} from './monster-queries.graphql';
-import {UserService} from '../shared/user/user.service';
+import { getQueryMap } from './monster-queries.graphql';
+import { UserService } from '../shared/user/user.service';
 
 @Injectable()
 export class MonstersService {
@@ -27,7 +27,7 @@ export class MonstersService {
     private graphQLService: GraphQLService,
     @Inject('API_ENDPOINT') apiEndpoint: string,
     private uploadService: UploadService,
-    private userService: UserService,
+    private userService: UserService
   ) {
     this.actionUrl = apiEndpoint + '/monsters';
   }
@@ -38,19 +38,19 @@ export class MonstersService {
       .getId()
       .flatMap(userId =>
         this.graphQLService
-          .query({query, variables: {id, userId}})
-          .map(res => fromJson(res.data['monster'], Monster)),
+          .query({ query, variables: { id, userId } })
+          .map(res => fromJson(res.data['monster'], Monster))
       );
   }
 
   updateMonster(
     monster: Partial<Monster>,
-    queryType: string,
+    queryType: string
   ): Observable<Monster> {
     return (
       this.http
         .post(this.actionUrl + '/update/', JSON.stringify(monster), {
-          headers: jsonHeader,
+          headers: jsonHeader
         })
         // FIXME: remove after move to GraphQL mutations
         .flatMap(() =>
@@ -59,7 +59,7 @@ export class MonstersService {
             if (monster.Attribute) {
               this.hasChanged.next();
             }
-          }),
+          })
         )
         .flatMap(() => this.getMonster(monster.id, queryType))
     );
@@ -79,10 +79,13 @@ export class MonstersService {
     return (
       this.http
         .post(this.actionUrl + '/add/', toJson(newMonster), {
-          headers: jsonHeader,
+          headers: jsonHeader
         })
         // FIXME: remove after move to GraphQL mutations
-        .flatMap(() => this.graphQLService.resetStore(), result => result)
+        .flatMap(
+          () => this.graphQLService.resetStore(),
+          result => result
+        )
         .map(response => fromJson(response, Monster))
         .map((monster: Monster) => monster.id)
         .catch(err => {
@@ -94,8 +97,8 @@ export class MonstersService {
   deleteMonster(id: number): Observable<void> {
     return (
       this.http
-        .post(this.actionUrl + '/del/', JSON.stringify({id: id}), {
-          headers: jsonHeader,
+        .post(this.actionUrl + '/del/', JSON.stringify({ id: id }), {
+          headers: jsonHeader
         })
         // FIXME: remove after move to GraphQL mutations
         .flatMap(() => this.graphQLService.resetStore())

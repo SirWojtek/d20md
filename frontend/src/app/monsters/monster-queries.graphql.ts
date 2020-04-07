@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import {Skill} from '../shared/model/skill';
+import { Skill } from '../shared/model/skill';
 
 function getSkills() {
   return new Skill().getParams();
@@ -20,29 +20,108 @@ const baseQuery = `
   User { id }
 `;
 
+const basicQuery = `
+  hp
+  initiative
+  type
+  isInFavourites
+  favouritesCount
+  Save {
+    fortitude
+    will
+    reflex
+  }
+  HitDices {
+    hd_amount
+    hd_type
+    description
+  }
+  Image {
+    path
+  }
+`;
+
+const defencesQuery = `
+  Armor {
+    armor
+    shield
+    size
+    enhancement
+    deflection
+    natural
+  }
+`;
+
+const attacksQuery = `
+  AttackGroups {
+    Attacks {
+      name
+      is_main
+      attack_type
+      attack_bonus
+      range
+      Damages {
+        dd_type
+        dd_amount
+        damage_bonus
+        damage_type
+        critical
+        description
+      }
+    }
+  }
+`;
+
+const movementQuery = `
+  Speed {
+    fly
+    swim
+    climb
+    land
+    burrow
+  }
+`;
+
+const skillQuery = `
+  Skill {
+    ${getSkills()}
+  }
+`;
+
+const featsQuery = `
+  Feats {
+    id
+    name
+    benefit
+  }
+`;
+
+const spellsQuery = `
+  Spells {
+    id
+    name
+    description
+    SpellLevels {
+      class_name
+      level
+    }
+  }
+`;
+
+const specialQuery = `
+  Specials {
+    type
+    name
+    description
+  }
+`;
+
 export const getQueryMap = {
   basic: gql`
     query basic($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        hp
-        initiative
-        type
-        isInFavourites
-        favouritesCount
-        Save {
-          fortitude
-          will
-          reflex
-        }
-        HitDices {
-          hd_amount
-          hd_type
-          description
-        }
-        Image {
-          path
-        }
+        ${basicQuery}
       }
     }
   `,
@@ -50,14 +129,7 @@ export const getQueryMap = {
     query defences($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        Armor {
-          armor
-          shield
-          size
-          enhancement
-          deflection
-          natural
-        }
+        ${defencesQuery}
       }
     }
   `,
@@ -65,23 +137,7 @@ export const getQueryMap = {
     query attacks($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        AttackGroups {
-          Attacks {
-            name
-            is_main
-            attack_type
-            attack_bonus
-            range
-            Damages {
-              dd_type
-              dd_amount
-              damage_bonus
-              damage_type
-              critical
-              description
-            }
-          }
-        }
+        ${attacksQuery}
       }
     }
   `,
@@ -89,13 +145,7 @@ export const getQueryMap = {
     query movement($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        Speed {
-          fly
-          swim
-          climb
-          land
-          burrow
-        }
+        ${movementQuery}
       }
     }
   `,
@@ -103,9 +153,7 @@ export const getQueryMap = {
     query skills($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        Skill {
-          ${getSkills()}
-        }
+        ${skillQuery}
       }
     }
   `,
@@ -113,11 +161,7 @@ export const getQueryMap = {
     query feats($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        Feats {
-          id
-          name
-          benefit
-        }
+        ${featsQuery}
       }
     }
   `,
@@ -125,15 +169,7 @@ export const getQueryMap = {
     query spells($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        Spells {
-          id
-          name
-          description
-          SpellLevels {
-            class_name
-            level
-          }
-        }
+        ${spellsQuery}
       }
     }
   `,
@@ -141,11 +177,7 @@ export const getQueryMap = {
     query special($id: Int!, $userId: Int) {
       monster(id: $id, userId: $userId) {
         ${baseQuery}
-        Specials {
-          type
-          name
-          description
-        }
+        ${specialQuery}
       }
     }
   `,
@@ -157,6 +189,22 @@ export const getQueryMap = {
       }
     }
   `,
+  all: gql`
+    query all($id: Int!, $userId: Int) {
+      monster(id: $id, userId: $userId) {
+        ${baseQuery}
+        ${basicQuery}
+        ${defencesQuery}
+        ${attacksQuery}
+        ${movementQuery}
+        ${skillQuery}
+        ${featsQuery}
+        ${spellsQuery}
+        ${specialQuery}
+        description
+      }
+    }
+  `
 };
 
 export const findMonstersQuery = gql`

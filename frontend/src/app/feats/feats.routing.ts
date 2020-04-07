@@ -4,26 +4,33 @@ import { AuthGuard } from '../shared/user/auth-guard';
 import { ShowFeatComponent } from './show-feat.component';
 import { AddFeatComponent } from './add-feat.component';
 import { FindFeatsComponent } from './find/find-feats.component';
+import { ShowAllFeatComponent } from './show-all-feat.component';
 
 const featsRoutes: Routes = [
   {
     path: 'feats',
     redirectTo: 'feats/find',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: 'feats/show/:id',
-    component: ShowFeatComponent,
+    component: ShowFeatComponent
+  },
+  {
+    path: 'feats/show-all/:id',
+    component: ShowAllFeatComponent
   },
   {
     path: 'feats/add',
     component: AddFeatComponent,
-    canActivate: [ AuthGuard ],
+    canActivate: [AuthGuard]
   },
   {
-    path : 'feats/find',
-    component : FindFeatsComponent,
-  },
+    path: 'feats/find',
+    component: FindFeatsComponent
+  }
 ];
 
-export const featsRouting: ModuleWithProviders = RouterModule.forChild(featsRoutes);
+export const featsRouting: ModuleWithProviders = RouterModule.forChild(
+  featsRoutes
+);

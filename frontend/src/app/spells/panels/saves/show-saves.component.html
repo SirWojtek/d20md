@@ -1,4 +1,10 @@
-<img [src]="'assets/img/' + save + '.svg'" [title]="save" width="96">
+<img *ngIf="showImage; else saveText" [src]="'assets/img/' + save + '.svg'" [title]="save" width="96">
+<ng-template #saveText>
+  <div class="save-type-container">
+    <span>Save type</span>
+    <span><b>{{ save | startCase }}</b></span>
+  </div>
+</ng-template>
 <hr>
 <div class="resistable-container">
   <div>

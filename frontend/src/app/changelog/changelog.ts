@@ -6,6 +6,13 @@ export interface IChange {
 
 export const changelog: IChange[] = [
   {
+    title: 'Printable entities',
+    date: new Date('2020-04-07'),
+    content: `
+    Introduced printable version of monster/spell/feat pages accessible via the icon.
+    `,
+  },
+  {
     title: 'Favourites',
     date: new Date('2019-04-13'),
     content: `

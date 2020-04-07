@@ -1,19 +1,23 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import {Save} from '../../../shared/model/save';
-import {toJson} from '../../../shared/model/conversions';
+import { Save } from '../../../shared/model/save';
+import { toJson } from '../../../shared/model/conversions';
 
-import {MonstersService} from '../../monsters.service';
+import { MonstersService } from '../../monsters.service';
 
 @Component({
   selector: 'd20md-save-panel',
-  templateUrl: './save-panel.component.html',
+  templateUrl: './save-panel.component.html'
 })
 export class SavePanelComponent implements OnInit {
   @Input()
   monsterId: number;
   @Input()
   canModify: boolean;
+  @Input()
+  dismissable = false;
+  @Output()
+  closed = new EventEmitter<void>();
 
   save: Save;
 
@@ -31,7 +35,7 @@ export class SavePanelComponent implements OnInit {
 
   onSaveChange(newVal: Save) {
     this.monstersService
-      .updateMonster({id: this.monsterId, Save: toJson(newVal)}, 'basic')
+      .updateMonster({ id: this.monsterId, Save: toJson(newVal) }, 'basic')
       .subscribe(updated => (this.save = updated.Save));
   }
 }

@@ -5,6 +5,7 @@ import { AuthGuard } from '../shared/user/auth-guard';
 import { ShowSpellComponent } from './show-spell.component';
 import { AddSpellComponent } from './add-spell.component';
 import { FindSpellsComponent } from './find/find-spells.component';
+import { ShowAllSpellComponent } from './show-all-spell.component';
 
 const spellsRoutes: Routes = [
   {
@@ -14,17 +15,23 @@ const spellsRoutes: Routes = [
   },
   {
     path: 'spells/show/:id',
-    component: ShowSpellComponent,
+    component: ShowSpellComponent
   },
   {
-   path: 'spells/add',
-   component: AddSpellComponent,
-   canActivate: [ AuthGuard ],
+    path: 'spells/show-all/:id',
+    component: ShowAllSpellComponent
   },
   {
-   path : 'spells/find',
-   component : FindSpellsComponent,
+    path: 'spells/add',
+    component: AddSpellComponent,
+    canActivate: [AuthGuard]
   },
+  {
+    path: 'spells/find',
+    component: FindSpellsComponent
+  }
 ];
 
-export const spellsRouting: ModuleWithProviders = RouterModule.forChild(spellsRoutes);
+export const spellsRouting: ModuleWithProviders = RouterModule.forChild(
+  spellsRoutes
+);

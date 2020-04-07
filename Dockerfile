@@ -1,8 +1,5 @@
 FROM node:8-jessie
 
-RUN npm install --global \
-  yarn
-
 ADD . /root/d20md
 
 WORKDIR /root/d20md

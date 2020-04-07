@@ -43,6 +43,7 @@
     "ng2-nouislider": "^1.7.7",
     "ngx-bootstrap": "^2.0.2",
     "ngx-infinite-scroll": "^0.8.2",
+    "ngx-print": "^1.2.0-beta.3",
     "nouislider": "^11.0.3",
     "process": "^0.11.10",
     "rxjs": "^5.5.6",

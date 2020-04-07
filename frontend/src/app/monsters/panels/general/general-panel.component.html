@@ -1,28 +1,49 @@
 <div class="panel panel-primary">
-  <div class="panel-heading"><b>General</b></div>
+  <div class="panel-heading">
+    <b>General</b>
+    <d20md-x-button
+      btnClass="pull-right"
+      *ngIf="dismissable"
+      (clicked)="closed.emit()"
+    >
+    </d20md-x-button>
+  </div>
     <div class="panel-body">
       <div *ngIf="monster" class="general-container">
 
-        <img
-          *ngIf="monster.Image && monster.Image.path; else placeholder"
-          src="{{ monster.Image.path }}"
-          alt="Monster Image"
-          title="Monster Image"
-        >
-        <ng-template #placeholder>
+        <div *ngIf="!viewOnly">
           <img
-            src="assets/img/monster-generic.svg"
+            *ngIf="monster.Image && monster.Image.path; else placeholder"
+            src="{{ monster.Image.path }}"
             alt="Monster Image"
             title="Monster Image"
           >
-        </ng-template>
+          <ng-template #placeholder>
+            <img
+              src="assets/img/monster-generic.svg"
+              alt="Monster Image"
+              title="Monster Image"
+            >
+          </ng-template>
+        </div>
 
         <table>
           <tbody>
+            <tr *ngIf="viewOnly">
+              <td><h4>Name</h4></td>
+              <td><span>{{ monster.name }}</span></td>
+            </tr>
             <tr>
               <td><h4>Type</h4></td>
               <td class="right-align">
-                <img [src]="'assets/img/' + monster.type + '.svg'" height=32 title="{{ monster.type | startCase }}">
+                <h4 *ngIf="viewOnly; else typeImage">{{ monster.type | startCase }}</h4>
+                <ng-template #typeImage>
+                  <img
+                    [src]="'assets/img/' + monster.type + '.svg'"
+                    height=32
+                    title="{{ monster.type | startCase }}"
+                  >
+                </ng-template>
               </td>
             </tr>
             <tr>

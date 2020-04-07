@@ -1,0 +1,76 @@
+<div class="print-button-container well well-sm">
+   <button
+     class="btn btn-primary"
+     [useExistingCss]="true"
+     printSectionId="show-spell-frame"
+     ngxPrint
+   >Print</button>
+</div>
+
+<div *ngIf="spellObs | async as spell" class="panel panel-default" id="show-spell-frame" align="center">
+  <div class="panel-heading">
+      <h2>{{ spell.name }}</h2>
+  </div>
+
+  <div class="panel-body tab-container">
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Saves</b></div>
+          <div class="panel-body">
+            <d20md-show-saves
+              [save]="spell.save_type"
+              [spellResistable]="spell.permits_sr"
+              [showImage]="false"
+            ></d20md-show-saves>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Spell levels</b></div>
+          <div class="panel-body">
+            <d20md-show-levels
+              [spellLevels]="spell.SpellLevels"
+            ></d20md-show-levels>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><b>Details</b></div>
+          <div class="panel-body">
+            <d20md-show-details
+              [spellType]="spell.spell_type"
+              [spellRange]="spell.spell_range"
+              [showImage]="false"
+            ></d20md-show-details>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <d20md-description-panel
+          [description]="spell.description"
+          [canModify]="false"
+        ></d20md-description-panel>
+      </div>
+    </div>
+
+    <div *ngIf="spell.Monsters?.length" class="row">
+      <div class="col-md-12">
+        <d20md-monsters-using-panel [monsters]="spell.Monsters"></d20md-monsters-using-panel>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+

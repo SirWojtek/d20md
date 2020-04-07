@@ -14,11 +14,8 @@ import { LevelFormComponent } from './levels/levels-form.component';
 import { ShowLevelsComponent } from './levels/show-levels.component';
 
 @NgModule({
-  imports : [
-    SharedModule,
-    SpellElementsModule,
-  ],
-  declarations : [
+  imports: [SharedModule, SpellElementsModule],
+  declarations: [
     DetailsPanelComponent,
     DetailsFormComponent,
     ShowDetailsComponent,
@@ -27,13 +24,15 @@ import { ShowLevelsComponent } from './levels/show-levels.component';
     ShowSavesComponent,
     LevelsPanelComponent,
     LevelFormComponent,
-    ShowLevelsComponent,
+    ShowLevelsComponent
   ],
-  exports : [
+  exports: [
     DetailsPanelComponent,
     SavesPanelComponent,
     LevelsPanelComponent,
-  ],
+    ShowSavesComponent,
+    ShowLevelsComponent,
+    ShowDetailsComponent
+  ]
 })
-
-export class SpellsPanelsModule { }
+export class SpellsPanelsModule {}

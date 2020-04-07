@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import {MonstersService} from '../monsters/monsters.service';
-import {SpellsService} from '../spells/spells.service';
-import {FeatsService} from '../feats/feats.service';
-import {StartCasePipe} from '../shared/elements/pipes';
+import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { MonstersService } from '../monsters/monsters.service';
+import { SpellsService } from '../spells/spells.service';
+import { FeatsService } from '../feats/feats.service';
+import { StartCasePipe } from '../shared/elements/pipes';
 
 interface ICustomUrlName {
   matchingUrl: RegExp;
@@ -18,7 +18,7 @@ interface IBreadcrumbItem {
 
 @Component({
   selector: 'd20md-breadcrumbs',
-  templateUrl: './breadcrumbs.component.html',
+  templateUrl: './breadcrumbs.component.html'
 })
 export class BreadcrumbsComponent {
   itemsObs: Observable<IBreadcrumbItem[]>;
@@ -28,32 +28,50 @@ export class BreadcrumbsComponent {
       matchingUrl: /monsters\/show\/\d+$/,
       resolveFunc: urlPart => {
         return this.monstersService.getMonster(+urlPart, null).map(m => m.name);
-      },
+      }
+    },
+    {
+      matchingUrl: /monsters\/show-all\/\d+$/,
+      resolveFunc: urlPart => {
+        return this.monstersService.getMonster(+urlPart, null).map(m => m.name);
+      }
     },
     {
       matchingUrl: /monsters\/show\/\d+\/special$/,
-      resolveFunc: () => Observable.of('Special Abilities'),
+      resolveFunc: () => Observable.of('Special Abilities')
     },
     {
       matchingUrl: /spells\/show\/\d+$/,
       resolveFunc: urlPart => {
         return this.spellsService.getSpell(+urlPart).map(m => m.name);
-      },
+      }
+    },
+    {
+      matchingUrl: /spells\/show-all\/\d+$/,
+      resolveFunc: urlPart => {
+        return this.spellsService.getSpell(+urlPart).map(m => m.name);
+      }
     },
     {
       matchingUrl: /feats\/show\/\d+$/,
       resolveFunc: urlPart => {
         return this.featsService.getFeat(+urlPart).map(m => m.name);
-      },
+      }
+    },
+    {
+      matchingUrl: /feats\/show-all\/\d+$/,
+      resolveFunc: urlPart => {
+        return this.featsService.getFeat(+urlPart).map(m => m.name);
+      }
     },
     {
       matchingUrl: /activate\//,
-      resolveFunc: () => Observable.of(''),
+      resolveFunc: () => Observable.of('')
     },
     {
       matchingUrl: /change-password\//,
-      resolveFunc: () => Observable.of(''),
-    },
+      resolveFunc: () => Observable.of('')
+    }
   ];
 
   constructor(
@@ -61,7 +79,7 @@ export class BreadcrumbsComponent {
     private startCasePipe: StartCasePipe,
     private monstersService: MonstersService,
     private spellsService: SpellsService,
-    private featsService: FeatsService,
+    private featsService: FeatsService
   ) {
     this.itemsObs = router.events
       .filter(e => e instanceof NavigationEnd)
@@ -71,28 +89,30 @@ export class BreadcrumbsComponent {
   }
 
   private mapRoute(url: string[]): IBreadcrumbItem[] | null {
-    const mappedPath = url.filter(urlPart => !!urlPart).reduce(
-      (res, urlPart) => {
+    const mappedPath = url
+      .filter(urlPart => !!urlPart)
+      .reduce((res, urlPart) => {
         const previousHref = res.length ? res[res.length - 1].href : '';
         const href = `${previousHref}/${urlPart}`;
-        return [...res, {href, name: this.determineNameForUrl(href, urlPart)}];
-      },
-      [] as IBreadcrumbItem[],
-    );
+        return [
+          ...res,
+          { href, name: this.determineNameForUrl(href, urlPart) }
+        ];
+      }, [] as IBreadcrumbItem[]);
 
     if (!mappedPath.length) {
       return null;
     }
 
-    return [{href: '/', name: Observable.of('d20md')}, ...mappedPath];
+    return [{ href: '/', name: Observable.of('d20md') }, ...mappedPath];
   }
 
   private determineNameForUrl(
     absoluteUrl: string,
-    urlPart: string,
+    urlPart: string
   ): Observable<string> {
     const urlMapping = this.customUrlMapping.find(m =>
-      m.matchingUrl.test(absoluteUrl),
+      m.matchingUrl.test(absoluteUrl)
     );
     if (!urlMapping) {
       return Observable.of(this.startCasePipe.transform(urlPart));

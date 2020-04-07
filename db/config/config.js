@@ -20,11 +20,10 @@ module.exports = {
     seederStorage: "sequelize"
   },
   production: {
-    username: "d20MD",
+    username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    database: "d20md",
-    host: "localhost",
-    port: 3306,
+    database: process.env.DB_NAME,
+    host: process.env.MYSQL_SERVICE_HOST,
     dialect: "mysql",
     seederStorage: "sequelize"
   }

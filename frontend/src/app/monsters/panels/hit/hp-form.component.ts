@@ -1,24 +1,28 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
-import { ModalButton, ModalBaseComponent } from '../../../shared/elements/modal-base/modal-base.component';
+import {Component, Output, EventEmitter, ViewChild} from '@angular/core';
+import {
+  ModalButton,
+  ModalBaseComponent,
+} from '../../../shared/elements/modal-base/modal-base.component';
 
 @Component({
-  selector : 'd20md-hp-form',
-  templateUrl : './hp-form.component.html',
-  styleUrls: [ './hp-form.component.scss' ]
+  selector: 'd20md-hp-form',
+  templateUrl: './hp-form.component.html',
+  styleUrls: ['./hp-form.component.scss'],
 })
-
 export class HpFormComponent {
   public suggestedHp: number;
   public hp: number;
-  @Output() hpChange = new EventEmitter<number>();
+  @Output()
+  hpChange = new EventEmitter<number>();
 
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
 
   public errorText = '';
 
   public modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave()),
+    new ModalButton('cancel-hp', 'Cancel', 'btn-warning'),
+    new ModalButton('save-hp', 'Save', 'btn-primary', () => this.onSave()),
   ];
 
   public show(hp: number, suggestedHp) {
@@ -28,7 +32,9 @@ export class HpFormComponent {
   }
 
   onHpChange(newVal: string) {
-    if (!newVal) { return; }
+    if (!newVal) {
+      return;
+    }
 
     const val = +newVal;
     if (val < 1 || val > 2000) {

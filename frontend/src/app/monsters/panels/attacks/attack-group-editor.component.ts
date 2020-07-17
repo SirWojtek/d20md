@@ -1,35 +1,46 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import {Component, Output, EventEmitter, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
-import { AttackGroup } from '../../../shared/model/attack-group';
-import { Attack } from '../../../shared/model/attack';
-import { ModalBaseComponent, ModalButton } from '../../../shared/elements/modal-base/modal-base.component';
-import { EditorTableComponent } from '../../../shared/elements/editor-table/editor-table.component';
-import { TableProperties } from '../../../shared/elements/editor-table/editor-table.component';
+import {AttackGroup} from '../../../shared/model/attack-group';
+import {Attack} from '../../../shared/model/attack';
+import {
+  ModalBaseComponent,
+  ModalButton,
+} from '../../../shared/elements/modal-base/modal-base.component';
+import {EditorTableComponent} from '../../../shared/elements/editor-table/editor-table.component';
+import {TableProperties} from '../../../shared/elements/editor-table/editor-table.component';
 
 @Component({
   selector: 'd20md-attack-group-editor',
   templateUrl: './attack-group-editor.component.html',
-  styleUrls: [ './attack-group-editor.component.scss' ]
+  styleUrls: ['./attack-group-editor.component.scss'],
 })
-
 export class AttackGroupEditorComponent {
-  @Output() attackGroupsChange = new EventEmitter<AttackGroup[]>();
+  @Output()
+  attackGroupsChange = new EventEmitter<AttackGroup[]>();
 
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
-  @ViewChild(EditorTableComponent) attacksEditor: EditorTableComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
+  @ViewChild(EditorTableComponent)
+  attacksEditor: EditorTableComponent;
 
   choppedAttackGroups: AttackGroup[][] = [[]];
   attackGroups: AttackGroup[] = [];
   private editedGroup: AttackGroup = null;
 
   public modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave(this.attackGroups)),
+    new ModalButton('cancel-attack-group', 'Cancel', 'btn-warning'),
+    new ModalButton('save-attack-group', 'Save', 'btn-primary', () =>
+      this.onSave(this.attackGroups),
+    ),
   ];
 
   public attackProperties = [
-    new TableProperties('', 'Attack name', false,
-      (attack: Attack) => attack.name + (attack.is_main ? ' (main)' : '')),
+    new TableProperties(
+      '',
+      'Attack name',
+      false,
+      (attack: Attack) => attack.name + (attack.is_main ? ' (main)' : ''),
+    ),
     new TableProperties('attack_bonus', 'Attack bonus', true),
     new TableProperties('attack_type', 'Attack type', true),
     new TableProperties('range', 'Range', true),
@@ -48,7 +59,9 @@ export class AttackGroupEditorComponent {
 
   onAttackGroupDelete(toDelete: AttackGroup) {
     const index = this.attackGroups.indexOf(toDelete);
-    if (index === -1) { return; }
+    if (index === -1) {
+      return;
+    }
     this.attackGroups.splice(index, 1);
     this.generateChoppedAttackGroups();
   }
@@ -59,7 +72,9 @@ export class AttackGroupEditorComponent {
   }
 
   onEditorSave(attacks: Attack[]) {
-    if (!this.editedGroup) { throw Error('No edited attack group'); }
+    if (!this.editedGroup) {
+      throw Error('No edited attack group');
+    }
     this.editedGroup.Attacks = attacks;
     this.editedGroup = null;
   }

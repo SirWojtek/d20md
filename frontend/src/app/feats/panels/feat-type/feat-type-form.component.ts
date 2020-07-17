@@ -1,32 +1,37 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
 
-import { ModalBaseComponent, ModalButton } from '../../../shared/elements/modal-base/modal-base.component';
-import { EnumService } from '../../../shared/enum.service';
-import { Utils } from '../../../shared/utils';
+import {
+  ModalBaseComponent,
+  ModalButton,
+} from '../../../shared/elements/modal-base/modal-base.component';
+import {EnumService} from '../../../shared/enum.service';
+import {Utils} from '../../../shared/utils';
 
 @Component({
   selector: 'd20md-feat-type-form',
-  templateUrl: './feat-type-form.component.html'
+  templateUrl: './feat-type-form.component.html',
 })
-
 export class FeatTypeFormComponent {
-  @Output() featTypeChange = new EventEmitter<string>();
+  @Output()
+  featTypeChange = new EventEmitter<string>();
 
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
 
   featType: string;
 
-  featTypes: Observable<{[index: string]: string; }>;
+  featTypes: Observable<{[index: string]: string}>;
 
   constructor(enumService: EnumService) {
-    this.featTypes = enumService.getFeatTypes()
+    this.featTypes = enumService
+      .getFeatTypes()
       .map(Utils.createUpperCaseToNoUpperCaseMap);
   }
 
   modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave()),
+    new ModalButton('cancel-feat', 'Cancel', 'btn-warning'),
+    new ModalButton('save-feat', 'Save', 'btn-primary', () => this.onSave()),
   ];
 
   show(featType: string) {

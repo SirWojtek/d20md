@@ -1,24 +1,30 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 
-import { Attribute } from '../../../shared/model/attribute';
-import { ModalBaseComponent, ModalButton } from '../../../shared/elements/modal-base/modal-base.component';
+import {Attribute} from '../../../shared/model/attribute';
+import {
+  ModalBaseComponent,
+  ModalButton,
+} from '../../../shared/elements/modal-base/modal-base.component';
 
 @Component({
   selector: 'd20md-attribute-form',
-  templateUrl: './attribute-form.component.html'
+  templateUrl: './attribute-form.component.html',
 })
-
 export class AttributeFormComponent {
-  @Output() attributeChange = new EventEmitter<Attribute>();
+  @Output()
+  attributeChange = new EventEmitter<Attribute>();
 
-  @ViewChild(ModalBaseComponent) modal: ModalBaseComponent;
+  @ViewChild(ModalBaseComponent)
+  modal: ModalBaseComponent;
 
   attribute: Attribute;
 
   modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave(this.attribute)),
+    new ModalButton('cancel-attributes', 'Cancel', 'btn-warning'),
+    new ModalButton('save-attributes', 'Save', 'btn-primary', () =>
+      this.onSave(this.attribute),
+    ),
   ];
 
   show(attribute: Attribute) {

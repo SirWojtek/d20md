@@ -29,8 +29,13 @@ export class GenerateHitDicesFormComponent {
   monsterSubtypes = Object.keys(MonsterSubtype).map(s => MonsterSubtype[s]);
 
   modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Recalculate', 'btn-primary', () => this.onSave()),
+    new ModalButton('cancel-generate-hit-dices', 'Cancel', 'btn-warning'),
+    new ModalButton(
+      'recalculate-generate-hit-dices',
+      'Recalculate',
+      'btn-primary',
+      () => this.onSave(),
+    ),
   ];
 
   show(monster: Monster) {

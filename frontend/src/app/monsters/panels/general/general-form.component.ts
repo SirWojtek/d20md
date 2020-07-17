@@ -43,8 +43,8 @@ export class GeneralFormComponent {
   modal: ModalBaseComponent;
 
   modalButtons: ModalButton[] = [
-    new ModalButton('Cancel', 'btn-warning'),
-    new ModalButton('Save', 'btn-primary', () => this.onSave()),
+    new ModalButton('cancel-general', 'Cancel', 'btn-warning'),
+    new ModalButton('save-general', 'Save', 'btn-primary', () => this.onSave()),
   ];
 
   constructor(enumService: EnumService) {

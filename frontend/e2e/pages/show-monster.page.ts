@@ -77,6 +77,50 @@ export class ShowMonsterPage {
     await frameElements.deleteButton.click();
   }
 
+  async setAttributes(attr: Partial<IAttributes>) {
+    await attributesElements.tab.click();
+    await attributesElements.editButton.click();
+
+    if (attr.strength) {
+      await this.setAttributesSlider(
+        attributesElements.editModal.strengthSlider,
+        attr.strength.value,
+      );
+    }
+    if (attr.dexterity) {
+      await this.setAttributesSlider(
+        attributesElements.editModal.dexteritySlider,
+        attr.dexterity.value,
+      );
+    }
+    if (attr.constitution) {
+      await this.setAttributesSlider(
+        attributesElements.editModal.constitutionSlider,
+        attr.constitution.value,
+      );
+    }
+    if (attr.intelligence) {
+      await this.setAttributesSlider(
+        attributesElements.editModal.intelligenceSlider,
+        attr.intelligence.value,
+      );
+    }
+    if (attr.wisdom) {
+      await this.setAttributesSlider(
+        attributesElements.editModal.wisdomSlider,
+        attr.wisdom.value,
+      );
+    }
+    if (attr.charisma) {
+      await this.setAttributesSlider(
+        attributesElements.editModal.charismaSlider,
+        attr.charisma.value,
+      );
+    }
+
+    await attributesElements.editModal.saveButton.click();
+  }
+
   private async getName(): Promise<string> {
     const name = await frameElements.name.getText();
     return name;
@@ -138,6 +182,7 @@ export class ShowMonsterPage {
   }
 
   private async getAttributes(): Promise<IAttributes> {
+    await attributesElements.tab.click();
     const [
       sv,
       sm,
@@ -361,5 +406,17 @@ export class ShowMonsterPage {
   private async assertShowMonsterPage() {
     const currentUrl = await browser.getCurrentUrl();
     expect(currentUrl).toContain(this.pagePrefixUrl);
+  }
+
+  private async setAttributesSlider(slider: ElementFinder, val: number) {
+    // NOTE: padding: 18px
+    const width = (await slider.getSize()).width - 18;
+    const offset = (width / 50) * val;
+    const x = Math.floor(offset - width / 2);
+
+    await browser
+      .actions()
+      .dragAndDrop(slider, {x, y: 0})
+      .perform();
   }
 }

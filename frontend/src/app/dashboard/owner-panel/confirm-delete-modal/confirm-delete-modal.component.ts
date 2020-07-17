@@ -18,8 +18,10 @@ export class ConfirmDeleteModalComponent {
   entity: {name: string; id: number};
 
   modalButtons: ModalButton[] = [
-    new ModalButton('No, keep it', 'btn-primary', () => true),
-    new ModalButton('Yes, delete it', 'btn-danger', () => this.onDelete()),
+    new ModalButton('do-no-delete', 'No, keep it', 'btn-primary', () => true),
+    new ModalButton('do-delete', 'Yes, delete it', 'btn-danger', () =>
+      this.onDelete(),
+    ),
   ];
 
   show(entity: {name: string; id: number}) {

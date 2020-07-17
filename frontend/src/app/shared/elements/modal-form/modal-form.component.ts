@@ -21,7 +21,9 @@ export class ModalFormComponent {
   modal: ModalBaseComponent;
 
   public modalButtons: ModalButton[] = [
-    new ModalButton('Save', 'btn-primary', () => this.onSave()),
+    new ModalButton('save-modal-form', 'Save', 'btn-primary', () =>
+      this.onSave(),
+    ),
   ];
 
   public init(valueType: Type<any>) {

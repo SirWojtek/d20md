@@ -38,7 +38,7 @@
     "core-js": "^2.5.3",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.21",
     "ng2-lazy-trumbowyg": "^2.4.2",
     "ng2-nouislider": "^1.7.7",
     "ngx-bootstrap": "^2.0.2",

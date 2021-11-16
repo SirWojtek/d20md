@@ -16,7 +16,7 @@
     "build:aot": "cd frontend && yarn build:aot"
   },
   "dependencies": {
-    "aws-sdk": "^2.381.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",

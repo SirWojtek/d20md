@@ -22,7 +22,7 @@
     "concurrently": "^3.5.1",
     "cors": "^2.8.4",
     "dataloader-sequelize": "^1.7.0",
-    "express": "^4.16.1",
+    "express": "^4.17.3",
     "express-graphql": "^0.6.12",
     "fs-extra": "^4.0.2",
     "graphql": "^0.13.2",
